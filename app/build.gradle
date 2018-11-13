@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply from: "$rootProject.projectDir/dependencies.gradle"
+
+
+def sdk = ext.sdkVersions
+def libs = ext.libraryVersions
+def testLibs = ext.testLibraryVersions
+
+android {
+    compileSdkVersion sdk.compileSdkVersion
+    buildToolsVersion sdk.buildToolsVersion
+    defaultConfig {
+        applicationId "com.segunfamisa.zeitung"
+        minSdkVersion sdk.minSdkVersion
+        targetSdkVersion sdk.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$libs.androidXVersion"
+
+    testImplementation "junit:junit:$testLibs.jUnitVersion"
+    androidTestImplementation "androidx.test:runner:$testLibs.testRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$testLibs.espressoVersion"
+}
