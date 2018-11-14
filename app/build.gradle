@@ -4,12 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply from: "$rootProject.projectDir/dependencies.gradle"
-
-
-def sdk = ext.sdkVersions
-def libs = ext.libraryVersions
-def testLibs = ext.testLibraryVersions
+def sdk = rootProject.ext.sdkVersions
+def libs = rootProject.ext.libraryVersions
+def testLibs = rootProject.ext.testLibraryVersions
 
 android {
     compileSdkVersion sdk.compileSdkVersion
