@@ -7,8 +7,8 @@ ext {
     ]
 
     libraryVersions = [
-            androidXVersion: "1.0.2"
-
+            androidXVersion          : "1.0.2",
+            coroutinesVersion        : "1.0.0"
     ]
 
     testLibraryVersions = [
