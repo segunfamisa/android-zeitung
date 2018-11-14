@@ -8,7 +8,10 @@ ext {
 
     libraryVersions = [
             androidXVersion          : "1.0.2",
-            coroutinesVersion        : "1.0.0"
+            coroutinesVersion        : "1.0.0",
+            retoriftVersion          : "2.4.0",
+            retrofitCoroutineVersions: "0.9.2",
+            moshiVersion             : "2.4.0",
     ]
 
     testLibraryVersions = [
