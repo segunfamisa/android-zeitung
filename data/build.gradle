@@ -20,6 +20,7 @@ buildConfig {
     clsName = 'BuildConfig'
     packageName = 'com.segunfamisa.zeitung.data'
 
+    buildConfigField 'String', 'BaseUrl', "https://newsapi.org/v2/"
     buildConfigField 'String', 'ApiKey', "${apiKey.apiKey()}"
 }
 
