@@ -25,6 +25,7 @@ ext {
     ]
 
     tools = [
-            ktlintVersion: "0.29.0"
+            ktlintVersion: "0.29.0",
+            detektVersion: "1.0.0-RC11"
     ]
 }
