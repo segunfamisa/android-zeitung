@@ -39,6 +39,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$libs.moshiVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
+    testImplementation("com.squareup.okhttp3:mockwebserver:3.10.0") {
+        because "version 3.12.0 uses okhttp version 3.12.0 which is incompatible with retrofit 2.4.0"
+    }
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
 }
 
 sourceCompatibility = "7"
