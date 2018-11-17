@@ -1,0 +1,266 @@
+{
+  "status": "ok",
+  "totalResults": 20,
+  "articles": [
+    {
+      "source": {
+        "id": "the-guardian-au",
+        "name": "The Guardian (AU)"
+      },
+      "author": "",
+      "title": "French protester killed in accident at anti-fuel tax blockade",
+      "description": "Driver accelerated when panicked by ‘yellow vest’ demonstration in Savoie, minister says",
+      "url": "https://www.theguardian.com/world/2018/nov/17/french-protester-killed-accident-anti-fuel-tax-blockade",
+      "urlToImage": "https://i.guim.co.uk/img/media/064945cbe81d630e66bc2b92a29412f97613b0a2/0_349_5239_3143/master/5239.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=488a1caf375d069b30d90bdbfe371a88",
+      "publishedAt": "2018-11-17T11:45:00Z",
+      "content": "A motorist has accidentally hit and killed a… [+801 chars]"
+    },
+    {
+      "source": {
+        "id": "the-new-york-times",
+        "name": "The New York Times"
+      },
+      "author": null,
+      "title": "List of Missing in California Fire Is Over 1000 People. Here Is How They're Being Counted.",
+      "description": "The news that more than 1,000 people are still missing in and around the Northern California town devastated by wildfire shocked even people helping with the search.",
+      "url": "https://www.nytimes.com/2018/11/16/us/california-fire-missing-list.html",
+      "urlToImage": "https://static01.nyt.com/images/2018/11/17/us/17missing-alt/17missing-alt-facebookJumbo.jpg",
+      "publishedAt": "2018-11-17T11:38:21Z",
+      "content": "“We are finding that there are a lot of people who don’t know that we are looking for them,” the sheriff said. “That is why we are publishing this list.” Is there a pattern in the people listed as missing? Many are older. Of the 246 people for whom ages were … [+1177 chars]"
+    },
+    {
+      "source": {
+        "id": "the-wall-street-journal",
+        "name": "The Wall Street Journal"
+      },
+      "author": null,
+      "title": "US, China Clash Over Trade, Security at Pacific Summit",
+      "description": null,
+      "url": "https://www.wsj.com/articles/u-s-china-clash-over-trade-security-at-pacific-summit-1542444911",
+      "urlToImage": null,
+      "publishedAt": "2018-11-17T08:57:54Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": "abc-news",
+        "name": "ABC News"
+      },
+      "author": "Joe Goldman",
+      "title": "Argentine submarine found on bottom of Atlantic Ocean after year of searching",
+      "description": "The submarine was lost on Nov. 15, 2017.",
+      "url": "https://abcnews.go.com/International/argentine-submarine-found-bottom-atlantic-ocean-year-searching/story?id=59261897",
+      "urlToImage": "https://s.abcnews.com/images/International/ara-san-juan-ap-mo-20181117_hpMain_16x9_992.jpg",
+      "publishedAt": "2018-11-17T08:21:33Z",
+      "content": "An Argentine submarine that went missing almost exactly one year ago has been found at the bottom of the Atlantic Ocean. The Argentine Navy and Defense Ministry confirmed late Friday evening that the remains of the ARA San Juan submarine had been located in t… [+3245 chars]"
+    },
+    {
+      "source": {
+        "id": "business-insider",
+        "name": "Business Insider"
+      },
+      "author": "Thomas Colson",
+      "title": "How it will play out if MPs vote down Theresa May's Brexit deal",
+      "description": "As the dust settles on the most chaotic week of British politics in recent memory, one question has become increasingly important.",
+      "url": "https://www.businessinsider.com/how-it-will-play-out-if-mps-vote-down-theresa-mays-brexit-deal-2018-11",
+      "urlToImage": "https://amp.businessinsider.com/images/5b6d66782154a33c008b4d66-1136-568.jpg",
+      "publishedAt": "2018-11-17T08:02:18Z",
+      "content": "LONDON — As the dust settles on the most chaotic week of British politics in recent memory, one question has become increasingly important. What happens if parliament votes down Theresa May's Brexit deal? Early in December, the prime minister will put her dea… [+6693 chars]"
+    },
+    {
+      "source": {
+        "id": "the-new-york-times",
+        "name": "The New York Times"
+      },
+      "author": null,
+      "title": "What's on TV Saturday: 'McQueen' and 'Jonestown: Terror in the Jungle'",
+      "description": "An Alexander McQueen documentary debuts on Amazon. And a Sundance TV series looks back at the Jonestown massacre.",
+      "url": "https://www.nytimes.com/2018/11/17/arts/television/whats-on-tv-saturday-mcqueen-and-jonestown-terror-in-the-jungle.html",
+      "urlToImage": "https://static01.nyt.com/images/2018/11/17/arts/television/17tvcol-mcqueen/17tvcol-mcqueen-facebookJumbo.jpg",
+      "publishedAt": "2018-11-17T06:00:11Z",
+      "content": "A MURDER IN MANSFIELD (2017) 9 p.m. on Investigation Discovery. In this searing documentary by Barbara Kopple, Collier Landry returns to Mansfield, Ohio, where his mother was killed by his father in 1989. Landry was 12 when he testified against his father; he… [+624 chars]"
+    },
+    {
+      "source": {
+        "id": "the-new-york-times",
+        "name": "The New York Times"
+      },
+      "author": null,
+      "title": "Florida Recounts Senate Votes Yet Again, and Nelson's Chances Dwindle",
+      "description": "A manual recount was underway in two still-undecided statewide elections in Florida, including the race for the Senate.",
+      "url": "https://www.nytimes.com/2018/11/16/us/rick-scott-bill-nelson-recount.html",
+      "urlToImage": "https://static01.nyt.com/images/2018/11/17/us/17florida/17florida-facebookJumbo.jpg",
+      "publishedAt": "2018-11-17T04:01:31Z",
+      "content": "“Making or using an altered form is a criminal offense under Florida law,” Bradley McVay, interim general counsel for the Secretary of State, said in a Nov. 9 letter to the United States attorneys in Florida. Mark Herron, a lawyer for the Florida Democratic P… [+1711 chars]"
+    },
+    {
+      "source": {
+        "id": "the-new-york-times",
+        "name": "The New York Times"
+      },
+      "author": null,
+      "title": "How the Trump Administration Stepped Up Pursuit of WikiLeaks's Assange",
+      "description": "As American spies worked to collect intelligence on Julian Assange, Justice Department prosecutors took steps that resulted in secret charges.",
+      "url": "https://www.nytimes.com/2018/11/16/us/politics/trump-administration-assange-wikileaks.html",
+      "urlToImage": "https://static01.nyt.com/images/2018/11/17/us/politics/17dc-ticktock1/17dc-ticktock1-facebookJumbo.jpg",
+      "publishedAt": "2018-11-17T02:07:16Z",
+      "content": "WikiLeaks encouraged “Guccifer 2.0,” the online persona of the Russian operatives, to provide it with the Democratic documents because it would “have a much higher impact,” according to court papers. Whether anyone connected with the Trump campaign worked wit… [+1841 chars]"
+    },
+    {
+      "source": {
+        "id": "the-new-york-times",
+        "name": "The New York Times"
+      },
+      "author": null,
+      "title": "The Kilogram is Dead. Long Live the Kilogram!",
+      "description": "After a vote (and a century of research), the standard measure for mass is redefined, and the long reign of Le Grand K is ended.",
+      "url": "https://www.nytimes.com/2018/11/16/science/kilogram-physics-measurement.html",
+      "urlToImage": "https://static01.nyt.com/images/2018/11/17/science/17KILOGRAM1b/17KILOGRAM1b-facebookJumbo.jpg",
+      "publishedAt": "2018-11-17T00:50:59Z",
+      "content": "The meter was defined accordingly, as the distance traveled by a beam of light in exactly 1/299,792,458th of a second. (The second, another fundamental unit, has been defined since 1967 as the amount of time it takes an atom of cesium-133 to vibrate 9,192,631… [+1109 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Bbc.com"
+      },
+      "author": "https://www.facebook.com/bbcnews",
+      "title": "Jim Acosta row: Donald Trump threat over reporters' behaviour",
+      "description": "The US president says he will walk out of future briefings if reporters do not follow his rules.",
+      "url": "https://www.bbc.com/news/world-us-canada-46240975",
+      "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/160EB/production/_104374309_gettyimages-1062293282.jpg",
+      "publishedAt": "2018-11-17T00:33:45Z",
+      "content": "Image copyright Getty Images Image caption Jim Acosta was in court to hear the judge's temporary ruling Donald Trump has threatened to walk out of future press briefings if reporters do not act with \"decorum\". The US president was speaking after a Washington … [+5183 chars]"
+    },
+    {
+      "source": {
+        "id": "the-washington-post",
+        "name": "The Washington Post"
+      },
+      "author": null,
+      "title": "CIA concludes Saudi crown prince ordered Jamal Khashoggi's assassination",
+      "description": null,
+      "url": "https://www.washingtonpost.com/world/national-security/cia-concludes-saudi-crown-prince-ordered-jamal-khashoggis-assassination/2018/11/16/98c89fe6-e9b2-11e8-a939-9469f1166f9d_story.html",
+      "urlToImage": null,
+      "publishedAt": "2018-11-16T23:14:42Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": "fox-news",
+        "name": "Fox News"
+      },
+      "author": "Madeline Farber",
+      "title": "Kentucky man bags 'rare' deer with decapitated buck head entangled in its antlers",
+      "description": "A man in Ballard County recently bagged a “two-headed” deer, the state’s Department of Fish and Wildlife Resources announced Thursday.",
+      "url": "https://www.foxnews.com/great-outdoors/kentucky-man-bags-deer-with-decapitated-buck-head-stuck-in-its-antlers",
+      "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2018/11/2-headed-buck.jpg",
+      "publishedAt": "2018-11-16T22:43:11Z",
+      "content": "As the saying goes, two heads are better than one — or in one hunter’s case, two sets of antlers. A man in Ballard County, Kentucky recently bagged a “two-headed” deer, the state’s Department of Fish and Wildlife Resources announced Thursday. WISCONSIN MAN BA… [+1351 chars]"
+    },
+    {
+      "source": {
+        "id": "the-hill",
+        "name": "The Hill"
+      },
+      "author": "Lydia Wheeler",
+      "title": "Attorneys want Supreme Court to determine legality of Whitaker as acting AG",
+      "description": "Attorneys for a Nevada man in a gun rights case asked the Supreme Court on Friday to issue an order that would name Deputy Attorney General Rod Rosenstein as acting attorney general in place of President Trump’s interim appointee, Matthew Whitaker",
+      "url": "https://thehill.com/regulation/court-battles/417207-plaintiff-asks-supreme-court-to-name-rosenstein-acting-ag",
+      "urlToImage": "https://thehill.com/sites/default/files/whitakermatthew_111618upi2_lead.jpg",
+      "publishedAt": "2018-11-16T22:19:42Z",
+      "content": "Attorneys for a Nevada man in a gun rights case asked the Supreme Court on Friday to issue an order that would name Deputy Attorney General Rod Rosenstein Rod Jay Rosenstein Attorneys want Supreme Court to determine legality of Whitaker as acting AG Top Dems:… [+3568 chars]"
+    },
+    {
+      "source": {
+        "id": "the-huffington-post",
+        "name": "The Huffington Post"
+      },
+      "author": "Ryan Grenoble",
+      "title": "Facebook's Top Brass Say They Knew Nothing About Definers. Don't Believe Them.",
+      "description": "Facebook is caught up in a disinformation campaign of its own making.",
+      "url": "https://www.huffingtonpost.com/entry/facebook-definers-sandberg-zuckerberg_us_5beef5b3e4b0510a1f3079c0",
+      "urlToImage": "https://img.huffingtonpost.com/asset/5bef2aff24000037045835a3.jpeg?cache=bdcosmlunv&ops=1910_1000",
+      "publishedAt": "2018-11-16T21:41:00Z",
+      "content": "Sweet, wide-eyed Mark Zuckerberg swears he didn’t know anything. The Facebook CEO was shocked and appalled at the conduct of his company, he told reporters on a conference call Thursday, responding to a bombshell New York Times report that Facebook hired a D.… [+3591 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Usnews.com"
+      },
+      "author": null,
+      "title": "Trump Honors GOP Donor, 6 Others With Presidential Award",
+      "description": null,
+      "url": "https://www.usnews.com/news/politics/articles/2018-11-16/trump-to-award-presidential-medal-of-freedom-to-donors-wife",
+      "urlToImage": null,
+      "publishedAt": "2018-11-16T21:21:34Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Slate.com"
+      },
+      "author": "Hailey Gavin",
+      "title": "Michelle Obama Tells Jimmy Kimmel About Her New Book Becoming",
+      "description": "Obama’s book, becoming, finally gave her time to reflect.",
+      "url": "https://slate.com/culture/2018/11/i-dare-you-not-to-feel-nostalgic-despair-watching-michelle-obama-promote-her-book-on-jimmy-kimmel-live.html",
+      "urlToImage": "https://compote.slate.com/images/dc1d9fd0-ba6b-44db-8e25-79871dd0364a.png?width=780&height=520&rect=771x514&offset=126x0",
+      "publishedAt": "2018-11-16T21:14:12Z",
+      "content": "In Memoriam: Ariana Grande’s Ponytail You Know William Goldman for His Movie Career. But He Also Wrote the Best Book Ever Published About Theater. Goodbye, FilmStruck. Hello, the Criterion Channel. “He Knew Everything”: Hollywood Remembers Legendary Scribe Wi… [+2180 chars]"
+    },
+    {
+      "source": {
+        "id": "the-new-york-times",
+        "name": "The New York Times"
+      },
+      "author": null,
+      "title": "'Not a Soul Taking Control': How a Storm in the New York Area Upended the Night",
+      "description": "As residents recovered and demanded an explanation, The Times asked readers to share their experiences. We’re continuing to collect information and provide updates as they become available.",
+      "url": "https://www.nytimes.com/2018/11/16/nyregion/nyc-snowstorm-traffic-commute.html",
+      "urlToImage": "https://static01.nyt.com/images/2018/11/17/nyregion/17snowwoes1/17snowwoes1-facebookJumbo-v2.jpg",
+      "publishedAt": "2018-11-16T19:36:12Z",
+      "content": "Zeina Farhat, who takes a bus to Wayne, N.J., also said the crowds at Port Authority were intense. She arrived at 4 p.m., then waited in line for her bus for close to three hours, she said. When she was finally at the front of the queue, ready to board the ne… [+979 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Sbnation.com"
+      },
+      "author": "Matt Ellentuck",
+      "title": "The most fitting end to Carmelo Anthony's career is with the Knicks",
+      "description": "Carmelo Anthony and the Knicks deserve one more chance to make things right.",
+      "url": "https://www.sbnation.com/nba/2018/11/16/18098173/carmelo-anthony-knicks-career-retirement",
+      "urlToImage": "https://cdn.vox-cdn.com/thumbor/hf05FufgwiS_NXg64SAElvggf-0=/0x324:3000x1895/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/8458577/667847432.jpg",
+      "publishedAt": "2018-11-16T18:45:05Z",
+      "content": "Carmelo Anthony ’s time with the Houston Rockets is over, and it’s ending much like his tenure with the Oklahoma City Thunder. Sides are “parting ways” as Anthony failed to fit into Houston’s system which thrives on three-point shooters and versatile defender… [+3806 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Espn.com"
+      },
+      "author": null,
+      "title": "Mike McCarthy punted on Packers' chance for 'galvanizing moment'",
+      "description": "A game-winning drive sparked by a bold fourth-down call could have been what the Packers needed. Instead, the uncertainty about their season grows.",
+      "url": "http://www.espn.com/blog/green-bay-packers/post/_/id/46278/mike-mccarthy-punted-on-packers-chance-for-galvanizing-moment",
+      "urlToImage": "http://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2018%2F1116%2Fr464499_1296x729_16%2D9.jpg",
+      "publishedAt": "2018-11-16T17:16:26Z",
+      "content": "SEATTLE -- It would have been bold -- one of the most daring decisions of his 13-year coaching tenure -- but Mike McCarthy stared the moment in the face, pondered it and then punted. Best of NFL Nation • Best receivers on secret behind big play • The David Jo… [+4892 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Nypost.com"
+      },
+      "author": null,
+      "title": "Protesters storm Ireland after thong cited as sign of consent in rape case",
+      "description": null,
+      "url": "https://nypost.com/2018/11/16/protesters-storm-ireland-after-thong-cited-as-sign-of-consent-in-rape-case/",
+      "urlToImage": null,
+      "publishedAt": "2018-11-16T14:49:00Z",
+      "content": null
+    }
+  ]
+}
