@@ -27,10 +27,6 @@ android {
     }
 }
 
-configurations {
-    ktlint
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -46,13 +42,4 @@ dependencies {
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test:runner:$testLibs.testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testLibs.espressoVersion"
-
-    ktlint "com.github.shyiko:ktlint:$tools.ktlintVersion"
-}
-
-task ktlintCheck(type: JavaExec, group: "verification", dependsOn: 'check') {
-    description = "Check Kotlin code style."
-    classpath = configurations.ktlint
-    main = "com.github.shyiko.ktlint.Main"
-    args "src/**/*.kt", "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
 }
