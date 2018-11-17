@@ -2,7 +2,7 @@ package com.segunfamisa.zeitung.data.remote.entities
 
 import com.squareup.moshi.Json
 
-data class Source(
+internal data class Source(
     @field:Json(name = "id") val id: String,
     @field:Json(name = "name") val name: String,
     @field:Json(name = "description") val description: String,

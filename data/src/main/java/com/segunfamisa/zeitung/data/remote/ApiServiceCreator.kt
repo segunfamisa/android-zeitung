@@ -13,7 +13,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class ApiServiceCreator(
+internal class ApiServiceCreator(
     private val urlProvider: UrlProvider,
     private val authorizationInterceptor: AuthorizationInterceptor
 ) {

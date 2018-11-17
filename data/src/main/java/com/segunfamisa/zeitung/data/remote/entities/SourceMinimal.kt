@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 /**
  * Minimal version of [Source]
  */
-data class SourceMinimal(
+internal data class SourceMinimal(
     @field:Json(name = "id") val id: String,
     @field:Json(name = "name") val name: String
 ) {

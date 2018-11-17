@@ -1,6 +1,6 @@
 package com.segunfamisa.zeitung.data.remote
 
-interface ApiKeyProvider {
+internal interface ApiKeyProvider {
 
     fun getApiKey(): String
 }
