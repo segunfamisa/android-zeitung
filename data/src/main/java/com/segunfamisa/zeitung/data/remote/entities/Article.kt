@@ -3,7 +3,7 @@ package com.segunfamisa.zeitung.data.remote.entities
 import com.squareup.moshi.Json
 import java.util.Date
 
-data class Article(
+internal data class Article(
     @field:Json(name = "source") val source: SourceMinimal,
     @field:Json(name = "author") val author: String?,
     @field:Json(name = "title") val title: String,

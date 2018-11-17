@@ -6,7 +6,7 @@ import okhttp3.Response
 /**
  * Interceptor for authorization information - ApiKey in this case
  */
-class AuthorizationInterceptor(private val apiKeyProvider: ApiKeyProvider) : Interceptor {
+internal class AuthorizationInterceptor(private val apiKeyProvider: ApiKeyProvider) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()

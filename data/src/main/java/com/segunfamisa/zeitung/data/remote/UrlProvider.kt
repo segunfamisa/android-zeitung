@@ -1,6 +1,6 @@
 package com.segunfamisa.zeitung.data.remote
 
-interface UrlProvider {
+internal interface UrlProvider {
 
     fun getBaseUrl(): String
 }

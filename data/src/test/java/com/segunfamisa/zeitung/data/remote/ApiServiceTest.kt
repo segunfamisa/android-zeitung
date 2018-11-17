@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.remote;
+package com.segunfamisa.zeitung.data.remote
 
 import com.segunfamisa.zeitung.data.remote.entities.Article
 import com.segunfamisa.zeitung.data.remote.entities.Source
