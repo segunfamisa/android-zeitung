@@ -1,7 +1,12 @@
 apply plugin: 'java-library'
+apply plugin: 'kotlin'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def testLibs = rootProject.ext.testLibraryVersions
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    testImplementation "junit:junit:$testLibs.jUnitVersion"
 }
 
 sourceCompatibility = "7"
