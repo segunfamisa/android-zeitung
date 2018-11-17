@@ -24,9 +24,12 @@ buildConfig {
 }
 
 dependencies {
+    def libs = rootProject.ext.libraryVersions
     def testLibs = rootProject.ext.testLibraryVersions
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libs.coroutinesVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
 }
