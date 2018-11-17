@@ -4,12 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply from: "$rootProject.projectDir/dependencies.gradle"
-
-
-def sdk = ext.sdkVersions
-def libs = ext.libraryVersions
-def testLibs = ext.testLibraryVersions
+def sdk = rootProject.ext.sdkVersions
+def libs = rootProject.ext.libraryVersions
+def testLibs = rootProject.ext.testLibraryVersions
 
 android {
     compileSdkVersion sdk.compileSdkVersion
@@ -37,7 +34,14 @@ configurations {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libs.coroutinesVersion"
+
     implementation "androidx.appcompat:appcompat:$libs.androidXVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$libs.retoriftVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$libs.retrofitCoroutineVersions"
+    implementation "com.squareup.retrofit2:converter-moshi:$libs.moshiVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test:runner:$testLibs.testRunnerVersion"

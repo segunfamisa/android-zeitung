@@ -1,0 +1,21 @@
+ext.apiKey = {
+    boolean isCiEnvironment = System.getenv("CI")
+    String apiKey = ""
+    if (isCiEnvironment) {
+        apiKey = System.getenv("API_KEY")
+    } else {
+        Properties props = new Properties()
+        try {
+            props.load(new FileInputStream(new File(rootProject.projectDir.getAbsolutePath() + "/keys.properties")))
+            apiKey = props.getProperty("apiKey")
+        } catch (FileNotFoundException ignored) {
+            if (isCiEnvironment) {
+                println("Please create an environment variable with key API_KEY and value should be the API key")
+            } else {
+                println("Please create a keys.properties file in the root directory of the project. " +
+                        "Have a look at keys-sample.properties for a sample of the file")
+            }
+        }
+    }
+    return apiKey
+}
