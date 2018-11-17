@@ -14,6 +14,11 @@ buildscript {
     }
 }
 
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC11")
+    id "org.jlleitschuh.gradle.ktlint" version "6.3.0"
+}
+
 allprojects {
     repositories {
         google()
@@ -26,3 +31,41 @@ task clean(type: Delete) {
 }
 
 apply from: "$rootProject.projectDir/dependencies.gradle"
+
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+subprojects {
+
+    apply {
+        plugin("io.gitlab.arturbosch.detekt")
+        plugin("org.jlleitschuh.gradle.ktlint")
+    }
+
+    def tools = rootProject.ext.tools
+
+    detekt {
+        toolVersion = tools.detektVersion
+        filters = ".*/resources/.*,.*/build/.*"
+        reports {
+            xml.enabled = true
+            html {
+                enabled = true
+                destination = file("$buildDir.absolutePath/reports/detekt.html")
+            }
+        }
+    }
+
+    ktlint {
+        version = tools.ktlintVersion
+        debug = true
+        verbose = true
+        android = true
+        outputToConsole = true
+        reporters = [ReporterType.CHECKSTYLE]
+        ignoreFailures = true
+        filter {
+            exclude("**/generated/**")
+            include("**/kotlin/**")
+            include("**/java/**")
+        }
+    }
+}
