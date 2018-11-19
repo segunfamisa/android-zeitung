@@ -2,8 +2,17 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
+    def libs = rootProject.ext.libraryVersions
+    def testLibs = rootProject.ext.testLibraryVersions
+
+    implementation project(':core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion"
     implementation "io.arrow-kt:arrow-core:$libs.arrowVersion"
+    implementation 'javax.inject:javax.inject:1'
+
+    testImplementation "junit:junit:$testLibs.jUnitVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testLibs.mockitoKotlinVersion"
 }
 
 sourceCompatibility = "7"
