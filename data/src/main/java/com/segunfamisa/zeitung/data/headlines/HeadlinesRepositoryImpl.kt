@@ -15,7 +15,7 @@ internal class HeadlinesRepositoryImpl @Inject constructor(
         country: String,
         sources: String
     ): Either<Error, Result<List<Article>>> {
-        return remoteSource.getHeadlines(category = category, country = category, sources = sources)
+        return remoteSource.getHeadlines(category = category, country = "", sources = "")
             .map {
                 Result(data = it)
             }
