@@ -12,8 +12,8 @@ internal class ArticlesMapper @Inject constructor() :
     override fun from(data: RemoteArticle): CoreArticle {
         return CoreArticle(
             source = Source(
-                id = data.source.id,
-                name = data.source.name,
+                id = data.source.id ?: "",
+                name = data.source.name ?: "",
                 description = "",
                 language = "",
                 url = "",
@@ -21,12 +21,12 @@ internal class ArticlesMapper @Inject constructor() :
                 country = ""
             ),
             url = data.url,
-            description = data.description,
+            description = data.description ?: "",
             author = data.author ?: "",
             title = data.title,
-            imageUrl = data.imageUrl,
+            imageUrl = data.imageUrl ?: "",
             publishedAt = data.publishedAt,
-            content = data.content
+            content = data.content ?: ""
         )
     }
 }
