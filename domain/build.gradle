@@ -3,6 +3,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "io.arrow-kt:arrow-core:$libs.arrowVersion"
 }
 
 sourceCompatibility = "7"
