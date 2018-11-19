@@ -12,7 +12,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import retrofit2.Response
-import com.segunfamisa.zeitung.data.remote.entities.Article as DataArticle
 
 class RemoteHeadlinesSourceTest {
 
