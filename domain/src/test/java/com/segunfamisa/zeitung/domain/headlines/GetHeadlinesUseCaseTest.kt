@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.domain.headlines;
+package com.segunfamisa.zeitung.domain.headlines
 
 import arrow.core.Either
 import arrow.core.orNull
