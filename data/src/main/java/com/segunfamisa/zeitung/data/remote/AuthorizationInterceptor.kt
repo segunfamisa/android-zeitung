@@ -2,11 +2,14 @@ package com.segunfamisa.zeitung.data.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
 /**
  * Interceptor for authorization information - ApiKey in this case
  */
-internal class AuthorizationInterceptor(private val apiKeyProvider: ApiKeyProvider) : Interceptor {
+internal class AuthorizationInterceptor @Inject constructor(
+    private val apiKeyProvider: ApiKeyProvider
+) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()

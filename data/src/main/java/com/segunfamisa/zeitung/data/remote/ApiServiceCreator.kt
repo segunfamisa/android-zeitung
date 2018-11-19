@@ -12,8 +12,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Date
+import javax.inject.Inject
 
-internal class ApiServiceCreator(
+internal class ApiServiceCreator @Inject constructor(
     private val urlProvider: UrlProvider,
     private val authorizationInterceptor: AuthorizationInterceptor
 ) {
