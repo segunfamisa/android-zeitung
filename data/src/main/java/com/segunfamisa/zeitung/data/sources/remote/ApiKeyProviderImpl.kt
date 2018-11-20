@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.remote
+package com.segunfamisa.zeitung.data.sources.remote
 
 import com.segunfamisa.zeitung.data.BuildConfig
 import javax.inject.Inject

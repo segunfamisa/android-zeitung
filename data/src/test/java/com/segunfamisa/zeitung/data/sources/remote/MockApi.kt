@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.remote
+package com.segunfamisa.zeitung.data.sources.remote
 
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse

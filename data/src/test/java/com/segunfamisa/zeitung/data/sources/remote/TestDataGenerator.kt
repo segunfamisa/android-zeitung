@@ -1,7 +1,7 @@
-package com.segunfamisa.zeitung.data.remote
+package com.segunfamisa.zeitung.data.sources.remote
 
-import com.segunfamisa.zeitung.data.remote.entities.Article
-import com.segunfamisa.zeitung.data.remote.entities.SourceMinimal
+import com.segunfamisa.zeitung.data.sources.remote.entities.Article
+import com.segunfamisa.zeitung.data.sources.remote.entities.SourceMinimal
 import java.util.Date
 
 internal object TestDataGenerator {

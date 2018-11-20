@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.remote.entities
+package com.segunfamisa.zeitung.data.sources.remote.entities
 
 import com.squareup.moshi.Json
 
