@@ -34,6 +34,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libs.coroutinesVersion"
 
     implementation "androidx.appcompat:appcompat:$libs.androidXVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$libs.retoriftVersion"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$libs.retrofitCoroutineVersions"
