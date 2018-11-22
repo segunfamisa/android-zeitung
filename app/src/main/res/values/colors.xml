@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+
+    <!-- Palette -->
+    <!-- dark theme -->
+    <color name="primary">#424242</color>
+    <color name="primaryDark">#1b1b1b</color>
+    <color name="primaryLight">#6d6d6d</color>
+
+    <!-- light theme -->
+    <color name="inverse_primary">#FFFFFF</color>
+    <color name="inverse_primaryDark">#CFCFCF</color>
+
+    <!-- common -->
+    <color name="accent">#4ebaaa</color>
+
+    <!-- text color -->
+    <color name="primaryTextColor">#ffffff</color>
 </resources>
