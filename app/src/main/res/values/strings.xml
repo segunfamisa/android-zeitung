@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Android Zeitung</string>
+
+    <string name="menu_news">News</string>
+    <string name="menu_browse">Browse</string>
+    <string name="menu_bookmarks">Saved</string>
 </resources>
