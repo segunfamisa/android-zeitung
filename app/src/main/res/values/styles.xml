@@ -1,11 +1,31 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="BaseTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="toolbarStyle">@style/Widget.Zeitung.Toolbar</item>
     </style>
 
+    <style name="BaseTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/inverse_primary</item>
+        <item name="colorPrimaryDark">@color/inverse_primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="toolbarStyle">@style/Widget.Zeitung.Toolbar.Light</item>
+    </style>
+
+    <style name="Zeitung" parent="BaseTheme" />
+
+    <style name="Zeitung.Light" parent="BaseTheme.Light" />
+
+    <style name="Widget.Zeitung.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Widget.Zeitung.Toolbar.Light" parent="Widget.Zeitung.Toolbar">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    </style>
 </resources>
