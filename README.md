@@ -1,6 +1,8 @@
 Android Zeitung
 ===============
 
+[![Build Status](https://travis-ci.org/segunfamisa/android-zeitung.svg?branch=master)](https://travis-ci.org/segunfamisa/android-zeitung)
+
 Android Zeitung is a news app project to learn, experiment and showcase state of the art Android development tools and
 techniques.
 
