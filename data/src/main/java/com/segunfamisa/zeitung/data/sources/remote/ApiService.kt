@@ -19,6 +19,18 @@ internal interface ApiService {
         @Query("page") page: Int? = null
     ): Deferred<Response<ArticlesResponse>>
 
+    @GET("everything")
+    fun getNews(
+        @Query("q") query: String? = null,
+        @Query("sources") sources: String? = null,
+        @Query("domains") domains: String? = null,
+        @Query("from") fromDate: String? = null,
+        @Query("to") toDate: String? = null,
+        @Query("language") language: String? = null,
+        @Query("sortBy") sortBy: String = "publishedAt",
+        @Query("page") page: Int? = null
+    ): Deferred<Response<ArticlesResponse>>
+
     @GET("sources")
     fun getSources(
         @Query("category") category: String? = null,

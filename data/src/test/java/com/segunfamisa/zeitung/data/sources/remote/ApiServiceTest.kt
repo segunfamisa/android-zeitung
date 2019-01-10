@@ -7,6 +7,8 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.AfterClass
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -101,5 +103,45 @@ class ApiServiceTest {
 
         assertEquals(expectedSource0, response.sources[0])
         assertEquals(14, response.sources.size)
+    }
+
+    @Test
+    fun `news are fetched successfully`() = runBlocking {
+        // given that the request completes successfully
+        server.setDispatcher(mockApi.successDispatcher)
+
+        // when we call get news
+        val response = apiService.getNews().await()
+
+        // then verify that the news are exactly as we read them from the news resource
+        val expectedNews0 = Article(
+            source = SourceMinimal(id = "engadget", name = "Engadget"),
+            author = "Rachel England",
+            title = "Fairphone's ethical smartphone gets Android 7",
+            description = "Description blah blah",
+            url = "https://www.engadget.com/201...phones-ethical-smartphone-gets-android-7/",
+            imageUrl = "https://o.aolcdn.com/images/dims?t..sdf",
+            publishedAt = sdf.parse("2018-11-13T12:42:00Z"),
+            content = "According to Fairphone, this software upgrade has cost the company around €500,000 [+936 chars]"
+        )
+
+        // then verify that response is as we have in the json file
+        val news = response.body()!!
+        assertEquals(expectedNews0, news.articles[0])
+        assertEquals(20, news.articles.size)
+        assertEquals(62465, news.totalResults)
+    }
+
+    @Test
+    fun `error occurred while fetching news`() = runBlocking {
+        // given that the request completes successfully
+        server.setDispatcher(mockApi.errorDispatcher)
+
+        // when we call get news
+        val response = apiService.getNews().await()
+
+        // then verify that body is null and error body is not null
+        assertNull("response body is expected to be null", response.body())
+        assertNotNull("error body should not be null", response.errorBody())
     }
 }
