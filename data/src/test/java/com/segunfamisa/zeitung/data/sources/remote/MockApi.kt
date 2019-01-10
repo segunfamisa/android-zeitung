@@ -13,9 +13,9 @@ class MockApi {
         override fun dispatch(request: RecordedRequest): MockResponse {
             val path = request.path
             return when {
-                path.contains("/everything") -> createResponseFromFile(file = "everything.json")
-                path.contains("/sources") -> createResponseFromFile(file = "news-sources.json")
-                path.contains("/top-headlines") -> createResponseFromFile(file = "top-headlines.json")
+                path.contains("/everything") -> createSuccessResponseFromFile(file = "everything.json")
+                path.contains("/sources") -> createSuccessResponseFromFile(file = "news-sources.json")
+                path.contains("/top-headlines") -> createSuccessResponseFromFile(file = "top-headlines.json")
                 else -> throw IllegalArgumentException("We have not handled this path")
             }
         }
@@ -23,18 +23,27 @@ class MockApi {
 
     val errorDispatcher = object : Dispatcher() {
         override fun dispatch(request: RecordedRequest): MockResponse {
-            return createResponseFromFile(file = "error.json")
+            return createErrorResponseFromFile(file = "error.json")
         }
     }
 
     fun createServer(): MockWebServer = MockWebServer()
 
-    private fun createResponseFromFile(file: String): MockResponse {
+    private fun createSuccessResponseFromFile(file: String): MockResponse {
+        return createResponseFromFile(file = file, response = MockResponse())
+    }
+
+    private fun createErrorResponseFromFile(file: String): MockResponse {
+        val mockResponse = MockResponse()
+        mockResponse.setResponseCode(400)
+        return createResponseFromFile(file = file, response = mockResponse)
+    }
+
+    private fun createResponseFromFile(file: String, response: MockResponse): MockResponse {
         val inputStream = javaClass.classLoader
             .getResourceAsStream("responses/$file")
         val source = Okio.buffer(Okio.source(inputStream))
-        val mockResponse = MockResponse()
-        mockResponse.setBody(source.readString(StandardCharsets.UTF_8))
-        return mockResponse
+        response.setBody(source.readString(StandardCharsets.UTF_8))
+        return response
     }
 }
