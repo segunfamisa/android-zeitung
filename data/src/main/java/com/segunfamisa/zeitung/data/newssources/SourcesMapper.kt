@@ -3,7 +3,7 @@ package com.segunfamisa.zeitung.data.newssources
 import com.segunfamisa.zeitung.data.common.Mapper
 import javax.inject.Inject
 import com.segunfamisa.zeitung.core.entities.Source as CoreNewsSource
-import com.segunfamisa.zeitung.data.sources.remote.entities.Source as DataNewsSource
+import com.segunfamisa.zeitung.data.remote.entities.Source as DataNewsSource
 
 internal class SourcesMapper @Inject constructor() : Mapper<DataNewsSource, CoreNewsSource> {
 

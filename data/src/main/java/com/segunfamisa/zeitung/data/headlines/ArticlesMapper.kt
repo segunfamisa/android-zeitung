@@ -4,7 +4,7 @@ import com.segunfamisa.zeitung.core.entities.Source
 import com.segunfamisa.zeitung.data.common.Mapper
 import javax.inject.Inject
 import com.segunfamisa.zeitung.core.entities.Article as CoreArticle
-import com.segunfamisa.zeitung.data.sources.remote.entities.Article as RemoteArticle
+import com.segunfamisa.zeitung.data.remote.entities.Article as RemoteArticle
 
 internal class ArticlesMapper @Inject constructor() :
     Mapper<RemoteArticle, CoreArticle> {

@@ -3,9 +3,9 @@ package com.segunfamisa.zeitung.data.headlines
 import arrow.core.orNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.segunfamisa.zeitung.data.sources.remote.ApiService
+import com.segunfamisa.zeitung.data.remote.ApiService
 import com.segunfamisa.zeitung.data.sources.remote.TestDataGenerator
-import com.segunfamisa.zeitung.data.sources.remote.entities.ArticlesResponse
+import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -29,7 +29,12 @@ class RemoteHeadlinesSourceTest {
         val articles = TestDataGenerator.createArticles(count = 5)
         whenever(apiService.getHeadlines(category = category))
             .thenReturn(async {
-                Response.success(ArticlesResponse(totalResults = 5, articles = articles))
+                Response.success(
+                    ArticlesResponse(
+                        totalResults = 5,
+                        articles = articles
+                    )
+                )
             })
 
         // when we get headlines with this category

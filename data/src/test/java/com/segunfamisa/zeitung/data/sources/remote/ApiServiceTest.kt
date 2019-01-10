@@ -1,8 +1,13 @@
 package com.segunfamisa.zeitung.data.sources.remote
 
-import com.segunfamisa.zeitung.data.sources.remote.entities.Article
-import com.segunfamisa.zeitung.data.sources.remote.entities.Source
-import com.segunfamisa.zeitung.data.sources.remote.entities.SourceMinimal
+import com.segunfamisa.zeitung.data.remote.ApiKeyProviderImpl
+import com.segunfamisa.zeitung.data.remote.ApiService
+import com.segunfamisa.zeitung.data.remote.ApiServiceCreator
+import com.segunfamisa.zeitung.data.remote.AuthorizationInterceptor
+import com.segunfamisa.zeitung.data.remote.UrlProvider
+import com.segunfamisa.zeitung.data.remote.entities.Article
+import com.segunfamisa.zeitung.data.remote.entities.Source
+import com.segunfamisa.zeitung.data.remote.entities.SourceMinimal
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.AfterClass
@@ -41,8 +46,12 @@ class ApiServiceTest {
             return server.url("/").toString()
         }
     }
-    private val interceptor = AuthorizationInterceptor(apiKeyProvider = ApiKeyProviderImpl())
-    private val apiServiceCreator = ApiServiceCreator(urlProvider = urlProvider, authorizationInterceptor = interceptor)
+    private val interceptor =
+        AuthorizationInterceptor(apiKeyProvider = ApiKeyProviderImpl())
+    private val apiServiceCreator = ApiServiceCreator(
+        urlProvider = urlProvider,
+        authorizationInterceptor = interceptor
+    )
 
     private lateinit var apiService: ApiService
 
@@ -62,7 +71,10 @@ class ApiServiceTest {
         // then verify that the headlines (as read from the json resource files) correspond to the expected ones
         val response = headlines.body()!!
         val expectedArticle0 = Article(
-            source = SourceMinimal(id = "the-guardian-au", name = "The Guardian (AU)"),
+            source = SourceMinimal(
+                id = "the-guardian-au",
+                name = "The Guardian (AU)"
+            ),
             author = "",
             title = "French protester killed in accident at anti-fuel tax blockade",
             description = "Driver accelerated when panicked by ‘yellow vest’ demonstration in Savoie, minister says",

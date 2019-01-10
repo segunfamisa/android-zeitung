@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.sources.remote
+package com.segunfamisa.zeitung.data.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

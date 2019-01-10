@@ -3,7 +3,7 @@ package com.segunfamisa.zeitung.data.headlines
 import arrow.core.Either
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.data.common.IllegalOperationException
-import com.segunfamisa.zeitung.data.sources.remote.ApiService
+import com.segunfamisa.zeitung.data.remote.ApiService
 import com.segunfamisa.zeitung.domain.common.Error
 import javax.inject.Inject
 

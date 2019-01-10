@@ -1,7 +1,7 @@
-package com.segunfamisa.zeitung.data.sources.remote
+package com.segunfamisa.zeitung.data.remote
 
-import com.segunfamisa.zeitung.data.sources.remote.entities.ArticlesResponse
-import com.segunfamisa.zeitung.data.sources.remote.entities.SourcesResponse
+import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
+import com.segunfamisa.zeitung.data.remote.entities.SourcesResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
