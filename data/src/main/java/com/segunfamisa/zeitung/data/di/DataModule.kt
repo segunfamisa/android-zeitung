@@ -1,5 +1,7 @@
 package com.segunfamisa.zeitung.data.di
 
+import com.segunfamisa.zeitung.data.common.ErrorParser
+import com.segunfamisa.zeitung.data.common.ErrorParserImpl
 import com.segunfamisa.zeitung.data.di.qualifiers.DataSource
 import com.segunfamisa.zeitung.data.headlines.HeadlinesRepositoryImpl
 import com.segunfamisa.zeitung.data.headlines.HeadlinesSource
@@ -15,6 +17,7 @@ import com.segunfamisa.zeitung.data.remote.UrlProvider
 import com.segunfamisa.zeitung.data.remote.UrlProviderImpl
 import com.segunfamisa.zeitung.domain.headlines.HeadlinesRepository
 import com.segunfamisa.zeitung.domain.newssources.NewsSourcesRepository
+import com.squareup.moshi.Moshi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -30,7 +33,16 @@ abstract class DataModule {
         internal fun provideApiService(apiServiceCreator: ApiServiceCreator): ApiService {
             return apiServiceCreator.createService()
         }
+
+        @Provides
+        @JvmStatic
+        internal fun provideMoshi(): Moshi {
+            return Moshi.Builder().build()
+        }
     }
+
+    @Binds
+    internal abstract fun bindErrorParser(errorParserImpl: ErrorParserImpl): ErrorParser
 
     // region Remote data
 
