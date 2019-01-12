@@ -9,3 +9,5 @@ techniques.
 This project is inspired by @ataulm's [art-collector](https://github.com/ataulm/art-collector) project
 
 Android Zeitung uses API from [News API](https://newsapi.org)
+
+Project still in early stages, WIP.
