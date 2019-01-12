@@ -10,4 +10,4 @@ This project is inspired by @ataulm's [art-collector](https://github.com/ataulm/
 
 Android Zeitung uses API from [News API](https://newsapi.org)
 
-Project still in early stages, WIP.
+Project still in early stage, WIP. Not much to see here :)
