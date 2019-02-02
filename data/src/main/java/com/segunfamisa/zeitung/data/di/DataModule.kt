@@ -6,6 +6,9 @@ import com.segunfamisa.zeitung.data.di.qualifiers.DataSource
 import com.segunfamisa.zeitung.data.headlines.HeadlinesRepositoryImpl
 import com.segunfamisa.zeitung.data.headlines.HeadlinesSource
 import com.segunfamisa.zeitung.data.headlines.RemoteHeadlinesSource
+import com.segunfamisa.zeitung.data.news.NewsRepositoryImpl
+import com.segunfamisa.zeitung.data.news.NewsSource
+import com.segunfamisa.zeitung.data.news.RemoteNewsSource
 import com.segunfamisa.zeitung.data.newssources.NewsSourcesDataSource
 import com.segunfamisa.zeitung.data.newssources.NewsSourcesRepositoryImpl
 import com.segunfamisa.zeitung.data.newssources.RemoteNewsSourcesDataSource
@@ -16,6 +19,7 @@ import com.segunfamisa.zeitung.data.remote.ApiServiceCreator
 import com.segunfamisa.zeitung.data.remote.UrlProvider
 import com.segunfamisa.zeitung.data.remote.UrlProviderImpl
 import com.segunfamisa.zeitung.domain.headlines.HeadlinesRepository
+import com.segunfamisa.zeitung.domain.news.NewsRepository
 import com.segunfamisa.zeitung.domain.newssources.NewsSourcesRepository
 import com.squareup.moshi.Moshi
 import dagger.Binds
@@ -65,6 +69,13 @@ abstract class DataModule {
     @Binds
     @DataSource(type = "remote")
     internal abstract fun bindRemoteNewsSourceDataSource(remoteDataSource: RemoteNewsSourcesDataSource): NewsSourcesDataSource
+
+    @Binds
+    @DataSource(type = "remote")
+    internal abstract fun bindRemoteNewsSource(remoteDataSource: RemoteNewsSource): NewsSource
+
+    @Binds
+    internal abstract fun bindNewsRepository(newsRepository: NewsRepositoryImpl): NewsRepository
 
     // endregion
 }
