@@ -1,7 +1,7 @@
-package com.segunfamisa.zeitung.data.sources.remote
+package com.segunfamisa.zeitung.data.remote
 
-import com.segunfamisa.zeitung.data.sources.remote.entities.ArticlesResponse
-import com.segunfamisa.zeitung.data.sources.remote.entities.SourcesResponse
+import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
+import com.segunfamisa.zeitung.data.remote.entities.SourcesResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,6 +16,18 @@ internal interface ApiService {
         @Query("sources") sources: String? = null,
         @Query("query") query: String? = null,
         @Query("pageSize") pageSize: Int? = null,
+        @Query("page") page: Int? = null
+    ): Deferred<Response<ArticlesResponse>>
+
+    @GET("everything")
+    fun getNews(
+        @Query("q") query: String? = null,
+        @Query("sources") sources: String? = null,
+        @Query("domains") domains: String? = null,
+        @Query("from") fromDate: String? = null,
+        @Query("to") toDate: String? = null,
+        @Query("language") language: String? = null,
+        @Query("sortBy") sortBy: String = "publishedAt",
         @Query("page") page: Int? = null
     ): Deferred<Response<ArticlesResponse>>
 

@@ -1,12 +1,19 @@
 package com.segunfamisa.zeitung.data.sources.remote
 
-import com.segunfamisa.zeitung.data.sources.remote.entities.Article
-import com.segunfamisa.zeitung.data.sources.remote.entities.Source
-import com.segunfamisa.zeitung.data.sources.remote.entities.SourceMinimal
+import com.segunfamisa.zeitung.data.remote.ApiKeyProviderImpl
+import com.segunfamisa.zeitung.data.remote.ApiService
+import com.segunfamisa.zeitung.data.remote.ApiServiceCreator
+import com.segunfamisa.zeitung.data.remote.AuthorizationInterceptor
+import com.segunfamisa.zeitung.data.remote.UrlProvider
+import com.segunfamisa.zeitung.data.remote.entities.Article
+import com.segunfamisa.zeitung.data.remote.entities.Source
+import com.segunfamisa.zeitung.data.remote.entities.SourceMinimal
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.AfterClass
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -39,8 +46,12 @@ class ApiServiceTest {
             return server.url("/").toString()
         }
     }
-    private val interceptor = AuthorizationInterceptor(apiKeyProvider = ApiKeyProviderImpl())
-    private val apiServiceCreator = ApiServiceCreator(urlProvider = urlProvider, authorizationInterceptor = interceptor)
+    private val interceptor =
+        AuthorizationInterceptor(apiKeyProvider = ApiKeyProviderImpl())
+    private val apiServiceCreator = ApiServiceCreator(
+        urlProvider = urlProvider,
+        authorizationInterceptor = interceptor
+    )
 
     private lateinit var apiService: ApiService
 
@@ -60,7 +71,10 @@ class ApiServiceTest {
         // then verify that the headlines (as read from the json resource files) correspond to the expected ones
         val response = headlines.body()!!
         val expectedArticle0 = Article(
-            source = SourceMinimal(id = "the-guardian-au", name = "The Guardian (AU)"),
+            source = SourceMinimal(
+                id = "the-guardian-au",
+                name = "The Guardian (AU)"
+            ),
             author = "",
             title = "French protester killed in accident at anti-fuel tax blockade",
             description = "Driver accelerated when panicked by ‘yellow vest’ demonstration in Savoie, minister says",
@@ -101,5 +115,45 @@ class ApiServiceTest {
 
         assertEquals(expectedSource0, response.sources[0])
         assertEquals(14, response.sources.size)
+    }
+
+    @Test
+    fun `news are fetched successfully`() = runBlocking {
+        // given that the request completes successfully
+        server.setDispatcher(mockApi.successDispatcher)
+
+        // when we call get news
+        val response = apiService.getNews().await()
+
+        // then verify that the news are exactly as we read them from the news resource
+        val expectedNews0 = Article(
+            source = SourceMinimal(id = "engadget", name = "Engadget"),
+            author = "Rachel England",
+            title = "Fairphone's ethical smartphone gets Android 7",
+            description = "Description blah blah",
+            url = "https://www.engadget.com/201...phones-ethical-smartphone-gets-android-7/",
+            imageUrl = "https://o.aolcdn.com/images/dims?t..sdf",
+            publishedAt = sdf.parse("2018-11-13T12:42:00Z"),
+            content = "According to Fairphone, this software upgrade has cost the company around €500,000 [+936 chars]"
+        )
+
+        // then verify that response is as we have in the json file
+        val news = response.body()!!
+        assertEquals(expectedNews0, news.articles[0])
+        assertEquals(20, news.articles.size)
+        assertEquals(62465, news.totalResults)
+    }
+
+    @Test
+    fun `error occurred while fetching news`() = runBlocking {
+        // given that the request completes successfully
+        server.setDispatcher(mockApi.errorDispatcher)
+
+        // when we call get news
+        val response = apiService.getNews().await()
+
+        // then verify that body is null and error body is not null
+        assertNull("response body is expected to be null", response.body())
+        assertNotNull("error body should not be null", response.errorBody())
     }
 }

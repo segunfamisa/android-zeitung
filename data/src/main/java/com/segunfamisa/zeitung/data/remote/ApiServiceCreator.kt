@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.sources.remote
+package com.segunfamisa.zeitung.data.remote
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.FromJson

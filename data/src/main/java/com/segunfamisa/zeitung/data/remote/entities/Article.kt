@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.data.sources.remote.entities
+package com.segunfamisa.zeitung.data.remote.entities
 
 import com.squareup.moshi.Json
 import java.util.Date
