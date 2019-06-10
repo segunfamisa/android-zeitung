@@ -23,7 +23,7 @@ class GetHeadlinesUseCaseTest {
     }
 
     @Test
-    fun `get headlines successfully`() = runBlocking {
+    fun `get headlines by category successfully`() = runBlocking {
         // given that we request business headlines
         val category = "business"
 
@@ -38,7 +38,6 @@ class GetHeadlinesUseCaseTest {
 
         // then we assert that the retrieved articles match the ones returned from the repository
         val retrievedArticles = result.orNull()!!
-        assertEquals(2, retrievedArticles.size)
         assertEquals(articles, retrievedArticles)
     }
 
