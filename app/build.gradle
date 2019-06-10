@@ -36,6 +36,7 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$libs.androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
+    implementation "androidx.core:core-ktx:${libs.androidXVersion}"
     implementation "com.google.android.material:material:$libs.materialDesignVersion"
 
     implementation "com.google.dagger:dagger:$libs.daggerVersion"
