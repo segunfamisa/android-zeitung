@@ -42,7 +42,10 @@ dependencies {
     implementation "com.google.android.material:material:$libs.materialDesignVersion"
 
     implementation "com.google.dagger:dagger:$libs.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$libs.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$libs.daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$libs.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$libs.daggerVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test:runner:$testLibs.testRunnerVersion"
