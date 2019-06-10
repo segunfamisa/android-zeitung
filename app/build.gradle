@@ -39,13 +39,22 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$libs.androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:${libs.androidXVersion}"
+    implementation "androidx.fragment:fragment-ktx:${libs.androidXFragmentVersion}"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$libs.androidXLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$libs.androidXLifecycleVersion"
+
     implementation "com.google.android.material:material:$libs.materialDesignVersion"
+
+    implementation "io.arrow-kt:arrow-core:$libs.arrowVersion"
 
     implementation "com.google.dagger:dagger:$libs.daggerVersion"
     implementation "com.google.dagger:dagger-android:$libs.daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$libs.daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$libs.daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$libs.daggerVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$libs.retoriftVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test:runner:$testLibs.testRunnerVersion"

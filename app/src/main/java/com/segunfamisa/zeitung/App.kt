@@ -2,7 +2,6 @@ package com.segunfamisa.zeitung
 
 import android.app.Activity
 import android.app.Application
-import com.segunfamisa.zeitung.di.DaggerAppComponent
 import com.segunfamisa.zeitung.di.Injector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

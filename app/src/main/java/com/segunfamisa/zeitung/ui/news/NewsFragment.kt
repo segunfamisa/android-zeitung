@@ -5,10 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.segunfamisa.zeitung.R
+import com.segunfamisa.zeitung.util.viewmodel.ViewModelFactory
+import javax.inject.Inject
 
 class NewsFragment : Fragment() {
 
+    @Inject
+    lateinit var factory: ViewModelFactory<NewsViewModel>
+    private val viewModel by viewModels<NewsViewModel> { factory }
 
     companion object {
         fun newInstance(): NewsFragment {
