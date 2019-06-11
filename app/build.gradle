@@ -41,6 +41,8 @@ dependencies {
     implementation "androidx.core:core-ktx:${libs.androidXVersion}"
     implementation "androidx.fragment:fragment-ktx:${libs.androidXFragmentVersion}"
 
+    implementation "com.github.bumptech.glide:glide:${libs.glideVersion}"
+
     implementation "androidx.lifecycle:lifecycle-extensions:$libs.androidXLifecycleVersion"
     kapt "androidx.lifecycle:lifecycle-common-java8:$libs.androidXLifecycleVersion"
 
