@@ -8,6 +8,8 @@ import com.segunfamisa.zeitung.data.sources.remote.TestDataGenerator
 import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType
+import okhttp3.ResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -28,14 +30,14 @@ class RemoteHeadlinesSourceTest {
         // given that the api service can return results for this category
         val articles = TestDataGenerator.createArticles(count = 5)
         whenever(apiService.getHeadlines(category = category))
-            .thenReturn(async {
+            .thenReturn(
                 Response.success(
                     ArticlesResponse(
                         totalResults = 5,
                         articles = articles
                     )
                 )
-            })
+            )
 
         // when we get headlines with this category
         val result = source.getHeadlines(category = category, country = "", sources = "")
@@ -72,6 +74,26 @@ class RemoteHeadlinesSourceTest {
         val result = source.getHeadlines(category = "", country = "de", sources = "local.de,news.google.de")
 
         // then we receive error
+        assertTrue(result.isLeft())
+    }
+
+    @Test
+    fun `an error is returned the api returns an error`() = runBlocking {
+        // given that we search for a certain valid param
+        val category = "technology"
+
+        // given that the api call fails
+        whenever(apiService.getHeadlines(category = category)).thenReturn(
+            Response.error(
+                401,
+                ResponseBody.create(MediaType.parse("application/json; charset=utf-8"), "")
+            )
+        );
+
+        // when we get headlines for this category
+        val result = source.getHeadlines(category = category, country = "", sources = "")
+
+        // then assert that it's an error
         assertTrue(result.isLeft())
     }
 }

@@ -19,7 +19,6 @@ internal class RemoteNewsSourcesDataSource @Inject constructor(
         val response =
             apiService
                 .getSources(category = category, language = language, country = country)
-                .await()
 
         return if (response.body() != null) {
             val sources = response.body()!!.sources.map { apiSource ->
