@@ -23,7 +23,7 @@ internal class RemoteNewsSource @Inject constructor(
         val response = apiService.getNews(
             sources = sources.nullify(),
             page = page
-        ).await()
+        )
 
         return response.body()
             ?.let { res ->

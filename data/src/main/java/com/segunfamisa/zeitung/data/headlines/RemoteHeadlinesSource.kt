@@ -22,18 +22,22 @@ internal class RemoteHeadlinesSource @Inject constructor(
             country = country,
             sources = sources
         ) { cat, cry, src ->
-            val response = apiService.getHeadlines(
-                category = cat.nullify(),
-                country = cry.nullify(),
-                sources = src.nullify()
-            ).await()
+            try {
+                val response = apiService.getHeadlines(
+                    category = cat.nullify(),
+                    country = cry.nullify(),
+                    sources = src.nullify()
+                )
 
-            val headlines = response.body()
-            if (headlines != null) {
-                Either.Right(headlines.articles.map { mapper.from(data = it) })
-            } else {
-                // TODO parse the actual response
-                Either.Left(Error(message = "Something wen't wrong"))
+                val headlines = response.body()
+                if (headlines != null) {
+                    Either.Right(headlines.articles.map { mapper.from(data = it) })
+                } else {
+                    // TODO parse the actual response
+                    Either.Left(Error(message = "Something wen't wrong"))
+                }
+            } catch (e: Exception) {
+                Either.Left(Error(message = e.message ?: ""))
             }
         }
     }

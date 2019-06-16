@@ -66,7 +66,7 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get headlines
-        val headlines = apiService.getHeadlines().await()
+        val headlines = apiService.getHeadlines()
 
         // then verify that the headlines (as read from the json resource files) correspond to the expected ones
         val response = headlines.body()!!
@@ -99,7 +99,7 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get sources
-        val sources = apiService.getSources().await()
+        val sources = apiService.getSources()
 
         // then verify that the source (as read from the json resource) correspond to the expected ones
         val response = sources.body()!!
@@ -123,7 +123,7 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get news
-        val response = apiService.getNews().await()
+        val response = apiService.getNews()
 
         // then verify that the news are exactly as we read them from the news resource
         val expectedNews0 = Article(
@@ -150,7 +150,7 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.errorDispatcher)
 
         // when we call get news
-        val response = apiService.getNews().await()
+        val response = apiService.getNews()
 
         // then verify that body is null and error body is not null
         assertNull("response body is expected to be null", response.body())
