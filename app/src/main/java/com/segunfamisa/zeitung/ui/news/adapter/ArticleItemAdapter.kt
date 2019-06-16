@@ -9,10 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.databinding.ItemArticleBinding
+import com.segunfamisa.zeitung.ui.news.UiArticleItem
+import com.segunfamisa.zeitung.util.ItemClickListener
 import javax.inject.Inject
 
-class ArticleItemAdapter @Inject constructor() :
-    RecyclerView.Adapter<ArticleItemAdapter.ArticleViewHolder>() {
+class ArticleItemAdapter @Inject constructor(
+    private val itemClickListener: ItemClickListener<UiArticleItem>
+) : RecyclerView.Adapter<ArticleItemAdapter.ArticleViewHolder>() {
 
     private var _items = listOf<UiArticleItem>()
         set(value) {
@@ -71,6 +74,10 @@ class ArticleItemAdapter @Inject constructor() :
                 Glide.with(binding.articleImage)
                     .load(imageUrl)
                     .into(binding.articleImage)
+
+                binding.root.setOnClickListener {
+                    itemClickListener.onItemClick(this)
+                }
             }
         }
     }
