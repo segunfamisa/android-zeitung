@@ -1,17 +1,11 @@
 package com.segunfamisa.zeitung.data.remote
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.squareup.moshi.FromJson
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.JsonReader
-import com.squareup.moshi.JsonWriter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.ToJson
+import com.squareup.moshi.*
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 import javax.inject.Inject
 
 internal class ApiServiceCreator @Inject constructor(
@@ -35,7 +29,6 @@ internal class ApiServiceCreator @Inject constructor(
         val retrofit = Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(urlProvider.getBaseUrl())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(moshiConverter)
             .build()
 

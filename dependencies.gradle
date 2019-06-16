@@ -10,9 +10,8 @@ ext {
             androidXVersion          : "1.0.2",
             constraintLayoutVersion  : "2.0.0-alpha2",
             materialDesignVersion    : "1.0.0",
-            coroutinesVersion        : "1.0.0",
-            retoriftVersion          : "2.4.0",
-            retrofitCoroutineVersions: "0.9.2",
+            coroutinesVersion        : "1.2.1",
+            retoriftVersion          : "2.6.0",
             moshiVersion             : "2.4.0",
             daggerVersion            : "2.19",
             arrowVersion             : "0.8.1"

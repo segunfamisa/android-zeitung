@@ -29,9 +29,7 @@ class RemoteNewsSourcesDataSourceTest {
         // given that the api service returns news sources for the query params
         val apiNewsSources = TestDataGenerator.createSources(5)
         whenever(apiService.getSources(category = category, country = country, language = language))
-            .thenReturn(async {
-                Response.success(SourcesResponse(sources = apiNewsSources))
-            })
+            .thenReturn(Response.success(SourcesResponse(sources = apiNewsSources)))
 
         // when we get news sources
         val response = remoteDataService.getNewsSources(

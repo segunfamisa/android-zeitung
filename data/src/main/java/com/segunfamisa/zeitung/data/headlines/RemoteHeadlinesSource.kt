@@ -26,8 +26,7 @@ internal class RemoteHeadlinesSource @Inject constructor(
                 category = cat.nullify(),
                 country = cry.nullify(),
                 sources = src.nullify()
-            ).await()
-
+            )
             val headlines = response.body()
             if (headlines != null) {
                 Either.Right(headlines.articles.map { mapper.from(data = it) })
