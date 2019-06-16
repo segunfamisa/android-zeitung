@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.segunfamisa.zeitung.R
-import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.databinding.ItemArticleBinding
 import javax.inject.Inject
 
 class ArticleItemAdapter @Inject constructor() :
     RecyclerView.Adapter<ArticleItemAdapter.ArticleViewHolder>() {
 
-    private var _items = listOf<Article>()
+    private var _items = listOf<UiArticleItem>()
         set(value) {
             val callback = object : DiffUtil.Callback() {
                 override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
@@ -33,7 +32,7 @@ class ArticleItemAdapter @Inject constructor() :
             result.dispatchUpdatesTo(this)
         }
 
-    fun setItems(items: List<Article>) {
+    fun setItems(items: List<UiArticleItem>) {
         _items = items
     }
 
@@ -59,14 +58,14 @@ class ArticleItemAdapter @Inject constructor() :
             binding.executePendingBindings()
         }
 
-        fun bind(article: Article) {
+        fun bind(article: UiArticleItem) {
             with(article) {
                 binding.articleDescription.text = description
                 binding.articleDescription.isGone = description.isEmpty()
 
-                binding.articleSourceText.text = source.name
+                binding.articleSourceText.text = source
                 binding.articleTitle.text = title
-                binding.articleTime.text = article.publishedAt.toString() // temp
+                binding.articleTime.text = date
 
                 binding.articleImage.isGone = imageUrl.isEmpty()
                 Glide.with(binding.articleImage)
