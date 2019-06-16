@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.news
+package com.segunfamisa.zeitung.ui.news.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
