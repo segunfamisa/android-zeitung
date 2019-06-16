@@ -5,5 +5,6 @@ data class UiArticleItem(
     val title: String,
     val imageUrl: String,
     val description: String,
-    val date: String
+    val date: String,
+    val url: String
 )
