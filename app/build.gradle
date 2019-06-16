@@ -59,6 +59,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$libs.retoriftVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
+    testImplementation "android.arch.core:core-testing:$libs.androidXLifecycleVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testLibs.mockitoKotlinVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$libs.coroutinesVersion"
+
     androidTestImplementation "androidx.test:runner:$testLibs.testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testLibs.espressoVersion"
 }
