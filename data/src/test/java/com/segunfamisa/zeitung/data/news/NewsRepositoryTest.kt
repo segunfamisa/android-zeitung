@@ -8,7 +8,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.core.entities.Source
 import com.segunfamisa.zeitung.domain.common.Error
-import com.segunfamisa.zeitung.domain.news.NewsRepository
+import com.segunfamisa.zeitung.domain.getnews.NewsRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

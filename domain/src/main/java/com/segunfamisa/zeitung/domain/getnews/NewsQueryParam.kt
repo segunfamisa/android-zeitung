@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.domain.news
+package com.segunfamisa.zeitung.domain.getnews
 
 import java.util.Date
 
