@@ -13,8 +13,4 @@ class GetNewsSourcesUseCase @Inject constructor(
     override suspend fun invoke(param: NewsSourcesQueryParam): Either<Error, List<Source>> {
         return sourcesRepository.getNewsSources(category = param.category, language = param.language, country = "")
     }
-
-    override fun cancel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }
