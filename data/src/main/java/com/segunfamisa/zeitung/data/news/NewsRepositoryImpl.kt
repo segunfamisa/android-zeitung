@@ -5,7 +5,7 @@ import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.data.common.IllegalOperationException
 import com.segunfamisa.zeitung.data.di.qualifiers.DataSource
 import com.segunfamisa.zeitung.domain.common.Error
-import com.segunfamisa.zeitung.domain.news.NewsRepository
+import com.segunfamisa.zeitung.domain.getnews.NewsRepository
 import java.util.Date
 import javax.inject.Inject
 

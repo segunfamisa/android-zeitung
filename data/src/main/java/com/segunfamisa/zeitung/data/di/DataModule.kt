@@ -19,7 +19,7 @@ import com.segunfamisa.zeitung.data.remote.ApiServiceCreator
 import com.segunfamisa.zeitung.data.remote.UrlProvider
 import com.segunfamisa.zeitung.data.remote.UrlProviderImpl
 import com.segunfamisa.zeitung.domain.headlines.HeadlinesRepository
-import com.segunfamisa.zeitung.domain.news.NewsRepository
+import com.segunfamisa.zeitung.domain.getnews.NewsRepository
 import com.segunfamisa.zeitung.domain.newssources.NewsSourcesRepository
 import com.squareup.moshi.Moshi
 import dagger.Binds

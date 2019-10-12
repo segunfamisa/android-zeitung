@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.domain.news
+package com.segunfamisa.zeitung.domain.getnews
 
 import arrow.core.Either
 import com.segunfamisa.zeitung.core.entities.Article
@@ -15,9 +15,5 @@ class GetNewsUseCase @Inject constructor(
             page = param.page,
             from = param.from
         )
-    }
-
-    override fun cancel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

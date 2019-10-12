@@ -13,8 +13,4 @@ class GetHeadlinesUseCase @Inject constructor(
     override suspend fun invoke(param: HeadlineQueryParam): Either<Error, List<Article>> {
         return repo.getHeadlines(category = param.category, country = "", sources = "")
     }
-
-    override fun cancel() {
-        TODO("not implemented")
-    }
 }
