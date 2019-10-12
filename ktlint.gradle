@@ -1,0 +1,13 @@
+ktlint {
+    version = tools.ktlintVersion
+    debug = true
+    verbose = true
+    android = true
+    outputToConsole = true
+    ignoreFailures = true
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+        include("**/java/**")
+    }
+}

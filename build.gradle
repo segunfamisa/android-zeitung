@@ -32,12 +32,12 @@ task clean(type: Delete) {
 
 apply from: "$rootProject.projectDir/dependencies.gradle"
 
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 subprojects {
 
     apply {
         plugin("io.gitlab.arturbosch.detekt")
         plugin("org.jlleitschuh.gradle.ktlint")
+        from("$rootProject.projectDir/ktlint.gradle")
     }
 
     def tools = rootProject.ext.tools
@@ -51,21 +51,6 @@ subprojects {
                 enabled = true
                 destination = file("$buildDir.absolutePath/reports/detekt.html")
             }
-        }
-    }
-
-    ktlint {
-        version = tools.ktlintVersion
-        debug = true
-        verbose = true
-        android = true
-        outputToConsole = true
-        reporters = [ReporterType.CHECKSTYLE]
-        ignoreFailures = true
-        filter {
-            exclude("**/generated/**")
-            include("**/kotlin/**")
-            include("**/java/**")
         }
     }
 }
