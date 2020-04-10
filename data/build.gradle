@@ -3,7 +3,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'de.fuerstenau.buildconfig'
 apply plugin: 'idea'
 apply from: "$rootProject.projectDir/keys.gradle"
-apply from: "$rootProject.projectDir/gradle/config-kotlin-sources.gradle"
 
 buildscript {
     repositories {
