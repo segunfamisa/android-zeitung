@@ -11,12 +11,32 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.Row
 import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
+import androidx.ui.res.stringResource
+import androidx.ui.res.vectorResource
+import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.theme.secondary
+
+
+@Composable
+private val navItems: List<NavItem>
+    get() = listOf(
+        NavItem(
+            0,
+            stringResource(id = R.string.menu_news),
+            vectorResource(id = R.drawable.ic_nav_menu_newspaper)
+        ),
+
+        NavItem(
+            1,
+            stringResource(id = R.string.menu_bookmarks),
+            vectorResource(id = R.drawable.ic_nav_menu_bookmark)
+        )
+    )
 
 @Composable
 fun MainContent(
-    items: List<NavItem>,
-    state: NavBarState,
+    items: List<NavItem> = navItems,
+    state: NavBarState = NavBarState(navItems[1]),
     onItemSelected: (NavItem) -> Boolean
 ) {
     Column {
@@ -48,12 +68,16 @@ private fun BottomNavBar(
                 text = { BottomNavText(navItem, isSelected) },
                 selected = isSelected,
                 onSelected = {
-                    val selected = onItemSelected(navItem)
-                    if (selected) {
-                        state.updateSelection(navItem)
+                    // We want to avoid reselection. In the future, I may provide item reselection
+                    // callbacks. But for now, no need.
+                    if (!isSelected) {
+                        val selected = onItemSelected(navItem)
+                        if (selected) {
+                            state.updateSelection(navItem)
+                        }
+                        // we no longer need to set initial item since the callback is triggered
+                        shouldSelectInitialNavItem = false
                     }
-                    // we no longer need to set initial item since the callback is triggered
-                    shouldSelectInitialNavItem = false
                 }
             )
 
