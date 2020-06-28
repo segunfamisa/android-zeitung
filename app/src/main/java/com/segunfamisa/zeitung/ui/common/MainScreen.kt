@@ -11,27 +11,11 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.Row
 import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
-import androidx.ui.res.stringResource
-import androidx.ui.res.vectorResource
-import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.theme.secondary
 
 
 @Composable
-private val navItems: List<NavItem>
-    get() = listOf(
-        NavItem(
-            0,
-            stringResource(id = R.string.menu_news),
-            vectorResource(id = R.drawable.ic_nav_menu_newspaper)
-        ),
-
-        NavItem(
-            1,
-            stringResource(id = R.string.menu_bookmarks),
-            vectorResource(id = R.drawable.ic_nav_menu_bookmark)
-        )
-    )
+private val navItems = listOf(NavItem.News, NavItem.Saved)
 
 @Composable
 fun MainContent(
