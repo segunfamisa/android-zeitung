@@ -36,7 +36,7 @@ private val navItems: List<NavItem>
 @Composable
 fun MainContent(
     items: List<NavItem> = navItems,
-    state: NavBarState = NavBarState(navItems[1]),
+    state: NavBarState = NavBarState(navItems[0]),
     onItemSelected: (NavItem) -> Boolean
 ) {
     Column {
