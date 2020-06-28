@@ -7,9 +7,9 @@ ext {
     ]
 
     libraryVersions = [
-            androidXVersion          : "1.2.0",
+            androidXVersion          : "1.3.0",
             appCompatVersion          : "1.1.0",
-            constraintLayoutVersion  : "2.0.0-beta4",
+            constraintLayoutVersion  : "2.0.0-beta7",
             materialDesignVersion    : "1.1.0",
             coroutinesVersion        : "1.3.0",
             retoriftVersion          : "2.6.2",
@@ -19,12 +19,12 @@ ext {
     ]
 
     testLibraryVersions = [
-            jUnitVersion        : "4.12",
+            jUnitVersion        : "4.13",
             testRunnerVersion   : "1.2.0",
             espressoVersion     : "3.2.0",
             mockWebServerVersion: "3.10.0",
-            mockitoKotlinVersion: "2.0.0"
-
+            mockitoKotlinVersion: "2.0.0",
+            androidXJunitExtVersion: "1.1.1"
     ]
 
     tools = [
