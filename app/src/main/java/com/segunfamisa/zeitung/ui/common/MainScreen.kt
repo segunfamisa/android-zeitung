@@ -13,16 +13,12 @@ import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
 import com.segunfamisa.zeitung.ui.theme.secondary
 
-
-@Composable
-private val navItems = listOf(NavItem.News, NavItem.Saved)
-
 @Composable
 fun MainContent(
-    items: List<NavItem> = navItems,
-    state: NavBarState = NavBarState(navItems[0]),
     onItemSelected: (NavItem) -> Boolean
 ) {
+    val items = listOf(NavItem.News, NavItem.Saved)
+    val state = NavBarState(items.first())
     Column {
         Row(modifier = Modifier.weight(1f)) {
             // TODO body corresponding to each selection goes here
