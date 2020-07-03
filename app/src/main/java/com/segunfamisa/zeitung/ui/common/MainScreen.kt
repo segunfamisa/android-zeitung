@@ -8,19 +8,17 @@ import androidx.ui.layout.Row
 
 @Composable
 fun MainContent(
-    onItemSelected: (NavItem) -> Boolean
+    navBarState : NavBarState,
+    onNavItemSelected: (NavItem) -> Boolean
 ) {
     Column {
         Row(modifier = Modifier.weight(1f)) {
             // TODO body corresponding to each selection goes here
         }
         Row {
-            val navItems: List<NavItem> = listOf(NavItem.News, NavItem.Bookmarks)
-            val navBarState = NavBarState(navItems.first())
             BottomNavBar(
-                items = navItems,
                 state = navBarState,
-                onItemSelected = onItemSelected
+                onItemSelected = onNavItemSelected
             )
         }
     }
