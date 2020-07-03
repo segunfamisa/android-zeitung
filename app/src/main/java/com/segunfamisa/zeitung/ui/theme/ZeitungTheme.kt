@@ -1,7 +1,6 @@
 package com.segunfamisa.zeitung.ui.theme
 
 import androidx.compose.Composable
-import androidx.compose.ambientOf
 import androidx.ui.graphics.Color
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.lightColorPalette

@@ -9,25 +9,30 @@ import androidx.ui.foundation.Text
 import androidx.ui.material.Scaffold
 import androidx.ui.material.TopAppBar
 import androidx.ui.res.stringResource
-import androidx.ui.tooling.preview.Preview
 import com.segunfamisa.zeitung.R
+import com.segunfamisa.zeitung.di.AppContainer
 import com.segunfamisa.zeitung.ui.theme.ZeitungTheme
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var appContainer: AppContainer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             ZeitungTheme {
-                MainScreen()
+                MainScreen(
+                    appContainer = appContainer
+                )
             }
         }
     }
 
     @Composable
-    @Preview
-    private fun MainScreen() {
+    private fun MainScreen(appContainer: AppContainer) {
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -36,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             },
             bodyContent = {
                 MainContent(
+                    appContainer = appContainer,
                     onItemSelected = {
                         setBottomNavSelection(it)
                     }
