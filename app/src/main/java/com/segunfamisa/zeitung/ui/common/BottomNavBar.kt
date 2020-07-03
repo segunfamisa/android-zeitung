@@ -12,6 +12,7 @@ import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
 import androidx.ui.res.stringResource
 import androidx.ui.res.vectorResource
+import androidx.ui.text.font.FontWeight
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.theme.secondary
 
@@ -83,5 +84,9 @@ private fun BottomNavText(
     navItem: NavItem,
     isSelected: Boolean
 ) {
-    Text(stringResource(id = navItem.title), color = if (isSelected) secondary() else Color.Unset)
+    Text(
+        text = stringResource(id = navItem.title),
+        color = if (isSelected) secondary() else Color.Unset,
+        fontWeight = if (isSelected) FontWeight.Bold else null
+    )
 }
