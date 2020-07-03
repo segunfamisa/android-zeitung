@@ -11,12 +11,11 @@ import com.segunfamisa.zeitung.ui.news.NewsContent
 
 @Composable
 fun MainContent(
-    onItemSelected: (NavItem) -> Boolean,
+    navBarState : NavBarState,
+    onNavItemSelected: (NavItem) -> Boolean,
     appContainer: AppContainer
 ) {
     Column {
-        val navItems: List<NavItem> = listOf(NavItem.News, NavItem.Bookmarks)
-        val navBarState = NavBarState(navItems.first())
         Row(modifier = Modifier.weight(1f)) {
             MainContentBody(
                 appContainer = appContainer,
@@ -25,9 +24,8 @@ fun MainContent(
         }
         Row {
             BottomNavBar(
-                items = navItems,
                 state = navBarState,
-                onItemSelected = onItemSelected
+                onItemSelected = onNavItemSelected
             )
         }
     }

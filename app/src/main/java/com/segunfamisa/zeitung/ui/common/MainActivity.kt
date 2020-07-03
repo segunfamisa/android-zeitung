@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     private fun MainScreen(appContainer: AppContainer) {
+        val navBarState = NavBarState(listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks))
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -42,9 +43,10 @@ class MainActivity : AppCompatActivity() {
             bodyContent = {
                 MainContent(
                     appContainer = appContainer,
-                    onItemSelected = {
+                    onNavItemSelected = {
                         setBottomNavSelection(it)
-                    }
+                    },
+                    navBarState = navBarState
                 )
             }
         )

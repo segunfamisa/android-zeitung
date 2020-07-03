@@ -12,16 +12,18 @@ import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
 import androidx.ui.res.stringResource
 import androidx.ui.res.vectorResource
+import androidx.ui.text.font.FontWeight
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.theme.secondary
 
 sealed class NavItem(val index: Int, @StringRes val title: Int, @DrawableRes val icon: Int) {
     object News : NavItem(0, R.string.menu_news, R.drawable.ic_nav_menu_newspaper)
-    object Bookmarks : NavItem(1, R.string.menu_bookmarks, R.drawable.ic_nav_menu_bookmark)
+    object Explore : NavItem(1, R.string.menu_browse, R.drawable.ic_nav_menu_browse)
+    object Bookmarks : NavItem(2, R.string.menu_bookmarks, R.drawable.ic_nav_menu_bookmark)
 }
 
-class NavBarState(initialSelection: NavItem) {
-    var currentSelection by mutableStateOf<NavItem>(initialSelection)
+class NavBarState(val navItems: List<NavItem>, defaultSelectedIndex: Int = 0) {
+    var currentSelection by mutableStateOf(navItems[defaultSelectedIndex])
         private set
 
     fun updateSelection(newSelection: NavItem) {
@@ -31,13 +33,12 @@ class NavBarState(initialSelection: NavItem) {
 
 @Composable
 fun BottomNavBar(
-    items: List<NavItem>,
     state: NavBarState,
     onItemSelected: (NavItem) -> Boolean
 ) {
     var shouldSelectInitialNavItem: Boolean = remember { true }
     BottomNavigation {
-        items.forEach { navItem ->
+        state.navItems.forEach { navItem ->
             val isSelected = navItem.index == state.currentSelection.index
             BottomNavigationItem(
                 icon = { BottomNavIcon(navItem, isSelected) },
@@ -83,5 +84,9 @@ private fun BottomNavText(
     navItem: NavItem,
     isSelected: Boolean
 ) {
-    Text(stringResource(id = navItem.title), color = if (isSelected) secondary() else Color.Unset)
+    Text(
+        text = stringResource(id = navItem.title),
+        color = if (isSelected) secondary() else Color.Unset,
+        fontWeight = if (isSelected) FontWeight.Bold else null
+    )
 }
