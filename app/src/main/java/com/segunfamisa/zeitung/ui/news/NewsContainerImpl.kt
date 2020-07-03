@@ -1,14 +1,23 @@
 package com.segunfamisa.zeitung.ui.news
 
+import androidx.lifecycle.ViewModelLazy
+import androidx.lifecycle.ViewModelStore
 import com.segunfamisa.zeitung.di.NewsContainer
-import dagger.Lazy
+import com.segunfamisa.zeitung.util.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
 class NewsContainerImpl @Inject constructor(
-    private val newsViewModelProvider: Lazy<NewsViewModel>
+    private val viewModelStore: ViewModelStore,
+    private val viewModelFactory: ViewModelFactory<NewsViewModel>
 ) : NewsContainer {
 
-    override val newsViewModel: NewsViewModel
-        get() = newsViewModelProvider.get()
+    override val newsViewModel: Lazy<NewsViewModel>
+        get() {
+            return ViewModelLazy(
+                viewModelClass = NewsViewModel::class,
+                storeProducer = { viewModelStore },
+                factoryProducer = { viewModelFactory }
+            )
+        }
 
 }

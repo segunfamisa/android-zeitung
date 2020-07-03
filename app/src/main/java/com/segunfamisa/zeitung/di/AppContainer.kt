@@ -10,6 +10,9 @@ interface AppContainer {
     fun newsContainer(): NewsContainer
 }
 
+/**
+ * Container to get News screen dependencies
+ */
 interface NewsContainer {
-    val newsViewModel: NewsViewModel
+    val newsViewModel: Lazy<NewsViewModel>
 }
