@@ -11,6 +11,6 @@ class GetHeadlinesUseCase @Inject constructor(
 ) : UseCase<HeadlineQueryParam, List<Article>>() {
 
     override suspend fun invoke(param: HeadlineQueryParam): Either<Error, List<Article>> {
-        return repo.getHeadlines(category = param.category, country = "", sources = "")
+        return repo.getHeadlines(category = param.category, country = param.country, sources = "")
     }
 }
