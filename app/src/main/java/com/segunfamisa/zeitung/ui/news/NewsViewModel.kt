@@ -55,6 +55,10 @@ class NewsViewModel @Inject constructor(
         }
     }
 
+    fun saveNewsItem(newsItem: UiNewsItem, shouldSave: Boolean) {
+        // TODO("Not yet implemented")
+    }
+
     private companion object {
         const val LOG_TAG = "NewsViewModel"
     }
