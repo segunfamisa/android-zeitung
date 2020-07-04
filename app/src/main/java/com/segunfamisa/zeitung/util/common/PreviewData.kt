@@ -23,7 +23,7 @@ internal fun ThemedPreview(
 }
 
 @Composable
-fun fakeArticle() = UiNewsItem(
+fun fakeArticle() = UiNewsItem.Regular(
     source = UiSourceItem(
         id = "",
         name = "Nintendo Life",

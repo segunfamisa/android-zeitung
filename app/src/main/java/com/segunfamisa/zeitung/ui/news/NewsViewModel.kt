@@ -37,22 +37,40 @@ class NewsViewModel @Inject constructor(
     }
 
     private fun List<Article>.toUiNewsItemList(): List<UiNewsItem> {
-        return this.map {
-            UiNewsItem(
-                headline = it.title,
-                subhead = it.description,
-                date = it.publishedAt,
-                author = it.author,
-                image = null,
-                imageUrl = it.imageUrl,
-                url = it.url,
-                isSaved = false, // TODO determine this with bookmarks list.
-                source = UiSourceItem(
-                    id = it.source.id,
-                    logo = null, // TODO implement converting url to image asset
-                    name = it.source.name
+        return this.mapIndexed { index, article ->
+            if (index == 0) {
+                UiNewsItem.Top(
+                    headline = article.title,
+                    subhead = article.description,
+                    date = article.publishedAt,
+                    author = article.author,
+                    image = null,
+                    imageUrl = article.imageUrl,
+                    url = article.url,
+                    isSaved = false, // TODO determine this with bookmarks list.
+                    source = UiSourceItem(
+                        id = article.source.id,
+                        logo = null, // TODO implement converting url to image asset
+                        name = article.source.name
+                    )
                 )
-            )
+            } else {
+                UiNewsItem.Regular(
+                    headline = article.title,
+                    subhead = article.description,
+                    date = article.publishedAt,
+                    author = article.author,
+                    image = null,
+                    imageUrl = article.imageUrl,
+                    url = article.url,
+                    isSaved = false, // TODO determine this with bookmarks list.
+                    source = UiSourceItem(
+                        id = article.source.id,
+                        logo = null, // TODO implement converting url to image asset
+                        name = article.source.name
+                    )
+                )
+            }
         }
     }
 
