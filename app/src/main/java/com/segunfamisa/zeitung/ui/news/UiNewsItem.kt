@@ -9,6 +9,7 @@ data class UiNewsItem(
     val author: String,
     val date: Date,
     val url: String,
+    val isSaved: Boolean,
     val image: ImageAsset?,
     val source: UiSourceItem
 )
