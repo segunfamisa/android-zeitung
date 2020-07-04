@@ -24,6 +24,17 @@ private val colors = lightColorPalette(
 fun secondary() = colors.secondary
 
 @Composable
+fun typography() = MaterialTheme.typography
+
+@Composable
+fun shapes() = MaterialTheme.shapes
+
+@Composable
 fun ZeitungTheme(children: @Composable() () -> Unit) {
-    MaterialTheme(colors = colors, content = children)
+    MaterialTheme(
+        colors = colors,
+        typography = typography(),
+        shapes = shapes(),
+        content = children
+    )
 }
