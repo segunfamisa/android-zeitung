@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.util.Date
+import java.util.*
 
 class GetHeadlinesUseCaseTest {
 
@@ -24,17 +24,18 @@ class GetHeadlinesUseCaseTest {
 
     @Test
     fun `get headlines successfully`() = runBlocking {
-        // given that we request business headlines
+        // given that we request business headlines from germany
         val category = "business"
+        val country = "de"
 
         // given that the repository returns news for that response
         val articles = createArticles(count = 2)
-        whenever(repo.getHeadlines(category = category, sources = "", country = "")).thenReturn(
+        whenever(repo.getHeadlines(category = category, sources = "", country = country)).thenReturn(
             Either.right(articles)
         )
 
         // when we invoke the use case
-        val result = useCase.invoke(param = HeadlineQueryParam(category = category))
+        val result = useCase.invoke(param = HeadlineQueryParam(category = category, country = country))
 
         // then we assert that the retrieved articles match the ones returned from the repository
         val retrievedArticles = result.orNull()!!

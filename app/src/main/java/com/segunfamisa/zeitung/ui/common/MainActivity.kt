@@ -9,26 +9,40 @@ import androidx.ui.foundation.Text
 import androidx.ui.material.Scaffold
 import androidx.ui.material.TopAppBar
 import androidx.ui.res.stringResource
-import androidx.ui.tooling.preview.Preview
 import com.segunfamisa.zeitung.R
+import com.segunfamisa.zeitung.di.AppContainer
+import com.segunfamisa.zeitung.ui.news.NewsContent
 import com.segunfamisa.zeitung.ui.theme.ZeitungTheme
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var appContainer: AppContainer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             ZeitungTheme {
-                MainScreen()
+                App(
+                    appContainer = appContainer
+                )
             }
         }
     }
 
     @Composable
-    @Preview
-    private fun MainScreen() {
+    private fun App(appContainer: AppContainer) {
         val navBarState = NavBarState(listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks))
+        val screenState = ScreenState(Screen.News)
+
+        val navigator = object : Navigator {
+            override fun navigateTo(screen: Screen) {
+                screenState.currentScreen = screen
+            }
+        }
+
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -36,18 +50,38 @@ class MainActivity : AppCompatActivity() {
                 )
             },
             bodyContent = {
-                MainContent(
-                    onNavItemSelected = {
-                        setBottomNavSelection(it)
-                    },
-                    navBarState = navBarState
+                when (screenState.currentScreen) {
+                    is Screen.News -> {
+                        NewsContent(
+                            newsContainer = appContainer.newsContainer(),
+                            onItemClicked = { item ->
+                                // Handle click listener
+                            }
+                        )
+                        appContainer.newsContainer().newsViewModel.value.fetchHeadlines()
+                    }
+                    else -> Unit
+                }
+
+            },
+            bottomBar = {
+                BottomNavBar(
+                    state = navBarState,
+                    onItemSelected = {
+                        setBottomNavSelection(it, navigator)
+                    }
                 )
             }
         )
     }
 
-    private fun setBottomNavSelection(navItem: NavItem): Boolean {
-        Toast.makeText(this, "Not yet implemented ${navItem.index}", Toast.LENGTH_SHORT).show()
+    private fun setBottomNavSelection(navItem: NavItem, navigator: Navigator): Boolean {
+        // navigate to corresponding screen
+        when (navItem) {
+            is NavItem.News -> navigator.navigateTo(Screen.News)
+            else -> Toast.makeText(this, "Not yet implemented ${navItem.index}", Toast.LENGTH_SHORT)
+                .show()
+        }
         return true
     }
 }
