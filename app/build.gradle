@@ -38,6 +38,9 @@ dependencies {
 
     implementation "com.squareup.retrofit2:converter-moshi:$libs.moshiVersion"
 
+    implementation "com.github.bumptech.glide:glide:$libs.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$libs.glideVersion"
+
     implementation "com.google.dagger:dagger:$libs.daggerVersion"
     implementation "com.google.dagger:dagger-android:$libs.daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$libs.daggerVersion"

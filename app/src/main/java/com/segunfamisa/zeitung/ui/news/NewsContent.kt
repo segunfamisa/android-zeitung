@@ -7,6 +7,7 @@ import androidx.compose.getValue
 import androidx.ui.core.*
 import androidx.ui.core.gesture.longPressGestureFilter
 import androidx.ui.foundation.*
+import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
 import androidx.ui.livedata.observeAsState
 import androidx.ui.material.CircularProgressIndicator
@@ -21,6 +22,7 @@ import com.segunfamisa.zeitung.ui.UiState
 import com.segunfamisa.zeitung.ui.theme.secondary
 import com.segunfamisa.zeitung.ui.theme.shapes
 import com.segunfamisa.zeitung.ui.theme.typography
+import com.segunfamisa.zeitung.util.GlideImage
 import com.segunfamisa.zeitung.util.common.ThemedPreview
 import com.segunfamisa.zeitung.util.common.fakeArticle
 import com.segunfamisa.zeitung.util.getTimeAgo
@@ -53,23 +55,115 @@ fun NewsContent(
 }
 
 @Composable
-fun NewsArticleList(
+private fun NewsArticleList(
     articles: List<UiNewsItem>,
     onItemClicked: (UiNewsItem) -> Unit,
     onSaveClicked: (UiNewsItem, Boolean) -> Unit
 ) {
-    VerticalScroller() {
+    VerticalScroller(
+        modifier = Modifier.padding(bottom = 56.dp)
+    ) {
         articles.forEachIndexed { index, item ->
-            NewsArticleItem(
-                item,
-                Modifier.clickable(onClick = { onItemClicked(item) }).longPressGestureFilter { },
-                onSaveClicked
-            )
+            if (item is UiNewsItem.Top) {
+                TopNewsArticleItem(
+                    item,
+                    Modifier.clickable(onClick = { onItemClicked(item) })
+                        .longPressGestureFilter { },
+                    onSaveClicked
+                )
+            } else {
+                NewsArticleItem(
+                    item,
+                    Modifier.clickable(onClick = { onItemClicked(item) })
+                        .longPressGestureFilter { },
+                    onSaveClicked
+                )
+            }
 
             if (index < articles.size - 1) {
                 Divider(modifier = Modifier.padding(horizontal = 16.dp))
             }
         }
+    }
+}
+
+@Composable
+private fun TopNewsArticleItem(
+    item: UiNewsItem,
+    modifier: Modifier,
+    onSaveClicked: (UiNewsItem, Boolean) -> Unit
+) {
+    ConstraintLayout(
+        modifier = modifier.fillMaxWidth().wrapContentHeight().padding(16.dp)
+    ) {
+        val (headline, source, image, date, save) = createRefs()
+        val typography = typography()
+
+        ArticleImage(
+            item = item,
+            modifier = Modifier.aspectRatio(1.78f).fillMaxWidth()
+                .clip(
+                    RoundedCornerShape(
+                        topLeft = 4.dp,
+                        topRight = 4.dp,
+                        bottomRight = 0.dp,
+                        bottomLeft = 0.dp
+                    )
+                )
+                .constrainAs(image) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+        )
+
+        Text(
+            text = item.source.name,
+            style = typography.overline,
+            modifier = Modifier.constrainAs(source) {
+                top.linkTo(image.bottom, 8.dp)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
+            }
+        )
+
+        Text(
+            text = item.headline,
+            style = typography.h6,
+            modifier = Modifier.constrainAs(headline) {
+                top.linkTo(source.bottom, 8.dp)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
+            }
+        )
+
+        Text(
+            text = item.date.asTimeAgo(ContextAmbient.current.resources).capitalize(),
+            style = typography.caption,
+            modifier = Modifier.constrainAs(date) {
+                top.linkTo(headline.bottom, 8.dp)
+                start.linkTo(parent.start)
+                end.linkTo(save.start)
+                width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
+            }
+        )
+
+        SaveButton(
+            isSaved = item.isSaved,
+            modifier = Modifier.preferredSize(24.dp)
+                .constrainAs(save) {
+                    bottom.linkTo(parent.bottom)
+                    end.linkTo(parent.end)
+                },
+            onSaveClicked = { saved ->
+                onSaveClicked(item, saved)
+            }
+        )
     }
 }
 
@@ -94,6 +188,7 @@ private fun NewsArticleItem(
                 start.linkTo(parent.start)
                 end.linkTo(image.start, 8.dp)
                 width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
             }
         )
 
@@ -114,24 +209,23 @@ private fun NewsArticleItem(
             style = typography.caption,
             modifier = Modifier.constrainAs(date) {
                 top.linkTo(headline.bottom, margin = 8.dp)
+                bottom.linkTo(parent.bottom)
                 start.linkTo(parent.start)
                 end.linkTo(image.start, 8.dp)
                 width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
             }
         )
 
-        item.image?.let {
-            Image(
-                asset = it,
-                modifier = Modifier.preferredSize(64.dp)
-                    .clip(shapes.medium)
-                    .constrainAs(image) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    },
-                contentScale = ContentScale.Crop
-            )
-        }
+        ArticleImage(
+            item = item,
+            modifier = Modifier.preferredSize(64.dp)
+                .clip(shapes.medium)
+                .constrainAs(image) {
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                }
+        )
 
         SaveButton(
             isSaved = item.isSaved,
@@ -145,6 +239,25 @@ private fun NewsArticleItem(
             }
         )
     }
+}
+
+@Composable
+private fun ArticleImage(
+    item: UiNewsItem,
+    modifier: Modifier
+) {
+    item.image?.let {
+        Image(
+            asset = it,
+            modifier = modifier,
+            contentScale = ContentScale.Crop
+        )
+    } ?: GlideImage(
+        url = item.imageUrl,
+        placeHolderResId = R.drawable.nintendo,
+        modifier = modifier,
+        contentScale = ContentScale.Crop
+    )
 }
 
 @Composable
@@ -210,6 +323,18 @@ private fun PreviewNewsArticleItem() {
 }
 
 @Composable
+@Preview("Top news article item")
+private fun PreviewTopNewsArticleItem() {
+    ThemedPreview {
+        TopNewsArticleItem(
+            item = fakeArticle(),
+            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            onSaveClicked = { _, _ -> }
+        )
+    }
+}
+
+@Composable
 @Preview("News article item (dark theme)")
 private fun PreviewDarkThemeNewsArticleItem() {
     ThemedPreview(darkTheme = true) {
@@ -225,7 +350,8 @@ private fun PreviewDarkThemeNewsArticleItem() {
 @Preview("News article list")
 private fun PreviewNewsArticleList() {
     ThemedPreview {
-        val articles = listOf(fakeArticle(), fakeArticle().copy(isSaved = false), fakeArticle())
+        val article = fakeArticle()
+        val articles = listOf(article, article.copy(isSaved = false), article.copy(image = null))
         NewsArticleList(
             articles = articles,
             onItemClicked = { },
