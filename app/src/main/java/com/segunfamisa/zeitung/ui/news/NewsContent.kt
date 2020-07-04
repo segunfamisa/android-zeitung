@@ -21,6 +21,7 @@ import com.segunfamisa.zeitung.ui.UiState
 import com.segunfamisa.zeitung.ui.theme.secondary
 import com.segunfamisa.zeitung.ui.theme.shapes
 import com.segunfamisa.zeitung.ui.theme.typography
+import com.segunfamisa.zeitung.util.GlideImage
 import com.segunfamisa.zeitung.util.common.ThemedPreview
 import com.segunfamisa.zeitung.util.common.fakeArticle
 import com.segunfamisa.zeitung.util.getTimeAgo
@@ -94,6 +95,7 @@ private fun NewsArticleItem(
                 start.linkTo(parent.start)
                 end.linkTo(image.start, 8.dp)
                 width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
             }
         )
 
@@ -114,24 +116,23 @@ private fun NewsArticleItem(
             style = typography.caption,
             modifier = Modifier.constrainAs(date) {
                 top.linkTo(headline.bottom, margin = 8.dp)
+                bottom.linkTo(parent.bottom)
                 start.linkTo(parent.start)
                 end.linkTo(image.start, 8.dp)
                 width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
             }
         )
 
-        item.image?.let {
-            Image(
-                asset = it,
-                modifier = Modifier.preferredSize(64.dp)
-                    .clip(shapes.medium)
-                    .constrainAs(image) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    },
-                contentScale = ContentScale.Crop
-            )
-        }
+        ArticleImage(
+            item = item,
+            modifier = Modifier.preferredSize(64.dp)
+                .clip(shapes.medium)
+                .constrainAs(image) {
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                }
+        )
 
         SaveButton(
             isSaved = item.isSaved,
@@ -145,6 +146,25 @@ private fun NewsArticleItem(
             }
         )
     }
+}
+
+@Composable
+private fun ArticleImage(
+    item: UiNewsItem,
+    modifier: Modifier
+) {
+    item.image?.let {
+        Image(
+            asset = it,
+            modifier = modifier,
+            contentScale = ContentScale.Crop
+        )
+    } ?: GlideImage(
+        url = item.imageUrl,
+        placeHolderResId = R.drawable.nintendo,
+        modifier = modifier,
+        contentScale = ContentScale.Crop
+    )
 }
 
 @Composable
@@ -225,7 +245,8 @@ private fun PreviewDarkThemeNewsArticleItem() {
 @Preview("News article list")
 private fun PreviewNewsArticleList() {
     ThemedPreview {
-        val articles = listOf(fakeArticle(), fakeArticle().copy(isSaved = false), fakeArticle())
+        val article = fakeArticle()
+        val articles = listOf(article, article.copy(isSaved = false), article.copy(image = null))
         NewsArticleList(
             articles = articles,
             onItemClicked = { },

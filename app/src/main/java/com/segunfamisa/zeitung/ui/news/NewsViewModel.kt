@@ -43,7 +43,8 @@ class NewsViewModel @Inject constructor(
                 subhead = it.description,
                 date = it.publishedAt,
                 author = it.author,
-                image = null, // TODO implement converting url to image asset
+                image = null,
+                imageUrl = it.imageUrl,
                 url = it.url,
                 isSaved = false, // TODO determine this with bookmarks list.
                 source = UiSourceItem(

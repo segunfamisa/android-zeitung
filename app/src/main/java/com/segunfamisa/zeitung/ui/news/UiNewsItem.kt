@@ -11,6 +11,7 @@ data class UiNewsItem(
     val url: String,
     val isSaved: Boolean,
     val image: ImageAsset?,
+    val imageUrl: String,
     val source: UiSourceItem
 )
 
