@@ -12,9 +12,10 @@ import java.util.*
 
 @Composable
 internal fun ThemedPreview(
+    darkTheme: Boolean = false,
     children: @Composable() () -> Unit
 ) {
-    ZeitungTheme {
+    ZeitungTheme(darkTheme = darkTheme) {
         Surface {
             children()
         }

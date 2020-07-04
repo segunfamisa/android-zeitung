@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     is Screen.News -> {
                         NewsContent(
                             newsContainer = appContainer.newsContainer(),
-                            onItemClicked = { item ->
+                            onItemClicked = {
                                 // Handle click listener
                             }
                         )
