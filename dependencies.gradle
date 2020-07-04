@@ -16,6 +16,7 @@ ext {
             moshiVersion           : "2.6.2",
             daggerVersion          : "2.27",
             arrowVersion           : "0.8.1",
+            glideVersion           : "4.11.0",
             composeVersion         : "0.1.0-SNAPSHOT"
     ]
 
