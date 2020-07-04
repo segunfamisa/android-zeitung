@@ -210,9 +210,34 @@ private fun PreviewNewsArticleItem() {
 }
 
 @Composable
+@Preview("News article item (dark theme)")
+private fun PreviewDarkThemeNewsArticleItem() {
+    ThemedPreview(darkTheme = true) {
+        NewsArticleItem(
+            item = fakeArticle(),
+            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            onSaveClicked = { _, _ -> }
+        )
+    }
+}
+
+@Composable
 @Preview("News article list")
 private fun PreviewNewsArticleList() {
     ThemedPreview {
+        val articles = listOf(fakeArticle(), fakeArticle().copy(isSaved = false), fakeArticle())
+        NewsArticleList(
+            articles = articles,
+            onItemClicked = { },
+            onSaveClicked = { _, _ -> }
+        )
+    }
+}
+
+@Composable
+@Preview("News article list (dark theme)")
+private fun PreviewDarkThemeNewsArticleList() {
+    ThemedPreview(darkTheme = true) {
         val articles = listOf(fakeArticle(), fakeArticle().copy(isSaved = false), fakeArticle())
         NewsArticleList(
             articles = articles,
