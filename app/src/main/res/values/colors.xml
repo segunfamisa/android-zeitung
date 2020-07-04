@@ -13,6 +13,7 @@
 
     <!-- common -->
     <color name="accent">#4ebaaa</color>
+    <color name="status_bar">#CFCFCF</color>
 
     <!-- text color -->
     <color name="primaryTextColor">#ffffff</color>
