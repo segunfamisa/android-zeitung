@@ -17,7 +17,8 @@ ext {
             daggerVersion          : "2.27",
             arrowVersion           : "0.8.1",
             glideVersion           : "4.11.0",
-            composeVersion         : "1.0.0-alpha01"
+            composeVersion         : "1.0.0-alpha01",
+            accompanistVersion     : "0.2.0"
     ]
 
     testLibraryVersions = [

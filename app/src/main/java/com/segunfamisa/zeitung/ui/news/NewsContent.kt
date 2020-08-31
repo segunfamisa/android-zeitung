@@ -26,6 +26,7 @@ import com.segunfamisa.zeitung.ui.UiState
 import com.segunfamisa.zeitung.ui.theme.secondary
 import com.segunfamisa.zeitung.ui.theme.shapes
 import com.segunfamisa.zeitung.ui.theme.typography
+import com.segunfamisa.zeitung.util.NetworkImage
 import com.segunfamisa.zeitung.util.common.ThemedPreview
 import com.segunfamisa.zeitung.util.common.fakeArticle
 import com.segunfamisa.zeitung.util.getTimeAgo
@@ -258,7 +259,11 @@ private fun ArticleImage(
             modifier = modifier,
             contentScale = ContentScale.Crop
         )
-    }
+    } ?: NetworkImage(
+        url = item.imageUrl,
+        modifier = modifier,
+        contentScale = ContentScale.Crop
+    )
 }
 
 @Composable
