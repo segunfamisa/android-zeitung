@@ -1,6 +1,6 @@
 package com.segunfamisa.zeitung.ui.news
 
-import androidx.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.ImageAsset
 import java.util.*
 
 sealed class UiNewsItem(

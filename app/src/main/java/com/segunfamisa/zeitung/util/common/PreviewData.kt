@@ -1,9 +1,9 @@
 package com.segunfamisa.zeitung.util.common
 
-import androidx.compose.Composable
-import androidx.ui.core.ContextAmbient
-import androidx.ui.graphics.imageFromResource
-import androidx.ui.material.Surface
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.imageFromResource
+import androidx.compose.ui.platform.ContextAmbient
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.news.UiNewsItem
 import com.segunfamisa.zeitung.ui.news.UiSourceItem

@@ -1,16 +1,13 @@
 package com.segunfamisa.zeitung.ui.news
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
-import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
 import com.segunfamisa.zeitung.ui.UiState
 import com.segunfamisa.zeitung.util.DispatcherProvider
-import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class NewsViewModel @Inject constructor(

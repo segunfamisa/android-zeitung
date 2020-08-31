@@ -2,27 +2,30 @@ package com.segunfamisa.zeitung.ui.news
 
 import android.content.res.Resources
 import android.util.Log
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.ui.core.*
-import androidx.ui.core.gesture.longPressGestureFilter
-import androidx.ui.foundation.*
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.*
-import androidx.ui.livedata.observeAsState
-import androidx.ui.material.CircularProgressIndicator
-import androidx.ui.material.Divider
-import androidx.ui.material.IconToggleButton
-import androidx.ui.res.vectorResource
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
+import androidx.compose.material.IconToggleButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.gesture.longPressGestureFilter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.di.NewsContainer
 import com.segunfamisa.zeitung.ui.UiState
 import com.segunfamisa.zeitung.ui.theme.secondary
 import com.segunfamisa.zeitung.ui.theme.shapes
 import com.segunfamisa.zeitung.ui.theme.typography
-import com.segunfamisa.zeitung.util.GlideImage
 import com.segunfamisa.zeitung.util.common.ThemedPreview
 import com.segunfamisa.zeitung.util.common.fakeArticle
 import com.segunfamisa.zeitung.util.getTimeAgo
@@ -60,7 +63,7 @@ private fun NewsArticleList(
     onItemClicked: (UiNewsItem) -> Unit,
     onSaveClicked: (UiNewsItem, Boolean) -> Unit
 ) {
-    VerticalScroller(
+    ScrollableColumn(
         modifier = Modifier.padding(bottom = 56.dp)
     ) {
         articles.forEachIndexed { index, item ->
@@ -142,7 +145,8 @@ private fun TopNewsArticleItem(
         )
 
         Text(
-            text = item.date.asTimeAgo(ContextAmbient.current.resources).capitalize(),
+            text = item.date.asTimeAgo(ContextAmbient.current.resources)
+                .capitalize(Locale.getDefault()),
             style = typography.caption,
             modifier = Modifier.constrainAs(date) {
                 top.linkTo(headline.bottom, 8.dp)
@@ -205,7 +209,9 @@ private fun NewsArticleItem(
         )
 
         Text(
-            text = item.date.asTimeAgo(ContextAmbient.current.resources).capitalize(),
+            text = item.date
+                .asTimeAgo(ContextAmbient.current.resources)
+                .capitalize(Locale.getDefault()),
             style = typography.caption,
             modifier = Modifier.constrainAs(date) {
                 top.linkTo(headline.bottom, margin = 8.dp)
@@ -252,12 +258,7 @@ private fun ArticleImage(
             modifier = modifier,
             contentScale = ContentScale.Crop
         )
-    } ?: GlideImage(
-        url = item.imageUrl,
-        placeHolderResId = R.drawable.nintendo,
-        modifier = modifier,
-        contentScale = ContentScale.Crop
-    )
+    }
 }
 
 @Composable

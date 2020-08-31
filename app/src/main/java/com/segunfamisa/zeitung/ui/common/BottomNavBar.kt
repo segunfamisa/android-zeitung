@@ -2,17 +2,17 @@ package com.segunfamisa.zeitung.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.*
-import androidx.ui.core.Modifier
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.contentColor
-import androidx.ui.graphics.Color
-import androidx.ui.material.BottomNavigation
-import androidx.ui.material.BottomNavigationItem
-import androidx.ui.res.stringResource
-import androidx.ui.res.vectorResource
-import androidx.ui.text.font.FontWeight
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.contentColor
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.theme.secondary
 
@@ -26,7 +26,7 @@ class NavBarState(val navItems: List<NavItem>, defaultSelectedIndex: Int = 0) {
     var currentSelection by mutableStateOf(navItems[defaultSelectedIndex])
         private set
 
-    fun updateSelection(newSelection: NavItem) {
+    fun update(newSelection: NavItem) {
         currentSelection = newSelection
     }
 }
@@ -42,15 +42,16 @@ fun BottomNavBar(
             val isSelected = navItem.index == state.currentSelection.index
             BottomNavigationItem(
                 icon = { BottomNavIcon(navItem, isSelected) },
-                text = { BottomNavText(navItem, isSelected) },
+                label = { BottomNavText(navItem, isSelected) },
                 selected = isSelected,
-                onSelected = {
+                alwaysShowLabels = true,
+                onSelect = {
                     // We want to avoid reselection. In the future, I may provide item reselection
                     // callbacks. But for now, no need.
                     if (!isSelected) {
                         val selected = onItemSelected(navItem)
                         if (selected) {
-                            state.updateSelection(navItem)
+                            state.update(navItem)
                         }
                         // we no longer need to set initial item since the callback is triggered
                         shouldSelectInitialNavItem = false
