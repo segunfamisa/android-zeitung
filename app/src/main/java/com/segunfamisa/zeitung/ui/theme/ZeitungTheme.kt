@@ -1,12 +1,14 @@
 package com.segunfamisa.zeitung.ui.theme
 
-import androidx.compose.Composable
-import androidx.ui.foundation.isSystemInDarkTheme
-import androidx.ui.graphics.Color
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.lightColorPalette
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
-private val lightThemeColors = lightColorPalette(
+
+private val lightThemeColors = lightColors(
     primary = Color(0xFFFFFFFF),
     primaryVariant = Color(0xFFCFCFCF),
     secondary = Color(0xFF4EBAAA),
@@ -21,11 +23,10 @@ private val lightThemeColors = lightColorPalette(
     onError = Color.White
 )
 
-private val darkThemeColors = lightColorPalette(
+private val darkThemeColors = darkColors(
     primary = Color(0xFF333333),
     primaryVariant = Color(0xFF1b1b1b),
     secondary = Color(0xFF3EB3A1),
-    secondaryVariant = Color(0xFF4EBAAA),
     background = Color(0xFF1b1b1b),
     surface = Color(0xFF1b1b1b),
     error = Color(0xFF770217),
