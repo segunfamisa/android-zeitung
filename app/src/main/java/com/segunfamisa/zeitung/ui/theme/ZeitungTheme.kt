@@ -45,7 +45,7 @@ fun colors(darkTheme: Boolean = isSystemInDarkTheme()) =
 fun secondary() = colors().secondary
 
 @Composable
-fun typography() = MaterialTheme.typography
+fun typography() = zeitungTypography()
 
 @Composable
 fun shapes() = MaterialTheme.shapes
