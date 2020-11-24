@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.font
 import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.unit.sp
+import com.segunfamisa.zeitung.common.R
 
 private val raleWayFontFamily = fontFamily(
     font(R.font.raleway_light, FontWeight.Light),
