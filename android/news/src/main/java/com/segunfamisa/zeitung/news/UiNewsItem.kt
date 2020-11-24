@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.news
+package com.segunfamisa.zeitung.news
 
 import androidx.compose.ui.graphics.ImageAsset
 import java.util.*

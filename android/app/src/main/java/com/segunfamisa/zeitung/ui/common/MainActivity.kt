@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.di.AppContainer
 import com.segunfamisa.zeitung.ui.news.NewsContent
-import com.segunfamisa.zeitung.theme.ZeitungTheme
+import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

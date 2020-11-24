@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.theme
+package com.segunfamisa.zeitung.common.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

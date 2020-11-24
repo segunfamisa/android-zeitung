@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui
+package com.segunfamisa.zeitung.common
 
 sealed class UiState<out T> {
     object Loading : UiState<Nothing>()

@@ -8,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
-import com.segunfamisa.zeitung.ui.UiState
-import com.segunfamisa.zeitung.util.DispatcherProvider
+import com.segunfamisa.zeitung.news.UiNewsItem
+import com.segunfamisa.zeitung.news.UiSourceItem
+import com.segunfamisa.zeitung.common.UiState
+import com.segunfamisa.zeitung.utils.DispatcherProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -8,7 +8,8 @@ dependencies {
     def libs = rootProject.ext.libraryVersions
     def testLibs = rootProject.ext.testLibraryVersions
 
-    implementation project(':android:theme')
+    implementation project(':android:common')
+    implementation project(':shared:domain')
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
@@ -20,6 +21,8 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
+
+    implementation "com.google.dagger:dagger:$libs.daggerVersion"
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test.ext:junit:$testLibs.androidXJunitExtVersion"

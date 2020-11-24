@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.platform.ContextAmbient
 import com.segunfamisa.zeitung.R
-import com.segunfamisa.zeitung.ui.news.UiNewsItem
-import com.segunfamisa.zeitung.ui.news.UiSourceItem
-import com.segunfamisa.zeitung.theme.ZeitungTheme
+import com.segunfamisa.zeitung.news.UiNewsItem
+import com.segunfamisa.zeitung.news.UiSourceItem
+import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import java.util.*
 
 @Composable
