@@ -11,4 +11,6 @@ dependencies {
 
     implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
     implementation("androidx.compose.material:material:$libs.composeVersion")
+
+    implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
 }

@@ -10,6 +10,8 @@ dependencies {
 
     implementation project(':android:common')
     implementation project(':shared:domain')
+    implementation project(':shared:core')
+    implementation project(':shared:utils')
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
@@ -20,9 +22,14 @@ dependencies {
     implementation("androidx.compose.ui:ui:$libs.composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
 
+    implementation "io.arrow-kt:arrow-core:$libs.arrowVersion"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
 
-    implementation "com.google.dagger:dagger:$libs.daggerVersion"
+    implementation("com.google.dagger:dagger:$libs.daggerVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$libs.coroutinesVersion")
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test.ext:junit:$testLibs.androidXJunitExtVersion"

@@ -3,37 +3,43 @@ package com.segunfamisa.zeitung.ui.common
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Text
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.ViewModelLazy
 import com.segunfamisa.zeitung.R
-import com.segunfamisa.zeitung.di.AppContainer
-import com.segunfamisa.zeitung.ui.news.NewsContent
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
+import com.segunfamisa.zeitung.news.NewsContent
+import com.segunfamisa.zeitung.news.NewsViewModel
+import com.segunfamisa.zeitung.util.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var appContainer: AppContainer
+    lateinit var viewModelFactory: ViewModelFactory<NewsViewModel>
+
+    private val newsViewModelLazy: Lazy<NewsViewModel> = ViewModelLazy(
+        viewModelClass = NewsViewModel::class,
+        storeProducer = { viewModelStore },
+        factoryProducer = { viewModelFactory }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             ZeitungTheme {
-                App(
-                    appContainer = appContainer
-                )
+                App()
             }
         }
     }
 
     @Composable
-    private fun App(appContainer: AppContainer) {
+    private fun App() {
         val navBarState = NavBarState(listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks))
         val screenState = ScreenState(Screen.News)
 
@@ -53,12 +59,12 @@ class MainActivity : AppCompatActivity() {
                 when (screenState.currentScreen) {
                     is Screen.News -> {
                         NewsContent(
-                            newsContainer = appContainer.newsContainer(),
+                            newsViewModel = newsViewModelLazy,
                             onItemClicked = {
                                 // Handle click listener
                             }
                         )
-                        appContainer.newsContainer().newsViewModel.value.fetchHeadlines()
+                        newsViewModelLazy.value.fetchHeadlines()
                     }
                     else -> Unit
                 }

@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.util
+package com.segunfamisa.zeitung.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.contentColor

@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.news
+package com.segunfamisa.zeitung.news
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
-import com.segunfamisa.zeitung.news.UiNewsItem
-import com.segunfamisa.zeitung.news.UiSourceItem
 import com.segunfamisa.zeitung.common.UiState
 import com.segunfamisa.zeitung.utils.DispatcherProvider
 import kotlinx.coroutines.launch

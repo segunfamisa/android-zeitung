@@ -1,15 +1,13 @@
-package com.segunfamisa.zeitung.ui.news
+package com.segunfamisa.zeitung.news
 
 import android.content.res.Resources
 import android.util.Log
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
-import androidx.compose.material.Icon
-import androidx.compose.material.IconToggleButton
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -17,32 +15,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.gesture.longPressGestureFilter
+import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import com.segunfamisa.zeitung.R
-import com.segunfamisa.zeitung.di.NewsContainer
-import com.segunfamisa.zeitung.news.UiNewsItem
+import com.segunfamisa.zeitung.common.NetworkImage
 import com.segunfamisa.zeitung.common.UiState
+import com.segunfamisa.zeitung.common.getTimeAgo
+import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
 import com.segunfamisa.zeitung.common.theme.secondary
 import com.segunfamisa.zeitung.common.theme.shapes
 import com.segunfamisa.zeitung.common.theme.typography
-import com.segunfamisa.zeitung.util.NetworkImage
-import com.segunfamisa.zeitung.util.common.ThemedPreview
-import com.segunfamisa.zeitung.util.common.fakeArticle
-import com.segunfamisa.zeitung.util.getTimeAgo
 import java.util.*
 
 const val LOG_TAG = "NewsContent"
 
 @Composable
 fun NewsContent(
-    newsContainer: NewsContainer,
+    newsViewModel: Lazy<NewsViewModel>,
     onItemClicked: (UiNewsItem) -> Unit
 ) {
-    val viewModel = newsContainer.newsViewModel.value
+    val viewModel = newsViewModel.value
     val uiState: UiState<List<UiNewsItem>>? by viewModel.state.observeAsState()
     val onSaveClicked: (UiNewsItem, Boolean) -> Unit = { newsItem, saved ->
         Log.i(LOG_TAG, "onSaveClicked: item: $newsItem, shouldSave: $saved")
@@ -382,3 +377,23 @@ private fun PreviewDarkThemeNewsArticleList() {
         )
     }
 }
+
+@Composable
+fun fakeArticle() = UiNewsItem.Regular(
+    source = UiSourceItem(
+        id = "",
+        name = "Nintendo Life",
+        logo = null
+    ),
+    author = "Nintendo Life",
+    headline = "The World Ends With You: The Animation Airs In 2021, Here's Your First Look - Nintendo Life",
+    subhead = "Square Enix ' s hit game returns as an anime",
+    url = "https://www.nintendolife.com/news/2020/07/the_world_ends_with_you_the_animation_airs_in_2021_heres_your_first_look",
+    isSaved = true,
+    image = imageFromResource(
+        ContextAmbient.current.resources,
+        R.drawable.nintendo
+    ),
+    imageUrl = "https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5ee95df165be0e00060a8bdd%2F0x0.jpg%3FcropX1%3D12%26cropX2%3D695%26cropY1%3D9%26cropY2%3D393",
+    date = Date()
+)
