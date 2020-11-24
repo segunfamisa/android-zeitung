@@ -14,7 +14,6 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
 
     // jetpack compose deps
-    implementation("androidx.compose:compose-compiler:$libs.composeVersion")
     implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
     implementation("androidx.compose.material:material:$libs.composeVersion")
     implementation("androidx.compose.animation:animation:$libs.composeVersion")

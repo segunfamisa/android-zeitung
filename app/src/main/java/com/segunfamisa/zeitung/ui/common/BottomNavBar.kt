@@ -2,11 +2,8 @@ package com.segunfamisa.zeitung.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Icon
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.contentColor
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,7 +42,7 @@ fun BottomNavBar(
                 label = { BottomNavText(navItem, isSelected) },
                 selected = isSelected,
                 alwaysShowLabels = true,
-                onSelect = {
+                onClick = {
                     // We want to avoid reselection. In the future, I may provide item reselection
                     // callbacks. But for now, no need.
                     if (!isSelected) {
@@ -76,7 +73,7 @@ private fun BottomNavIcon(
     Icon(
         asset = vectorResource(id = navItem.icon),
         modifier = Modifier,
-        tint = if (isSelected) secondary() else contentColor()
+        tint = if (isSelected) secondary() else AmbientContentColor.current
     )
 }
 
@@ -87,7 +84,7 @@ private fun BottomNavText(
 ) {
     Text(
         text = stringResource(id = navItem.title),
-        color = if (isSelected) secondary() else Color.Unset,
+        color = if (isSelected) secondary() else Color.Unspecified,
         fontWeight = if (isSelected) FontWeight.Bold else null
     )
 }

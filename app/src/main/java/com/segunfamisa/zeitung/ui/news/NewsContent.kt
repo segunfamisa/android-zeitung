@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
+import androidx.compose.material.Text
+import androidx.compose.material.Icon
 import androidx.compose.material.IconToggleButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -293,7 +295,8 @@ private fun SaveButton(
 @Composable
 private fun LoadingScreen() {
     Box(
-        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center),
+        alignment = Alignment.Center
     ) {
         CircularProgressIndicator(color = secondary())
     }

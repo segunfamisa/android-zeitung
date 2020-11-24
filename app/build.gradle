@@ -24,7 +24,6 @@ dependencies {
 
     implementation "io.arrow-kt:arrow-core:$libs.arrowVersion"
 
-    implementation("androidx.compose:compose-compiler:$libs.composeVersion")
     implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
     implementation("androidx.compose.material:material:$libs.composeVersion")
     implementation("androidx.compose.animation:animation:$libs.composeVersion")
