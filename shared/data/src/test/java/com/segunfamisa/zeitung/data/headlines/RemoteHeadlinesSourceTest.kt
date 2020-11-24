@@ -6,7 +6,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.segunfamisa.zeitung.data.remote.ApiService
 import com.segunfamisa.zeitung.data.sources.remote.TestDataGenerator
 import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType
 import okhttp3.ResponseBody

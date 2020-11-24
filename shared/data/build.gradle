@@ -28,8 +28,8 @@ dependencies {
     def libs = rootProject.ext.libraryVersions
     def testLibs = rootProject.ext.testLibraryVersions
 
-    implementation project(':core')
-    implementation project(':domain')
+    implementation project(':shared:core')
+    implementation project(':shared:domain')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion"
