@@ -8,6 +8,8 @@ dependencies {
     def libs = rootProject.ext.libraryVersions
     def testLibs = rootProject.ext.testLibraryVersions
 
+    implementation project(':android:theme')
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
     implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")

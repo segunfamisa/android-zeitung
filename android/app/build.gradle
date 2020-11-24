@@ -18,6 +18,7 @@ dependencies {
     implementation project(':shared:core')
     implementation project(':shared:domain')
     implementation project(':android:news')
+    implementation project(':android:theme')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion"
