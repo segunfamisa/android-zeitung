@@ -6,7 +6,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.segunfamisa.zeitung.data.remote.ApiService
 import com.segunfamisa.zeitung.data.sources.remote.TestDataGenerator
 import com.segunfamisa.zeitung.data.remote.entities.SourcesResponse
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
