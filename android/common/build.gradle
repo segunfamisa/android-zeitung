@@ -1,0 +1,16 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+apply from: "${rootProject.projectDir}/config/android-library-config.gradle"
+
+dependencies {
+    def libs = rootProject.ext.libraryVersions
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+
+    implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
+    implementation("androidx.compose.material:material:$libs.composeVersion")
+
+    implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
+}
