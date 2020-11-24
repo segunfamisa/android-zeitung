@@ -17,6 +17,7 @@ dependencies {
     implementation project(':shared:data')
     implementation project(':shared:core')
     implementation project(':shared:domain')
+    implementation project(':shared:utils')
     implementation project(':android:news')
     implementation project(':android:theme')
 

@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.util
+package com.segunfamisa.zeitung.utils
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
