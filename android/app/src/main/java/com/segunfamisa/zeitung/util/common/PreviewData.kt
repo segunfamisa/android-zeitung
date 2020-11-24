@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.ContextAmbient
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.ui.news.UiNewsItem
 import com.segunfamisa.zeitung.ui.news.UiSourceItem
-import com.segunfamisa.zeitung.ui.theme.ZeitungTheme
+import com.segunfamisa.zeitung.theme.ZeitungTheme
 import java.util.*
 
 @Composable

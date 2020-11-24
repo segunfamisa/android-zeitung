@@ -25,9 +25,9 @@ import androidx.ui.tooling.preview.Preview
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.di.NewsContainer
 import com.segunfamisa.zeitung.ui.UiState
-import com.segunfamisa.zeitung.ui.theme.secondary
-import com.segunfamisa.zeitung.ui.theme.shapes
-import com.segunfamisa.zeitung.ui.theme.typography
+import com.segunfamisa.zeitung.theme.secondary
+import com.segunfamisa.zeitung.theme.shapes
+import com.segunfamisa.zeitung.theme.typography
 import com.segunfamisa.zeitung.util.NetworkImage
 import com.segunfamisa.zeitung.util.common.ThemedPreview
 import com.segunfamisa.zeitung.util.common.fakeArticle

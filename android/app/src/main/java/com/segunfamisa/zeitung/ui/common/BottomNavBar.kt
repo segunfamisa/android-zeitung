@@ -2,7 +2,6 @@ package com.segunfamisa.zeitung.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.contentColor
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -11,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.segunfamisa.zeitung.R
-import com.segunfamisa.zeitung.ui.theme.secondary
+import com.segunfamisa.zeitung.theme.secondary
 
 sealed class NavItem(val index: Int, @StringRes val title: Int, @DrawableRes val icon: Int) {
     object News : NavItem(0, R.string.menu_news, R.drawable.ic_nav_menu_newspaper)

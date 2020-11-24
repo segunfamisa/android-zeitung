@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.theme
+package com.segunfamisa.zeitung.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
