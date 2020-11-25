@@ -5,7 +5,7 @@ import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.common.Error
 import java.util.Date
 
-internal interface NewsSource {
+interface NewsSource {
 
     suspend fun getNews(
         sources: String,
