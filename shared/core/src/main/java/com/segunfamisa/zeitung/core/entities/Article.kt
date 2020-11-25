@@ -10,5 +10,6 @@ data class Article(
     val url: String,
     val imageUrl: String,
     val publishedAt: Date,
-    val content: String
+    val content: String,
+    val isSaved: Boolean
 )

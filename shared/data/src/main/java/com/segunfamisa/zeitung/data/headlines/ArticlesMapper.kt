@@ -26,7 +26,8 @@ internal class ArticlesMapper @Inject constructor() :
             title = data.title,
             imageUrl = data.imageUrl ?: "",
             publishedAt = data.publishedAt,
-            content = data.content ?: ""
+            content = data.content ?: "",
+            isSaved = false
         )
     }
 }
