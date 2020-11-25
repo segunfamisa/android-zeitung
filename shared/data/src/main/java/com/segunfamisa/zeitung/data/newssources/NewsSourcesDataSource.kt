@@ -7,7 +7,7 @@ import com.segunfamisa.zeitung.domain.common.Error
 /**
  * Interface to get news sources
  */
-internal interface NewsSourcesDataSource {
+interface NewsSourcesDataSource {
 
     suspend fun getNewsSources(category: String, language: String, country: String): Either<Error, List<Source>>
 }

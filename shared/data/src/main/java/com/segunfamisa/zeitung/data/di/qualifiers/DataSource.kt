@@ -4,4 +4,8 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-internal annotation class DataSource(val type: String)
+annotation class Local
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Remote

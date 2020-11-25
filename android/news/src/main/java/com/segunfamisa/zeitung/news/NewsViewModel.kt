@@ -47,7 +47,7 @@ class NewsViewModel @Inject constructor(
                     image = null,
                     imageUrl = article.imageUrl,
                     url = article.url,
-                    isSaved = false, // TODO determine this with bookmarks list.
+                    isSaved = article.isSaved,
                     source = UiSourceItem(
                         id = article.source.id,
                         logo = null, // TODO implement converting url to image asset
@@ -63,7 +63,7 @@ class NewsViewModel @Inject constructor(
                     image = null,
                     imageUrl = article.imageUrl,
                     url = article.url,
-                    isSaved = false, // TODO determine this with bookmarks list.
+                    isSaved = article.isSaved,
                     source = UiSourceItem(
                         id = article.source.id,
                         logo = null, // TODO implement converting url to image asset
