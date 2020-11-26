@@ -1,8 +1,9 @@
 package com.segunfamisa.zeitung.domain.common
 
 import arrow.core.Either
+import kotlinx.coroutines.flow.Flow
 
-abstract class UseCase<in Param, out Output> {
+abstract class FlowUseCase<in Param, out Result> {
 
-    abstract suspend operator fun invoke(param: Param): Either<Error, Output>
+    abstract fun execute(param: Param): Flow<Either<Error, Result>>
 }

@@ -5,21 +5,27 @@ import com.segunfamisa.zeitung.core.entities.Source
 import com.segunfamisa.zeitung.data.di.qualifiers.Remote
 import com.segunfamisa.zeitung.domain.common.Error
 import com.segunfamisa.zeitung.domain.newssources.NewsSourcesRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 internal class NewsSourcesRepositoryImpl @Inject constructor(
     @Remote private val remoteSource: NewsSourcesDataSource
 ) : NewsSourcesRepository {
 
-    override suspend fun getNewsSources(
+    override fun getNewsSources(
         category: String,
         language: String,
         country: String
-    ): Either<Error, List<Source>> {
-        return remoteSource.getNewsSources(
-            category = category,
-            language = language,
-            country = country
-        )
+    ): Flow<Either<Error, List<Source>>> {
+        return flow {
+            emit(
+                remoteSource.getNewsSources(
+                    category = category,
+                    language = language,
+                    country = country
+                )
+            )
+        }
     }
 }

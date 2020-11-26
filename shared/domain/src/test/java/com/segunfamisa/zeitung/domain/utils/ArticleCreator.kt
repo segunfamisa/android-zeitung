@@ -26,7 +26,8 @@ object ArticleCreator {
                     url = "url $it",
                     imageUrl = "imageUrl $it",
                     publishedAt = Date(System.currentTimeMillis() + count),
-                    content = "content $it"
+                    content = "content $it",
+                    isSaved = false
                 )
             )
         }

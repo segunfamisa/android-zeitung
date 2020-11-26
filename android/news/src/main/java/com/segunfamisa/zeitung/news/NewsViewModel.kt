@@ -6,10 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.segunfamisa.zeitung.core.entities.Article
-import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
 import com.segunfamisa.zeitung.common.UiState
+import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.utils.DispatcherProvider
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,13 +27,15 @@ class NewsViewModel @Inject constructor(
         viewModelScope.launch(dispatcherProvider.io) {
             val params = HeadlineQueryParam(category = "technology", country = "us")
             _state.postValue(UiState.Loading)
-            val headlines = getHeadlinesUseCase.invoke(params)
-            headlines.fold({
-                Log.e(LOG_TAG, it.toString())
-                _state.postValue(UiState.Error(error = Exception(it.message)))
-            }, {
-                _state.postValue(UiState.Success(data = it.toUiNewsItemList()))
-            })
+            getHeadlinesUseCase.execute(params)
+                .collect { headlines ->
+                    headlines.fold({
+                        Log.e(LOG_TAG, it.toString())
+                        _state.postValue(UiState.Error(error = Exception(it.message)))
+                    }, {
+                        _state.postValue(UiState.Success(data = it.toUiNewsItemList()))
+                    })
+                }
         }
     }
 
