@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: "${rootProject.projectDir}/config/android-config.gradle"
+apply from: "${rootProject.projectDir}/config/android-compose-config.gradle"
 apply plugin: 'kotlin-kapt'
 
 def libs = rootProject.ext.libraryVersions

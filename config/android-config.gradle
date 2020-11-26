@@ -2,8 +2,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 def sdk = rootProject.ext.sdkVersions
-def tools = rootProject.ext.tools
-
 android {
     compileSdkVersion sdk.compileSdkVersion
     buildToolsVersion sdk.buildToolsVersion
@@ -23,16 +21,5 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-        useIR = true
-    }
-    buildFeatures {
-        dataBinding = true
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "$tools.composeCompilerVersion"
     }
 }

@@ -1,0 +1,17 @@
+apply from: "${rootProject.projectDir}/config/android-config.gradle"
+
+def tools = rootProject.ext.tools
+
+android {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        useIR = true
+    }
+    buildFeatures {
+        dataBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "$tools.composeCompilerVersion"
+    }
+}
