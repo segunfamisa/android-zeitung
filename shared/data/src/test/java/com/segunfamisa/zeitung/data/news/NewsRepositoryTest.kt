@@ -9,6 +9,7 @@ import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.core.entities.Source
 import com.segunfamisa.zeitung.domain.common.Error
 import com.segunfamisa.zeitung.domain.getnews.NewsRepository
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -38,26 +39,28 @@ class NewsRepositoryTest {
             .thenReturn(Either.right(articles))
 
         // when we call the repository to get news sources
-        val result = repository.getNews(sourceIds = sources, page = 0, from = null)
-
-        // then we verify that we return the data that the remote source fetches
-        assertEquals(
-            "emitted articles are not the ones from the remote source",
-            articles,
-            result.orNull()
-        )
+        repository.getNews(sourceIds = sources, page = 0, from = null)
+            .collect { result ->
+                // then we verify that we return the data that the remote source fetches
+                assertEquals(
+                    "emitted articles are not the ones from the remote source",
+                    articles,
+                    result.orNull()
+                )
+            }
     }
 
     @Test
     fun `error is returned if list of sources is empty`() = runBlocking {
         // when we call the repository to get news sources with an empty list of source ids
-        val result = repository.getNews(sourceIds = listOf(), page = 0, from = null)
-
-        // then we verify that we return the data that the remote source fetches
-        assertTrue(
-            "error should be returned when list of sources is empty",
-            result.getOrHandle { it } is Error
-        )
+        repository.getNews(sourceIds = listOf(), page = 0, from = null)
+            .collect { result ->
+                // then we verify that we return the data that the remote source fetches
+                assertTrue(
+                    "error should be returned when list of sources is empty",
+                    result.getOrHandle { it } is Error
+                )
+            }
     }
 
     @Test
@@ -71,14 +74,15 @@ class NewsRepositoryTest {
             .thenReturn(Either.right(articles))
 
         // when we call the repository to get news sources
-        val result = repository.getNews(sourceIds = listOf("cnn-brk"), page = 0, from = startDate)
-
-        // then we verify that we return the data that the remote source fetches
-        assertEquals(
-            "emitted articles are not for the correct date",
-            articles,
-            result.orNull()
-        )
+        repository.getNews(sourceIds = listOf("cnn-brk"), page = 0, from = startDate)
+            .collect {result ->
+                // then we verify that we return the data that the remote source fetches
+                assertEquals(
+                    "emitted articles are not for the correct date",
+                    articles,
+                    result.orNull()
+                )
+            }
     }
 
     @Test
@@ -92,14 +96,15 @@ class NewsRepositoryTest {
             .thenReturn(Either.right(articles))
 
         // when we call the repository to get news sources
-        val result = repository.getNews(sourceIds = listOf("bbc-africa"), page = page, from = null)
-
-        // then we verify that we return the data that the remote source fetches
-        assertEquals(
-            "emitted articles are not for the correct page",
-            articles,
-            result.orNull()
-        )
+        repository.getNews(sourceIds = listOf("bbc-africa"), page = page, from = null)
+            .collect { result ->
+                // then we verify that we return the data that the remote source fetches
+                assertEquals(
+                    "emitted articles are not for the correct page",
+                    articles,
+                    result.orNull()
+                )
+            }
     }
 
     @Test
@@ -112,10 +117,11 @@ class NewsRepositoryTest {
             .thenReturn(Either.left(Error(message = "can't retrieve news", throwable = Throwable())))
 
         // when we call the repository to get news sources
-        val result = repository.getNews(sourceIds = sources, page = 0, from = null)
-
-        // then verify that there is an error
-        assertTrue(result.getOrHandle { it } is Error)
+        repository.getNews(sourceIds = sources, page = 0, from = null)
+            .collect { result ->
+                // then verify that there is an error
+                assertTrue(result.getOrHandle { it } is Error)
+            }
     }
 
     private fun createArticles(count: Int): List<Article> {
@@ -138,7 +144,8 @@ class NewsRepositoryTest {
                     url = "url $it",
                     imageUrl = "imageUrl $it",
                     publishedAt = Date(System.currentTimeMillis() + count),
-                    content = "content $it"
+                    content = "content $it",
+                    isSaved = false
                 )
             )
         }

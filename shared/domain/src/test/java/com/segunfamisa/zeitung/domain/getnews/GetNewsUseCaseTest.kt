@@ -5,6 +5,8 @@ import arrow.core.orNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.segunfamisa.zeitung.domain.utils.ArticleCreator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -28,18 +30,18 @@ class GetNewsUseCaseTest {
         // given the repository
         val articles = ArticleCreator.createArticles(count = 2)
         whenever(repo.getNews(sourceIds = sources, page = 0, from = null))
-            .thenReturn(Either.right(articles))
+            .thenReturn(flowOf(Either.right(articles)))
 
         // when we invoke, then we we receive the use case
-        val result =
-            useCase.invoke(param = NewsQueryParam(sourceIds = sources, page = 0, from = null))
-
-        // then we assert that the retrieved articles are the same content as emitted by the repo
-        val retrievedArticles = result.orNull()!!
-        assertEquals(
-            "the content of the retrieved articles vary from the articles returned by the repository",
-            articles,
-            retrievedArticles
-        )
+        useCase.execute(param = NewsQueryParam(sourceIds = sources, page = 0, from = null))
+            .collect { result ->
+                // then we assert that the retrieved articles are the same content as emitted by the repo
+                val retrievedArticles = result.orNull()!!
+                assertEquals(
+                    "the content of the retrieved articles vary from the articles returned by the repository",
+                    articles,
+                    retrievedArticles
+                )
+            }
     }
 }
