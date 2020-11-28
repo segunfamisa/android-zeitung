@@ -24,8 +24,8 @@ import androidx.ui.tooling.preview.Preview
 import com.segunfamisa.zeitung.common.NetworkImage
 import com.segunfamisa.zeitung.common.UiState
 import com.segunfamisa.zeitung.common.getTimeAgo
+import com.segunfamisa.zeitung.common.theme.colors
 import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
-import com.segunfamisa.zeitung.common.theme.secondary
 import com.segunfamisa.zeitung.common.theme.shapes
 import com.segunfamisa.zeitung.common.theme.typography
 import java.util.*
@@ -278,7 +278,7 @@ private fun SaveButton(
         if (isSaved) {
             Icon(
                 asset = vectorResource(id = R.drawable.ic_bookmark),
-                tint = secondary()
+                tint = colors().secondary
             )
         } else {
             Icon(
@@ -294,7 +294,7 @@ private fun LoadingScreen() {
         modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center),
         alignment = Alignment.Center
     ) {
-        CircularProgressIndicator(color = secondary())
+        CircularProgressIndicator(color = colors().secondary)
     }
 }
 

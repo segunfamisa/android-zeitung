@@ -21,6 +21,7 @@ dependencies {
     implementation project(':shared:utils')
     implementation project(':android:news')
     implementation project(':android:common')
+    implementation project(':android:onboarding')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutinesVersion"

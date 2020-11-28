@@ -4,7 +4,6 @@ import arrow.core.Either
 import com.segunfamisa.zeitung.core.entities.Source
 import com.segunfamisa.zeitung.domain.common.Error
 import com.segunfamisa.zeitung.domain.common.FlowUseCase
-import com.segunfamisa.zeitung.domain.common.UseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
