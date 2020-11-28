@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_prompt">Enter your newsapi.org API key to get started*</string>
+    <string name="api_key_text_prompt">API key goes here</string>
+    <string name="onboarding_continue">Continue</string>
+</resources>
