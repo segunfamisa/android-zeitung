@@ -1,8 +1,10 @@
 package com.segunfamisa.zeitung.data.di
 
+import com.segunfamisa.zeitung.data.credentials.ApiCredentialsRepositoryImpl
 import com.segunfamisa.zeitung.data.headlines.HeadlinesRepositoryImpl
 import com.segunfamisa.zeitung.data.news.NewsRepositoryImpl
 import com.segunfamisa.zeitung.data.newssources.NewsSourcesRepositoryImpl
+import com.segunfamisa.zeitung.domain.credentials.ApiCredentialsRepository
 import com.segunfamisa.zeitung.domain.getnews.NewsRepository
 import com.segunfamisa.zeitung.domain.headlines.HeadlinesRepository
 import com.segunfamisa.zeitung.domain.newssources.NewsSourcesRepository
@@ -22,6 +24,9 @@ abstract class DataModule {
 
     @Binds
     internal abstract fun bindNewsRepository(newsRepository: NewsRepositoryImpl): NewsRepository
+
+    @Binds
+    internal abstract fun bindApiCredentialsRepository(apiCredentialsRepository: ApiCredentialsRepositoryImpl): ApiCredentialsRepository
 
     // endregion
 }
