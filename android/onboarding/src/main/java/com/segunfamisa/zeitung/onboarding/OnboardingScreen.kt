@@ -4,15 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
+import androidx.compose.runtime.State
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -22,10 +21,29 @@ import androidx.ui.tooling.preview.Preview
 import com.segunfamisa.zeitung.common.theme.colors
 import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
 import com.segunfamisa.zeitung.common.theme.typography
+import kotlinx.coroutines.FlowPreview
+
+@FlowPreview
+@Composable
+fun OnboardingContent(
+    onboardingViewModel: Lazy<OnboardingViewModel>,
+    onContinue: (String) -> Unit,
+    onApiTokenChange: (String) -> Unit
+) {
+    val continueButtonEnabled =
+        onboardingViewModel.value.continueButtonEnabled.observeAsState(false)
+    OnboardingScreen(
+        continueButtonEnabled = continueButtonEnabled,
+        onContinue = onContinue,
+        onApiTokenChange = onApiTokenChange
+    )
+}
 
 @Composable
 fun OnboardingScreen(
-    onContinue: (String) -> Unit
+    continueButtonEnabled: State<Boolean>,
+    onContinue: (String) -> Unit,
+    onApiTokenChange: (String) -> Unit
 ) {
     var apiKey by savedInstanceState(saver = TextFieldValue.Saver) { TextFieldValue() }
     Box(
@@ -53,6 +71,7 @@ fun OnboardingScreen(
                 value = apiKey,
                 onValueChange = {
                     apiKey = it
+                    onApiTokenChange(it.text)
                 },
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
@@ -64,7 +83,7 @@ fun OnboardingScreen(
                         onContinue(apiKey.text)
                     }
                 },
-                textStyle = TextStyle(color = contentColorFor(color = colors().background)),
+                textStyle = typography().caption.copy(color = contentColorFor(color = colors().background)),
                 activeColor = colors().secondary,
                 label = { Text(text = stringResource(id = R.string.api_key_text_prompt)) }
             )
@@ -72,7 +91,8 @@ fun OnboardingScreen(
             Button(
                 onClick = { onContinue(apiKey.text) },
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                colors = ButtonConstants.defaultButtonColors()
+                colors = ButtonConstants.defaultButtonColors(),
+                enabled = continueButtonEnabled.value
             ) {
                 Text(text = stringResource(id = R.string.onboarding_continue))
             }
@@ -84,7 +104,11 @@ fun OnboardingScreen(
 @Composable
 private fun PreviewOnboardingScreen() {
     ThemedPreview {
-        OnboardingScreen(onContinue = {})
+        OnboardingScreen(
+            continueButtonEnabled = mutableStateOf(true),
+            onContinue = {},
+            onApiTokenChange = {}
+        )
     }
 }
 
@@ -92,6 +116,10 @@ private fun PreviewOnboardingScreen() {
 @Composable
 private fun PreviewOnboardingScreenDarkMode() {
     ThemedPreview(darkTheme = true) {
-        OnboardingScreen(onContinue = {})
+        OnboardingScreen(
+            continueButtonEnabled = mutableStateOf(false),
+            onContinue = {},
+            onApiTokenChange = {}
+        )
     }
 }
