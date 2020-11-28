@@ -9,6 +9,7 @@ dependencies {
     def testLibs = rootProject.ext.testLibraryVersions
 
     implementation project(':android:common')
+    implementation project(':shared:domain')
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
