@@ -6,7 +6,6 @@ import com.segunfamisa.zeitung.domain.credentials.ApiCredentialsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Temporary in-memory API token store
