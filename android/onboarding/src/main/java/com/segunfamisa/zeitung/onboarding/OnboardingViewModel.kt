@@ -5,13 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.segunfamisa.zeitung.domain.credentials.SaveApiCredentialsUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OnboardingViewModel @Inject constructor() : ViewModel() {
+class OnboardingViewModel @Inject constructor(
+    private val saveApiCredentialsUseCase: SaveApiCredentialsUseCase,
+) : ViewModel() {
 
     private val _continueButtonEnabled: MutableLiveData<Boolean> = MutableLiveData()
     val continueButtonEnabled: LiveData<Boolean>
@@ -28,7 +31,12 @@ class OnboardingViewModel @Inject constructor() : ViewModel() {
     }
 
     fun onContinueClicked(token: String) {
-        Log.d("Onboarding", "API token: $token")
+        viewModelScope.launch {
+            saveApiCredentialsUseCase.execute(param = token)
+                .collect {
+                    Log.d("Onboarding", "API token saved!")
+                }
+        }
     }
 
 }
