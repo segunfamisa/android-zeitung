@@ -2,15 +2,17 @@ package com.segunfamisa.zeitung.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.segunfamisa.zeitung.R
-import com.segunfamisa.zeitung.common.theme.secondary
+import com.segunfamisa.zeitung.common.theme.colors
 
 sealed class NavItem(val index: Int, @StringRes val title: Int, @DrawableRes val icon: Int) {
     object News : NavItem(0, R.string.menu_news, R.drawable.ic_nav_menu_newspaper)
@@ -41,6 +43,7 @@ fun BottomNavBar(
                 label = { BottomNavText(navItem, isSelected) },
                 selected = isSelected,
                 alwaysShowLabels = true,
+                selectedContentColor = colors().secondary,
                 onClick = {
                     // We want to avoid reselection. In the future, I may provide item reselection
                     // callbacks. But for now, no need.
@@ -72,7 +75,6 @@ private fun BottomNavIcon(
     Icon(
         asset = vectorResource(id = navItem.icon),
         modifier = Modifier,
-        tint = if (isSelected) secondary() else AmbientContentColor.current
     )
 }
 
@@ -83,7 +85,6 @@ private fun BottomNavText(
 ) {
     Text(
         text = stringResource(id = navItem.title),
-        color = if (isSelected) secondary() else Color.Unspecified,
         fontWeight = if (isSelected) FontWeight.Bold else null
     )
 }

@@ -1,6 +1,7 @@
 package com.segunfamisa.zeitung.common.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -87,3 +88,6 @@ fun zeitungTypography() = Typography(
         letterSpacing = 1.5.sp
     )
 )
+
+@Composable
+fun typography() = zeitungTypography()
