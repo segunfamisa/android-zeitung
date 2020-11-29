@@ -20,6 +20,8 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("io.arrow-kt:arrow-core:$libs.arrowVersion")
+    implementation("com.google.dagger:dagger:$libs.daggerVersion")
 
     implementation "com.google.dagger:dagger:$libs.daggerVersion"
 

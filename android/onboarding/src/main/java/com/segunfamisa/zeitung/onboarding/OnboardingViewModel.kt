@@ -1,10 +1,10 @@
 package com.segunfamisa.zeitung.onboarding
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.Either
 import com.segunfamisa.zeitung.domain.credentials.SaveApiCredentialsUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
@@ -20,6 +20,10 @@ class OnboardingViewModel @Inject constructor(
     val continueButtonEnabled: LiveData<Boolean>
         get() = _continueButtonEnabled
 
+    private val _continueToApp: MutableLiveData<Boolean> = MutableLiveData()
+    val continueToApp: LiveData<Boolean>
+        get() = _continueToApp
+
     fun onApiTokenChange(token: String) {
         viewModelScope.launch {
             flowOf(token)
@@ -34,7 +38,10 @@ class OnboardingViewModel @Inject constructor(
         viewModelScope.launch {
             saveApiCredentialsUseCase.execute(param = token)
                 .collect {
-                    Log.d("Onboarding", "API token saved!")
+                    when (it) {
+                        is Either.Right -> _continueToApp.value = true
+                        else -> Unit
+                    }
                 }
         }
     }
