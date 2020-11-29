@@ -35,6 +35,7 @@ dependencies {
     implementation("androidx.ui:ui-tooling:$libs.composeVersion")
     implementation("androidx.compose.ui:ui:$libs.composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
+    implementation("androidx.navigation:navigation-compose:$libs.navigationVersion")
 
     implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
 
