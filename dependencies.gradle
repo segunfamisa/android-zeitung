@@ -18,6 +18,7 @@ ext {
             arrowVersion           : "0.8.1",
             glideVersion           : "4.11.0",
             composeVersion         : "1.0.0-alpha07",
+            navigationVersion      : "1.0.0-alpha02",
             accompanistVersion     : "0.3.3.1"
     ]
 

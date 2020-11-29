@@ -18,10 +18,11 @@ dependencies {
     implementation("androidx.ui:ui-tooling:$libs.composeVersion")
     implementation("androidx.compose.ui:ui:$libs.composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
+    implementation("androidx.navigation:navigation-compose:$libs.navigationVersion")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("io.arrow-kt:arrow-core:$libs.arrowVersion")
+    implementation("com.google.dagger:dagger:$libs.daggerVersion")
 
-    implementation "com.google.dagger:dagger:$libs.daggerVersion"
-
-    testImplementation "junit:junit:$testLibs.jUnitVersion"
+    testImplementation("junit:junit:$testLibs.jUnitVersion")
 }

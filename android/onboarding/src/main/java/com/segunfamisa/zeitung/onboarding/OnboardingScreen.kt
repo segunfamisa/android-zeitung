@@ -30,13 +30,15 @@ fun OnboardingContent(
     onContinue: (String) -> Unit,
     onApiTokenChange: (String) -> Unit
 ) {
-    val continueButtonEnabled =
-        onboardingViewModel.value.continueButtonEnabled.observeAsState(false)
-    OnboardingScreen(
-        continueButtonEnabled = continueButtonEnabled,
-        onContinue = onContinue,
-        onApiTokenChange = onApiTokenChange
-    )
+    Scaffold {
+        val continueButtonEnabled =
+            onboardingViewModel.value.continueButtonEnabled.observeAsState(false)
+        OnboardingScreen(
+            continueButtonEnabled = continueButtonEnabled,
+            onContinue = onContinue,
+            onApiTokenChange = onApiTokenChange
+        )
+    }
 }
 
 @Composable
