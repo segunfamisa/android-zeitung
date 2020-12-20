@@ -20,7 +20,7 @@ ext {
             composeVersion         : "1.0.0-alpha09",
             composeUiToolingVersion: "1.0.0-alpha07",
             navigationVersion      : "1.0.0-alpha04",
-            accompanistVersion     : "0.3.3.1"
+            accompanistVersion     : "0.4.1"
     ]
 
     testLibraryVersions = [
