@@ -15,10 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.gesture.longPressGestureFilter
-import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ContextAmbient
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.segunfamisa.zeitung.common.NetworkImage
@@ -253,7 +252,7 @@ private fun ArticleImage(
 ) {
     item.image?.let {
         Image(
-            imageVector = it,
+            painter = it,
             modifier = modifier,
             contentScale = ContentScale.Crop
         )
@@ -277,12 +276,12 @@ private fun SaveButton(
     ) {
         if (isSaved) {
             Icon(
-                imageVector = vectorResource(id = R.drawable.ic_bookmark),
+                painter = painterResource(id = R.drawable.ic_bookmark),
                 tint = colors().secondary
             )
         } else {
             Icon(
-                imageVector = vectorResource(id = R.drawable.ic_bookmark_outlined)
+                painter = painterResource(id = R.drawable.ic_bookmark_outlined)
             )
         }
     }
@@ -390,7 +389,7 @@ fun fakeArticle() = UiNewsItem.Regular(
     subhead = "Square Enix ' s hit game returns as an anime",
     url = "https://www.nintendolife.com/news/2020/07/the_world_ends_with_you_the_animation_airs_in_2021_heres_your_first_look",
     isSaved = true,
-    image = null,
+    image = painterResource(id = R.drawable.nintendo),
     imageUrl = "https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5ee95df165be0e00060a8bdd%2F0x0.jpg%3FcropX1%3D12%26cropX2%3D695%26cropY1%3D9%26cropY2%3D393",
     date = Date()
 )

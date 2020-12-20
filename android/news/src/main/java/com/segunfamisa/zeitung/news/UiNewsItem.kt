@@ -1,7 +1,7 @@
 package com.segunfamisa.zeitung.news
 
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import java.util.*
 
 sealed class UiNewsItem(
@@ -11,7 +11,7 @@ sealed class UiNewsItem(
     open val date: Date,
     open val url: String,
     open val isSaved: Boolean,
-    open val image: ImageVector?,
+    open val image: Painter?,
     open val imageUrl: String,
     open val source: UiSourceItem
 ) {
@@ -23,7 +23,7 @@ sealed class UiNewsItem(
         override val date: Date,
         override val url: String,
         override val isSaved: Boolean,
-        override val image: ImageVector?,
+        override val image: Painter?,
         override val imageUrl: String,
         override val source: UiSourceItem
     ) : UiNewsItem(
@@ -45,7 +45,7 @@ sealed class UiNewsItem(
         override val date: Date,
         override val url: String,
         override val isSaved: Boolean,
-        override val image: ImageVector?,
+        override val image: Painter?,
         override val imageUrl: String,
         override val source: UiSourceItem
     ) : UiNewsItem(
