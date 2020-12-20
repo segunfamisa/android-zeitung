@@ -17,8 +17,9 @@ ext {
             daggerVersion          : "2.27",
             arrowVersion           : "0.8.1",
             glideVersion           : "4.11.0",
-            composeVersion         : "1.0.0-alpha07",
-            navigationVersion      : "1.0.0-alpha02",
+            composeVersion         : "1.0.0-alpha09",
+            composeUiToolingVersion: "1.0.0-alpha07",
+            navigationVersion      : "1.0.0-alpha04",
             accompanistVersion     : "0.3.3.1"
     ]
 
@@ -34,6 +35,6 @@ ext {
     tools = [
             ktlintVersion          : "0.29.0",
             detektVersion          : "1.0.0-RC11",
-            composeCompilerVersion : "1.0.0-alpha07"
+            composeCompilerVersion : "1.0.0-alpha09"
     ]
 }

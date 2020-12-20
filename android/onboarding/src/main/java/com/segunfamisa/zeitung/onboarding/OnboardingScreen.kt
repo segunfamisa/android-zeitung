@@ -50,14 +50,14 @@ fun OnboardingScreen(
     var apiKey by savedInstanceState(saver = TextFieldValue.Saver) { TextFieldValue() }
     Box(
         modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center),
-        alignment = Alignment.Center
+        contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier.wrapContentSize(align = Alignment.Center).padding(72.dp)
         ) {
             Image(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                asset = vectorResource(id = R.drawable.onboarding_icon)
+                imageVector = vectorResource(id = R.drawable.onboarding_icon)
             )
             Spacer(modifier = Modifier.preferredHeight(16.dp))
             Text(

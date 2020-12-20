@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -61,7 +62,7 @@ private fun BottomNavIcon(
     navItem: NavItem
 ) {
     Icon(
-        asset = vectorResource(id = navItem.icon),
+        painter = painterResource(id = navItem.icon),
         modifier = Modifier,
     )
 }
