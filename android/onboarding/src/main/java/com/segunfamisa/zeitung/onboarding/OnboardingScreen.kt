@@ -10,8 +10,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -50,14 +50,14 @@ fun OnboardingScreen(
     var apiKey by savedInstanceState(saver = TextFieldValue.Saver) { TextFieldValue() }
     Box(
         modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center),
-        alignment = Alignment.Center
+        contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier.wrapContentSize(align = Alignment.Center).padding(72.dp)
         ) {
             Image(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                asset = vectorResource(id = R.drawable.onboarding_icon)
+                painter = painterResource(id = R.drawable.onboarding_icon)
             )
             Spacer(modifier = Modifier.preferredHeight(16.dp))
             Text(
