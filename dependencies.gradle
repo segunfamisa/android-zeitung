@@ -8,25 +8,26 @@ ext {
 
     libraryVersions = [
             androidXVersion        : "1.3.0",
-            appCompatVersion       : "1.1.0",
-            constraintLayoutVersion: "2.0.0-beta7",
-            materialDesignVersion  : "1.1.0",
+            appCompatVersion       : "1.4.1",
+            constraintLayoutVersion: "2.1.3",
+            materialDesignVersion  : "1.5.0",
             coroutinesVersion      : "1.3.0",
             retoriftVersion        : "2.6.2",
             moshiVersion           : "2.6.2",
             daggerVersion          : "2.27",
             arrowVersion           : "0.8.1",
             glideVersion           : "4.11.0",
-            composeVersion         : "1.0.0-alpha09",
+            composeVersion         : "1.2.0-alpha01",
             composeUiToolingVersion: "1.0.0-alpha07",
-            navigationVersion      : "1.0.0-alpha04",
-            accompanistVersion     : "0.4.1"
+            navigationVersion      : "2.4.0-rc01",
+            accompanistVersion     : "0.4.1",
+            vmKtxVersion     : "2.4.0"
     ]
 
     testLibraryVersions = [
             jUnitVersion        : "4.13",
-            testRunnerVersion   : "1.2.0",
-            espressoVersion     : "3.2.0",
+            testRunnerVersion   : "1.4.0",
+            espressoVersion     : "3.4.0",
             mockWebServerVersion: "3.10.0",
             mockitoKotlinVersion: "2.0.0",
             androidXJunitExtVersion: "1.1.1"

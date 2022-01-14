@@ -40,7 +40,7 @@ dependencies {
     implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
 
     implementation "androidx.appcompat:appcompat:$libs.appCompatVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$libs.vmKtxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
     implementation "com.google.android.material:material:$libs.materialDesignVersion"
 
