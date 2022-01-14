@@ -20,7 +20,7 @@ object Injector {
             .inject(application)
 
         application.registerActivityLifecycleCallbacks(object : LifecycleCallbacks() {
-            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 if (activity is HasAndroidInjector || activity is AppCompatActivity) {
                     AndroidInjection.inject(activity)
                 }
