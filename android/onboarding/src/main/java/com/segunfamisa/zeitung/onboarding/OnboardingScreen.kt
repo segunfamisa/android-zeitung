@@ -2,12 +2,12 @@ package com.segunfamisa.zeitung.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.savedinstancestate.savedInstanceState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -47,53 +47,59 @@ fun OnboardingScreen(
     onContinue: (String) -> Unit,
     onApiTokenChange: (String) -> Unit
 ) {
-    var apiKey by savedInstanceState(saver = TextFieldValue.Saver) { TextFieldValue() }
+    var apiKey by rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue()) }
     Box(
-        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center),
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center),
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier.wrapContentSize(align = Alignment.Center).padding(72.dp)
+            modifier = Modifier
+                .wrapContentSize(align = Alignment.Center)
+                .padding(72.dp)
         ) {
             Image(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
+                contentDescription = null,
                 painter = painterResource(id = R.drawable.onboarding_icon)
             )
-            Spacer(modifier = Modifier.preferredHeight(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
                     .wrapContentWidth(align = Alignment.CenterHorizontally),
                 text = stringResource(id = R.string.onboarding_prompt),
                 style = typography().h5,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.preferredHeight(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
                 value = apiKey,
-                onValueChange = {
-                    apiKey = it
-                    onApiTokenChange(it.text)
+                onValueChange = { value: TextFieldValue ->
+                    apiKey = value
+                    onApiTokenChange(value.text)
                 },
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     imeAction = ImeAction.Go
                 ),
-                onImeActionPerformed = { imeAction, softwareKeyboardController ->
-                    if (imeAction == ImeAction.Go) {
-                        softwareKeyboardController?.hideSoftwareKeyboard()
+                keyboardActions = KeyboardActions(
+                    onGo = {
+                        //softwareKeyboardController?.hideSoftwareKeyboard()
                         onContinue(apiKey.text)
                     }
-                },
-                textStyle = typography().caption.copy(color = contentColorFor(color = colors().background)),
-                activeColor = colors().secondary,
+                ),
+                textStyle = typography().caption.copy(color = contentColorFor(backgroundColor = colors().background)),
+                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = colors().secondary),
                 label = { Text(text = stringResource(id = R.string.api_key_text_prompt)) }
             )
-            Spacer(modifier = Modifier.preferredHeight(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { onContinue(apiKey.text) },
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                colors = ButtonConstants.defaultButtonColors(),
+                colors = ButtonDefaults.buttonColors(),
                 enabled = continueButtonEnabled.value
             ) {
                 Text(text = stringResource(id = R.string.onboarding_continue))
@@ -105,9 +111,10 @@ fun OnboardingScreen(
 @Preview("Preview onboarding screen")
 @Composable
 private fun PreviewOnboardingScreen() {
+    val continueButton = remember { mutableStateOf(true) }
     ThemedPreview {
         OnboardingScreen(
-            continueButtonEnabled = mutableStateOf(true),
+            continueButtonEnabled = continueButton,
             onContinue = {},
             onApiTokenChange = {}
         )
@@ -117,9 +124,10 @@ private fun PreviewOnboardingScreen() {
 @Preview("Preview onboarding screen dark mode")
 @Composable
 private fun PreviewOnboardingScreenDarkMode() {
+    val continueButton = remember { mutableStateOf(false) }
     ThemedPreview(darkTheme = true) {
         OnboardingScreen(
-            continueButtonEnabled = mutableStateOf(false),
+            continueButtonEnabled = continueButton,
             onContinue = {},
             onApiTokenChange = {}
         )
