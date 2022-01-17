@@ -25,8 +25,8 @@ sealed class NavItem(
     @DrawableRes val icon: Int,
     val route: String
 ) {
-    object News : NavItem(R.string.menu_news, R.drawable.ic_nav_menu_newspaper, Routes.News)
-    object Explore : NavItem(R.string.menu_browse, R.drawable.ic_nav_menu_browse, Routes.Explore)
+    object News : NavItem(R.string.menu_news, R.drawable.ic_nav_menu_home, Routes.News)
+    object Explore : NavItem(R.string.menu_browse, R.drawable.ic_nav_menu_explore, Routes.Explore)
     object Bookmarks :
         NavItem(R.string.menu_bookmarks, R.drawable.ic_nav_menu_bookmark, Routes.Bookmarks)
 }
