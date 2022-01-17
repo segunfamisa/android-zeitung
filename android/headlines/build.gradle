@@ -17,7 +17,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
     implementation("androidx.compose.material:material:$libs.composeVersion")
     implementation("androidx.compose.animation:animation:$libs.composeVersion")
-    implementation("androidx.ui:ui-tooling:$libs.composeUiToolingVersion")
+    implementation("androidx.compose.ui:ui-tooling:$libs.composeUiToolingVersion")
     implementation("androidx.compose.ui:ui:$libs.composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
 
