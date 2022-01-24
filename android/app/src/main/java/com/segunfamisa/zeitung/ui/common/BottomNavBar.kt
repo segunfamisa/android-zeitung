@@ -13,10 +13,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.KEY_ROUTE
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.navigate
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.common.theme.colors
 
@@ -37,19 +37,29 @@ fun BottomNavBar(
     items: List<NavItem>
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+    val currentDestination = navBackStackEntry?.destination
     BottomNavigation {
         items.forEach { navItem ->
-            val isSelected = currentRoute == navItem.route
+            val isSelected = currentDestination?.hierarchy?.any { it.route?.equals(navItem.route) == true } == true
             BottomNavigationItem(
                 icon = { BottomNavIcon(navItem) },
                 label = { BottomNavText(navItem, isSelected) },
                 selected = isSelected,
-                alwaysShowLabels = true,
+                alwaysShowLabel = true,
                 selectedContentColor = colors().secondary,
                 onClick = {
-                    if (currentRoute != navItem.route) {
-                        navController.navigate(route = navItem.route)
+                    navController.navigate(navItem.route) {
+                        // Pop up to the start destination of the graph to
+                        // avoid building up a large stack of destinations
+                        // on the back stack as users select items
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
+                        launchSingleTop = true
+                        // Restore state when reselecting a previously selected item
+                        restoreState = true
                     }
                 }
             )
@@ -63,6 +73,7 @@ private fun BottomNavIcon(
 ) {
     Icon(
         painter = painterResource(id = navItem.icon),
+        contentDescription = null,
         modifier = Modifier,
     )
 }

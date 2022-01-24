@@ -36,11 +36,12 @@ dependencies {
     implementation("androidx.compose.ui:ui:$libs.composeVersion")
     implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
     implementation("androidx.navigation:navigation-compose:$libs.navigationVersion")
+    implementation("androidx.constraintlayout:constraintlayout-compose:$libs.composeConstraintLayoutVersion")
 
-    implementation("dev.chrisbanes.accompanist:accompanist-coil:$libs.accompanistVersion")
+    implementation("io.coil-kt:coil-compose:$libs.coilVersion")
 
     implementation "androidx.appcompat:appcompat:$libs.appCompatVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$libs.vmKtxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
     implementation "com.google.android.material:material:$libs.materialDesignVersion"
 

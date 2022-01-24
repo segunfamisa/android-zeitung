@@ -4,6 +4,10 @@ apply plugin: 'de.fuerstenau.buildconfig'
 apply plugin: 'idea'
 apply from: "$rootProject.projectDir/keys.gradle"
 
+configurations {
+    create("compile")
+}
+
 buildscript {
     repositories {
         maven {

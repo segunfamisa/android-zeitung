@@ -3,23 +3,27 @@ package com.segunfamisa.zeitung.news
 import android.content.res.Resources
 import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.gesture.longPressGestureFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
+import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.common.NetworkImage
 import com.segunfamisa.zeitung.common.UiState
 import com.segunfamisa.zeitung.common.getTimeAgo
@@ -31,6 +35,8 @@ import java.util.*
 
 const val LOG_TAG = "NewsContent"
 
+@ExperimentalCoilApi
+@ExperimentalComposeUiApi
 @Composable
 fun NewsContent(
     newsViewModel: Lazy<NewsViewModel>,
@@ -55,28 +61,33 @@ fun NewsContent(
     }
 }
 
+@ExperimentalCoilApi
+@ExperimentalComposeUiApi
 @Composable
 private fun NewsArticleList(
     articles: List<UiNewsItem>,
     onItemClicked: (UiNewsItem) -> Unit,
     onSaveClicked: (UiNewsItem, Boolean) -> Unit
 ) {
-    ScrollableColumn(
-        modifier = Modifier.padding(bottom = 56.dp)
+    val scrollState = rememberScrollState()
+    Column(
+        modifier = Modifier
+            .verticalScroll(
+                state = scrollState
+            )
+            .padding(bottom = 56.dp)
     ) {
         articles.forEachIndexed { index, item ->
             if (item is UiNewsItem.Top) {
                 TopNewsArticleItem(
                     item,
-                    Modifier.clickable(onClick = { onItemClicked(item) })
-                        .longPressGestureFilter { },
+                    Modifier.clickable(onClick = { onItemClicked(item) }),
                     onSaveClicked
                 )
             } else {
                 NewsArticleItem(
                     item,
-                    Modifier.clickable(onClick = { onItemClicked(item) })
-                        .longPressGestureFilter { },
+                    Modifier.clickable(onClick = { onItemClicked(item) }),
                     onSaveClicked
                 )
             }
@@ -88,27 +99,34 @@ private fun NewsArticleList(
     }
 }
 
+@ExperimentalCoilApi
 @Composable
+@ExperimentalComposeUiApi
 private fun TopNewsArticleItem(
     item: UiNewsItem,
     modifier: Modifier,
     onSaveClicked: (UiNewsItem, Boolean) -> Unit
 ) {
+    val resources = LocalContext.current.resources
+
     ConstraintLayout(
-        modifier = modifier.fillMaxWidth().wrapContentHeight().padding(16.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(16.dp)
     ) {
         val (headline, source, image, date, save) = createRefs()
         val typography = typography()
 
         ArticleImage(
             item = item,
-            modifier = Modifier.aspectRatio(1.78f).fillMaxWidth()
+            modifier = Modifier
+                .aspectRatio(1.78f)
+                .fillMaxWidth()
                 .clip(
                     RoundedCornerShape(
-                        topLeft = 4.dp,
-                        topRight = 4.dp,
-                        bottomRight = 0.dp,
-                        bottomLeft = 0.dp
+                        topStart = 4.dp,
+                        topEnd = 4.dp,
                     )
                 )
                 .constrainAs(image) {
@@ -143,7 +161,7 @@ private fun TopNewsArticleItem(
         )
 
         Text(
-            text = item.date.asTimeAgo(ContextAmbient.current.resources)
+            text = item.date.asTimeAgo(resources)
                 .capitalize(Locale.getDefault()),
             style = typography.caption,
             modifier = Modifier.constrainAs(date) {
@@ -157,7 +175,8 @@ private fun TopNewsArticleItem(
 
         SaveButton(
             isSaved = item.isSaved,
-            modifier = Modifier.preferredSize(24.dp)
+            modifier = Modifier
+                .size(24.dp)
                 .constrainAs(save) {
                     bottom.linkTo(parent.bottom)
                     end.linkTo(parent.end)
@@ -176,7 +195,10 @@ private fun NewsArticleItem(
     onSaveClicked: (UiNewsItem, Boolean) -> Unit
 ) {
     ConstraintLayout(
-        modifier = modifier.fillMaxWidth().wrapContentHeight().padding(16.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(16.dp)
     ) {
         val (headline, source, image, date, save) = createRefs()
         val typography = typography()
@@ -208,7 +230,7 @@ private fun NewsArticleItem(
 
         Text(
             text = item.date
-                .asTimeAgo(ContextAmbient.current.resources)
+                .asTimeAgo(LocalContext.current.resources)
                 .capitalize(Locale.getDefault()),
             style = typography.caption,
             modifier = Modifier.constrainAs(date) {
@@ -223,7 +245,8 @@ private fun NewsArticleItem(
 
         ArticleImage(
             item = item,
-            modifier = Modifier.preferredSize(64.dp)
+            modifier = Modifier
+                .size(64.dp)
                 .clip(shapes.medium)
                 .constrainAs(image) {
                     top.linkTo(parent.top)
@@ -233,7 +256,8 @@ private fun NewsArticleItem(
 
         SaveButton(
             isSaved = item.isSaved,
-            modifier = Modifier.preferredSize(24.dp)
+            modifier = Modifier
+                .size(24.dp)
                 .constrainAs(save) {
                     bottom.linkTo(parent.bottom)
                     end.linkTo(parent.end)
@@ -245,6 +269,7 @@ private fun NewsArticleItem(
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 private fun ArticleImage(
     item: UiNewsItem,
@@ -253,6 +278,7 @@ private fun ArticleImage(
     item.image?.let {
         Image(
             painter = it,
+            contentDescription = null,
             modifier = modifier,
             contentScale = ContentScale.Crop
         )
@@ -277,11 +303,13 @@ private fun SaveButton(
         if (isSaved) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_bookmark),
+                contentDescription = null,
                 tint = colors().secondary
             )
         } else {
             Icon(
-                painter = painterResource(id = R.drawable.ic_bookmark_outlined)
+                painter = painterResource(id = R.drawable.ic_bookmark_outlined),
+                contentDescription = null
             )
         }
     }
@@ -290,7 +318,9 @@ private fun SaveButton(
 @Composable
 private fun LoadingScreen() {
     Box(
-        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center),
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(color = colors().secondary)
@@ -320,19 +350,25 @@ private fun PreviewNewsArticleItem() {
     ThemedPreview {
         NewsArticleItem(
             item = fakeArticle(),
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
             onSaveClicked = { _, _ -> }
         )
     }
 }
 
+@ExperimentalCoilApi
+@ExperimentalComposeUiApi
 @Composable
 @Preview("Top news article item")
 private fun PreviewTopNewsArticleItem() {
     ThemedPreview {
         TopNewsArticleItem(
             item = fakeArticle(),
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
             onSaveClicked = { _, _ -> }
         )
     }
@@ -344,12 +380,15 @@ private fun PreviewDarkThemeNewsArticleItem() {
     ThemedPreview(darkTheme = true) {
         NewsArticleItem(
             item = fakeArticle(),
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
             onSaveClicked = { _, _ -> }
         )
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 @Preview("News article list")
 private fun PreviewNewsArticleList() {
@@ -364,6 +403,7 @@ private fun PreviewNewsArticleList() {
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 @Preview("News article list (dark theme)")
 private fun PreviewDarkThemeNewsArticleList() {

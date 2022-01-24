@@ -5,19 +5,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.font
-import androidx.compose.ui.text.font.fontFamily
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import com.segunfamisa.zeitung.common.R
 
-private val raleWayFontFamily = fontFamily(
-    font(R.font.raleway_light, FontWeight.Light),
-    font(R.font.raleway_regular, FontWeight.Normal),
-    font(R.font.raleway_medium, FontWeight.Medium),
+private val raleWayFontFamily = FontFamily(
+    Font(R.font.raleway_light, FontWeight.Light),
+    Font(R.font.raleway_regular, FontWeight.Normal),
+    Font(R.font.raleway_medium, FontWeight.Medium),
 
-    font(R.font.raleway_light_italic, FontWeight.Light, FontStyle.Italic),
-    font(R.font.raleway_regular_italic, FontWeight.Normal, FontStyle.Italic),
-    font(R.font.raleway_medium_italic, FontWeight.Medium, FontStyle.Italic)
+    Font(R.font.raleway_light_italic, FontWeight.Light, FontStyle.Italic),
+    Font(R.font.raleway_regular_italic, FontWeight.Normal, FontStyle.Italic),
+    Font(R.font.raleway_medium_italic, FontWeight.Medium, FontStyle.Italic)
 )
 
 fun zeitungTypography() = Typography(

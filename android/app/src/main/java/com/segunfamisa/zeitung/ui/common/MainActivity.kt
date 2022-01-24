@@ -1,6 +1,7 @@
 package com.segunfamisa.zeitung.ui.common
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -9,13 +10,13 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModelLazy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import com.segunfamisa.zeitung.news.NewsContent
@@ -23,6 +24,7 @@ import com.segunfamisa.zeitung.news.NewsViewModel
 import com.segunfamisa.zeitung.onboarding.OnboardingContent
 import com.segunfamisa.zeitung.onboarding.OnboardingViewModel
 import com.segunfamisa.zeitung.util.viewmodel.ViewModelFactory
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         factoryProducer = { onboardingViewModelFactory }
     )
 
+    @ExperimentalCoilApi
+    @ExperimentalComposeUiApi
+    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalCoilApi
+    @ExperimentalComposeUiApi
+    @FlowPreview
     @Composable
     private fun App() {
         val onboardingNavController = rememberNavController()
@@ -80,6 +88,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalCoilApi
+    @ExperimentalComposeUiApi
     @Composable
     private fun Main() {
         val navController = rememberNavController()
