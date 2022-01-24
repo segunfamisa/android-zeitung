@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun App() {
         val onboardingNavController = rememberNavController()
-        NavHost(navController = onboardingNavController, startDestination = Routes.Onboarding) {
+        NavHost(navController = onboardingNavController, startDestination = Routes.Main) {
             composable(Routes.Onboarding) {
                 OnboardingContent(
                     onboardingViewModel = onboardingViewModelLazy,
