@@ -45,15 +45,12 @@ fun BottomNavBar(
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    BottomNavigation {
+    BottomNav {
         items.forEach { navItem ->
             val isSelected = currentDestination?.hierarchy?.any { it.route?.equals(navItem.route) == true } == true
-            BottomNavigationItem(
-                icon = { BottomNavIcon(navItem) },
-                label = { BottomNavText(navItem, isSelected) },
-                selected = isSelected,
-                alwaysShowLabel = true,
-                selectedContentColor = colors().secondary,
+            BottomNavItem(
+                isSelected = isSelected,
+                item = navItem,
                 onClick = {
                     navController.navigate(navItem.route) {
                         // Pop up to the start destination of the graph to
@@ -101,7 +98,7 @@ private fun BottomNavItem(
     onClick: () -> Unit
 ) {
     val backgroundColor = if (isSelected) MaterialTheme.colors.primary.copy(alpha = 0.1f) else Color.Transparent
-    val contentColor = if (isSelected) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.onBackground
+    val contentColor = if (isSelected) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.onSurface
 
     Box(modifier = modifier
         .then(
@@ -130,28 +127,6 @@ private fun BottomNavItem(
             }
         }
     }
-}
-
-@Composable
-private fun BottomNavIcon(
-    navItem: NavItem
-) {
-    Icon(
-        painter = painterResource(id = navItem.icon),
-        contentDescription = null,
-        modifier = Modifier,
-    )
-}
-
-@Composable
-private fun BottomNavText(
-    navItem: NavItem,
-    isSelected: Boolean
-) {
-    Text(
-        text = stringResource(id = navItem.title),
-        fontWeight = if (isSelected) FontWeight.Bold else null
-    )
 }
 
 @Preview
