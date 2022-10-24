@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.10.0")
+    id("io.gitlab.arturbosch.detekt").version("1.22.0-RC2")
     id("org.jlleitschuh.gradle.ktlint").version("9.2.1")
 }
 
@@ -40,10 +40,10 @@ subprojects {
             parallel = true
             buildUponDefaultConfig = true
             reports {
-                xml.enabled = true
+                xml.required.set(true)
                 html {
-                    enabled = true
-                    destination = file("${buildDir.absolutePath}/reports/detekt.html")
+                    required.set(true)
+                    outputLocation.set(file("${buildDir.absolutePath}/reports/detekt.html"))
                 }
             }
         }
