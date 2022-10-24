@@ -5,7 +5,6 @@ def tools = rootProject.ext.tools
 android {
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
     buildFeatures {
         dataBinding = true
