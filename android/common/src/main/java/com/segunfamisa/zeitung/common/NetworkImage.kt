@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.AsyncImagePainter
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.segunfamisa.zeitung.common.theme.compositedOnSurface
@@ -38,7 +39,7 @@ fun NetworkImage(
             contentScale = contentScale,
         )
 
-        if (painter.state is ImagePainter.State.Loading && placeholderColor != null) {
+        if (painter.state is AsyncImagePainter.State.Loading && placeholderColor != null) {
             Spacer(modifier = Modifier
                 .matchParentSize()
                 .background(placeholderColor))

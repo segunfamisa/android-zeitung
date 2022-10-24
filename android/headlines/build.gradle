@@ -13,12 +13,14 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
 
     // jetpack compose deps
-    implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
-    implementation("androidx.compose.material:material:$libs.composeVersion")
-    implementation("androidx.compose.animation:animation:$libs.composeVersion")
-    implementation("androidx.compose.ui:ui-tooling:$libs.composeUiToolingVersion")
-    implementation("androidx.compose.ui:ui:$libs.composeVersion")
-    implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
+    def composeBom = platform("androidx.compose:compose-bom:$libs.composeBomVersion")
+    implementation(composeBom)
+    implementation("androidx.compose.foundation:foundation-layout")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.animation:animation")
+    implementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.runtime:runtime-livedata")
 
     testImplementation "junit:junit:$testLibs.jUnitVersion"
     androidTestImplementation "androidx.test.ext:junit:$testLibs.androidXJunitExtVersion"
