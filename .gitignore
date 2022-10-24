@@ -7,3 +7,4 @@ keys.properties
 /build
 /captures
 .externalNativeBuild
+/.java-version
