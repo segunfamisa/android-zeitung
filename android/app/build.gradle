@@ -29,13 +29,14 @@ dependencies {
 
     implementation "io.arrow-kt:arrow-core:$libs.arrowVersion"
 
-    implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
-    implementation("androidx.compose.material:material:$libs.composeVersion")
-    implementation("androidx.compose.animation:animation:$libs.composeVersion")
-    implementation("androidx.compose.ui:ui-tooling:$libs.composeUiToolingVersion")
-    implementation("androidx.compose.ui:ui-tooling:$libs.composeUiToolingVersion")
-    implementation("androidx.compose.ui:ui:$libs.composeVersion")
-    implementation("androidx.compose.runtime:runtime-livedata:$libs.composeVersion")
+    def composeBom = platform("androidx.compose:compose-bom:$libs.composeBomVersion")
+    implementation(composeBom)
+    implementation("androidx.compose.foundation:foundation-layout")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.animation:animation")
+    implementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.navigation:navigation-compose:$libs.navigationVersion")
     implementation("androidx.constraintlayout:constraintlayout-compose:$libs.composeConstraintLayoutVersion")
 

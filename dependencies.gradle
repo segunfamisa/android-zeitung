@@ -16,11 +16,9 @@ ext {
             daggerVersion                 : "2.44",
             arrowVersion                  : "0.8.1",
             glideVersion                  : "4.11.0",
-            composeVersion                : "1.2.0-alpha01",
-            composeConstraintLayoutVersion: "1.0.0",
-            composeUiToolingVersion       : "1.0.5",
-            navigationVersion             : "2.4.0-rc01",
-            accompanistVersion            : "0.22.0-rc",
+            composeBomVersion             : "2022.10.00",
+            composeConstraintLayoutVersion: "1.0.1",
+            navigationVersion             : "2.5.3",
             coilVersion                   : "2.2.2",
             vmKtxVersion                  : "2.5.1"
     ]

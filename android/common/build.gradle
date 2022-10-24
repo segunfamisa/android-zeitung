@@ -9,8 +9,10 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
-    implementation("androidx.compose.foundation:foundation-layout:$libs.composeVersion")
-    implementation("androidx.compose.material:material:$libs.composeVersion")
+    def composeBom = platform("androidx.compose:compose-bom:$libs.composeBomVersion")
+    implementation(composeBom)
+    implementation("androidx.compose.foundation:foundation-layout")
+    implementation("androidx.compose.material:material")
     implementation("androidx.constraintlayout:constraintlayout-compose:$libs.composeConstraintLayoutVersion")
 
     implementation("io.coil-kt:coil-compose:$libs.coilVersion")
