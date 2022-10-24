@@ -57,6 +57,7 @@ fun NewsContent(
             )
             is UiState.Loading -> LoadingScreen()
             is UiState.Error -> ErrorSnackbar()
+            else -> {}
         }
     }
 }

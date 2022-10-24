@@ -8,7 +8,6 @@ dependencies {
     def libs = rootProject.ext.libraryVersions
     def testLibs = rootProject.ext.testLibraryVersions
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$libs.androidXVersion"
     implementation "androidx.appcompat:appcompat:$libs.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayoutVersion"
