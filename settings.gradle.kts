@@ -1,0 +1,11 @@
+include(":android:app")
+include(":android:common")
+include(":android:headlines")
+include(":android:news")
+include(":android:onboarding")
+
+include(":shared:core")
+include(":shared:data")
+include(":shared:data-remote")
+include(":shared:domain")
+include(":shared:utils")
