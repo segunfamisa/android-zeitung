@@ -1,3 +1,13 @@
+enableFeaturePreview("VERSION_CATALOGS")
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name="android-zeitung"
+
 include(":android:app")
 include(":android:common")
 include(":android:headlines")

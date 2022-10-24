@@ -1,0 +1,23 @@
+[versions]
+# Plugin versions
+agp = "7.3.1"
+detekt = "1.22.0-RC2"
+kotlin = "1.7.20"
+ktlint = "9.2.1"
+
+# App library versions
+composeBom = "2022.10.00"
+
+[libraries]
+android-gradleplugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+coil = "io.coil-kt:coil-compose:2.2.2"
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
+compose-material = { module = "androidx.compose.material:material" }
+kotlin-gradleplugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

@@ -17,13 +17,6 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint").version("9.2.1")
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
