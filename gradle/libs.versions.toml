@@ -6,6 +6,7 @@ kotlin = "1.7.20"
 ktlint = "9.2.1"
 
 # App library versions
+androidx = "1.9.0"
 composeBom = "2022.10.00"
 dagger = "2.44"
 glide = "4.11.0"
@@ -13,6 +14,8 @@ kotlin-coroutines = "1.3.0"
 
 [libraries]
 android-gradleplugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx" }
+androidx-testjunitext = "androidx.test.ext:junit:1.1.3"
 androidx-testrunner = "androidx.test:runner:1.4.0"
 androidx-espresso = "androidx.test.espresso:espresso-core:3.4.0"
 appcompat = "androidx.appcompat:appcompat:1.5.1"
