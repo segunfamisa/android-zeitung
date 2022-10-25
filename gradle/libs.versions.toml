@@ -37,6 +37,7 @@ dagger-android-support = { module = "com.google.dagger:dagger-android-support", 
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 glide-lib = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-kapt = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+javax-inject = "javax.inject:javax.inject:1"
 junit = "junit:junit:4.13.2"
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
@@ -44,6 +45,8 @@ kotlin-gradleplugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 lifecycle-vm = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 material = "com.google.android.material:material:1.7.0"
+test-mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
+test-junit = "junit:junit:4.13.2"
 moshi-converter = "com.squareup.retrofit2:converter-moshi:2.6.2"
 
 [bundles]
