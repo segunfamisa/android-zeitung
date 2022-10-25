@@ -10,9 +10,9 @@ ext.apiKey = {
             apiKey = props.getProperty("apiKey")
         } catch (FileNotFoundException ignored) {
             if (isCiEnvironment) {
-                println("Please create an environment variable with key API_KEY and value should be the API key")
+                throw IllegalStateException("Please create an environment variable with key API_KEY and value should be the API key")
             } else {
-                println("Please create a keys.properties file in the root directory of the project. " +
+                throw IllegalStateException("Please create a keys.properties file in the root directory of the project. " +
                         "Have a look at keys-sample.properties for a sample of the file")
             }
         }

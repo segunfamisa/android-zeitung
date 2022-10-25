@@ -1,5 +1,4 @@
 ktlint {
-    version = tools.ktlintVersion
     debug = true
     verbose = true
     android = true

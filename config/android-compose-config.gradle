@@ -1,7 +1,5 @@
 apply from: "${rootProject.projectDir}/config/android-config.gradle"
 
-def tools = rootProject.ext.tools
-
 android {
     kotlinOptions {
         jvmTarget = "1.8"
@@ -11,7 +9,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "$tools.composeCompilerVersion"
+        kotlinCompilerExtensionVersion "1.3.2"
         kotlinCompilerVersion rootProject.ext.kotlin_version
     }
 }
