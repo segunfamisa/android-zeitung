@@ -6,7 +6,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name="android-zeitung"
+rootProject.name = "android-zeitung"
 
 include(":android:app")
 include(":android:common")
