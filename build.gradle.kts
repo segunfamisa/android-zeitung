@@ -22,8 +22,6 @@ tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
 
-apply(from = "${rootProject.projectDir}/dependencies.gradle")
-
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
