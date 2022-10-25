@@ -22,5 +22,5 @@ dependencies {
     implementation(libs.arrow)
     implementation(libs.dagger.core)
 
-    testImplementation(libs.junit)
+    testImplementation(libs.test.junit)
 }

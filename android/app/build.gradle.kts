@@ -56,7 +56,7 @@ dependencies {
     kapt(libs.dagger.compiler)
     kapt(libs.dagger.android.processor)
 
-    testImplementation(libs.junit)
+    testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.testrunner)
     androidTestImplementation(libs.androidx.espresso)
 }

@@ -17,6 +17,6 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
 
-    testImplementation(libs.junit)
+    testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.testjunitext)
 }

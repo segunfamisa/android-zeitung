@@ -30,6 +30,6 @@ dependencies {
 
     implementation(libs.bundles.kotlin.coroutines)
 
-    testImplementation(libs.junit)
+    testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.testjunitext)
 }
