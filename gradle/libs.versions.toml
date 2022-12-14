@@ -7,7 +7,7 @@ ktlint = "9.2.1"
 
 # App library versions
 androidx = "1.9.0"
-composeBom = "2022.10.00"
+composeBom = "2022.12.00"
 dagger = "2.44"
 glide = "4.11.0"
 kotlin-coroutines = "1.6.4"
