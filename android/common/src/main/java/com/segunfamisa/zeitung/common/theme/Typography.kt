@@ -1,12 +1,12 @@
 package com.segunfamisa.zeitung.common.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.segunfamisa.zeitung.common.R
 
@@ -20,71 +20,85 @@ private val raleWayFontFamily = FontFamily(
     Font(R.font.raleway_medium_italic, FontWeight.Medium, FontStyle.Italic)
 )
 
-fun zeitungTypography() = Typography(
-    defaultFontFamily = raleWayFontFamily,
-    h1 = TextStyle(
-        fontWeight = FontWeight.Light,
-        fontSize = 96.sp,
+private val textStyle: TextStyle = TextStyle(
+    fontFamily = raleWayFontFamily
+)
+
+internal fun zeitungTypography() = Typography(
+    displayLarge = textStyle.copy(
+        fontFamily = raleWayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 57.sp,
         letterSpacing = (-1.5).sp
     ),
-    h2 = TextStyle(
-        fontWeight = FontWeight.Light,
-        fontSize = 60.sp,
+    displayMedium = textStyle.copy(
+        fontWeight = FontWeight.Normal,
+        fontSize = 45.sp,
         letterSpacing = (-0.5).sp
     ),
-    h3 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 48.sp,
+    displaySmall = textStyle.copy(
+        fontWeight = FontWeight.Light,
+        fontSize = 36.sp,
         letterSpacing = 0.sp
     ),
-    h4 = TextStyle(
+    headlineLarge = textStyle.copy(
         fontWeight = FontWeight.Normal,
-        fontSize = 34.sp,
+        fontSize = 32.sp,
         letterSpacing = 0.25.sp
     ),
-    h5 = TextStyle(
+    headlineMedium = textStyle.copy(
         fontWeight = FontWeight.Normal,
-        fontSize = 24.sp,
+        fontSize = 28.sp,
         letterSpacing = 0.sp
     ),
-    h6 = TextStyle(
+    headlineSmall = textStyle.copy(
         fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
+        fontSize = 24.sp,
         letterSpacing = 0.15.sp
     ),
-    subtitle1 = TextStyle(
+    titleLarge = textStyle.copy(
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 22.sp,
         letterSpacing = 0.15.sp
     ),
-    subtitle2 = TextStyle(
+    titleMedium = textStyle.copy(
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
         letterSpacing = 0.1.sp
     ),
-    body1 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        letterSpacing = 0.5.sp
-    ),
-    body2 = TextStyle(
+    titleSmall = textStyle.copy(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
+        letterSpacing = 0.5.sp
+    ),
+    bodyLarge = textStyle.copy(
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
         letterSpacing = 0.25.sp
     ),
-    button = TextStyle(
+    bodyMedium = textStyle.copy(
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         letterSpacing = 1.25.sp
     ),
-    caption = TextStyle(
+    bodySmall = textStyle.copy(
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         letterSpacing = 0.4.sp
     ),
-    overline = TextStyle(
+    labelLarge = textStyle.copy(
         fontWeight = FontWeight.Normal,
-        fontSize = 10.sp,
+        fontSize = 14.sp,
+        letterSpacing = 1.5.sp
+    ),
+    labelMedium = textStyle.copy(
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        letterSpacing = 1.5.sp
+    ),
+    labelSmall = textStyle.copy(
+        fontWeight = FontWeight.Normal,
+        fontSize = 11.sp,
         letterSpacing = 1.5.sp
     )
 )

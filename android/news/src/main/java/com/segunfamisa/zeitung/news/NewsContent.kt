@@ -8,7 +8,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -27,7 +31,7 @@ import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.common.NetworkImage
 import com.segunfamisa.zeitung.common.UiState
 import com.segunfamisa.zeitung.common.getTimeAgo
-import com.segunfamisa.zeitung.common.theme.colors
+import com.segunfamisa.zeitung.common.theme.colorScheme
 import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
 import com.segunfamisa.zeitung.common.theme.shapes
 import com.segunfamisa.zeitung.common.theme.typography
@@ -139,7 +143,7 @@ private fun TopNewsArticleItem(
 
         Text(
             text = item.source.name,
-            style = typography.overline,
+            style = typography.labelSmall,
             modifier = Modifier.constrainAs(source) {
                 top.linkTo(image.bottom, 8.dp)
                 start.linkTo(parent.start)
@@ -151,7 +155,7 @@ private fun TopNewsArticleItem(
 
         Text(
             text = item.headline,
-            style = typography.h6,
+            style = typography.titleLarge,
             modifier = Modifier.constrainAs(headline) {
                 top.linkTo(source.bottom, 8.dp)
                 start.linkTo(parent.start)
@@ -164,7 +168,7 @@ private fun TopNewsArticleItem(
         Text(
             text = item.date.asTimeAgo(resources)
                 .capitalize(Locale.getDefault()),
-            style = typography.caption,
+            style = typography.labelMedium,
             modifier = Modifier.constrainAs(date) {
                 top.linkTo(headline.bottom, 8.dp)
                 start.linkTo(parent.start)
@@ -207,7 +211,7 @@ private fun NewsArticleItem(
 
         Text(
             text = item.source.name,
-            style = typography.overline,
+            style = typography.labelSmall,
             modifier = Modifier.constrainAs(source) {
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
@@ -219,7 +223,7 @@ private fun NewsArticleItem(
 
         Text(
             text = item.headline,
-            style = typography.h6,
+            style = typography.titleMedium,
             modifier = Modifier.constrainAs(headline) {
                 top.linkTo(source.bottom, margin = 8.dp)
                 start.linkTo(parent.start)
@@ -233,7 +237,7 @@ private fun NewsArticleItem(
             text = item.date
                 .asTimeAgo(LocalContext.current.resources)
                 .capitalize(Locale.getDefault()),
-            style = typography.caption,
+            style = typography.labelMedium,
             modifier = Modifier.constrainAs(date) {
                 top.linkTo(headline.bottom, margin = 8.dp)
                 bottom.linkTo(parent.bottom)
@@ -305,7 +309,7 @@ private fun SaveButton(
             Icon(
                 painter = painterResource(id = R.drawable.ic_bookmark),
                 contentDescription = null,
-                tint = colors().secondary
+                tint = colorScheme().primary
             )
         } else {
             Icon(
@@ -324,7 +328,7 @@ private fun LoadingScreen() {
             .wrapContentSize(Alignment.Center),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator(color = colors().secondary)
+        CircularProgressIndicator(color = colorScheme().secondary)
     }
 }
 

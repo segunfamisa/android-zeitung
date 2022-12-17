@@ -1,7 +1,7 @@
 package com.segunfamisa.zeitung.common.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
 @Composable
@@ -13,9 +13,9 @@ fun ZeitungTheme(
     children: @Composable() () -> Unit
 ) {
     MaterialTheme(
-        colors = colors(darkTheme),
-        typography = typography(),
+        colorScheme = colorScheme(darkTheme),
         shapes = shapes(),
+        typography = typography(),
         content = children
     )
 }
