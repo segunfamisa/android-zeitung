@@ -12,6 +12,7 @@ dependencies {
     implementation(libs.compose.foundation.layout)
     implementation(libs.compose.material)
     implementation(libs.compose.constraintlayout)
+    implementation(libs.compose.ui.tooling)
 
     implementation(libs.coil)
 }
