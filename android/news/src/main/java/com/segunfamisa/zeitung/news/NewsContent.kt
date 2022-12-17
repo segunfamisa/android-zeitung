@@ -1,10 +1,17 @@
 package com.segunfamisa.zeitung.news
 
 import android.content.res.Resources
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -14,8 +21,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -23,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -33,6 +37,7 @@ import com.segunfamisa.zeitung.common.UiState
 import com.segunfamisa.zeitung.common.getTimeAgo
 import com.segunfamisa.zeitung.common.theme.colorScheme
 import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
+import com.segunfamisa.zeitung.common.theme.preview.ThemedUiPreview
 import com.segunfamisa.zeitung.common.theme.shapes
 import com.segunfamisa.zeitung.common.theme.typography
 import java.util.*
@@ -43,19 +48,14 @@ const val LOG_TAG = "NewsContent"
 @ExperimentalComposeUiApi
 @Composable
 fun NewsContent(
-    newsViewModel: Lazy<NewsViewModel>,
-    onItemClicked: (UiNewsItem) -> Unit
+    uiState: UiState<List<UiNewsItem>>? = null,
+    onItemClicked: (UiNewsItem) -> Unit,
+    onSaveClicked: (UiNewsItem, Boolean) -> Unit,
 ) {
-    val viewModel = newsViewModel.value
-    val uiState: UiState<List<UiNewsItem>>? by viewModel.state.observeAsState()
-    val onSaveClicked: (UiNewsItem, Boolean) -> Unit = { newsItem, saved ->
-        Log.i(LOG_TAG, "onSaveClicked: item: $newsItem, shouldSave: $saved")
-        viewModel.saveNewsItem(newsItem, saved)
-    }
     Column {
         when (uiState) {
             is UiState.Success<List<UiNewsItem>> -> NewsArticleList(
-                articles = (uiState as UiState.Success<List<UiNewsItem>>).data,
+                articles = uiState.data,
                 onItemClicked = onItemClicked,
                 onSaveClicked = onSaveClicked
             )
@@ -341,32 +341,10 @@ private fun Date.asTimeAgo(resources: Resources): String {
     return getTimeAgo(this.time, System.currentTimeMillis(), resources)
 }
 
-@Composable
-@Preview("Loading screen")
-private fun PreviewLoadingState() {
-    ThemedPreview {
-        LoadingScreen()
-    }
-}
-
-@Composable
-@Preview("News article item")
-private fun PreviewNewsArticleItem() {
-    ThemedPreview {
-        NewsArticleItem(
-            item = fakeArticle(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
-            onSaveClicked = { _, _ -> }
-        )
-    }
-}
-
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @Composable
-@Preview("Top news article item")
+@ThemedUiPreview
 private fun PreviewTopNewsArticleItem() {
     ThemedPreview {
         TopNewsArticleItem(
@@ -380,9 +358,9 @@ private fun PreviewTopNewsArticleItem() {
 }
 
 @Composable
-@Preview("News article item (dark theme)")
-private fun PreviewDarkThemeNewsArticleItem() {
-    ThemedPreview(darkTheme = true) {
+@ThemedUiPreview
+private fun PreviewRegularNewsArticleItem() {
+    ThemedPreview {
         NewsArticleItem(
             item = fakeArticle(),
             modifier = Modifier
@@ -395,25 +373,11 @@ private fun PreviewDarkThemeNewsArticleItem() {
 
 @ExperimentalComposeUiApi
 @Composable
-@Preview("News article list")
+@ThemedUiPreview
 private fun PreviewNewsArticleList() {
     ThemedPreview {
         val article = fakeArticle()
         val articles = listOf(article, article.copy(isSaved = false), article.copy(image = null))
-        NewsArticleList(
-            articles = articles,
-            onItemClicked = { },
-            onSaveClicked = { _, _ -> }
-        )
-    }
-}
-
-@ExperimentalComposeUiApi
-@Composable
-@Preview("News article list (dark theme)")
-private fun PreviewDarkThemeNewsArticleList() {
-    ThemedPreview(darkTheme = true) {
-        val articles = listOf(fakeArticle(), fakeArticle().copy(isSaved = false), fakeArticle())
         NewsArticleList(
             articles = articles,
             onItemClicked = { },

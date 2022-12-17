@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun Main() {
         val navController = rememberNavController()
+        val newsViewModel = newsViewModelLazy.value
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity() {
             },
         ) {
             LaunchedEffect(Routes.News) {
-                newsViewModelLazy.value.fetchHeadlines()
+                newsViewModel.fetchHeadlines()
             }
             NavHost(navController = navController, startDestination = Routes.News) {
                 composable(Routes.Explore) {
@@ -121,9 +122,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 composable(Routes.News) {
                     NewsContent(
-                        newsViewModel = newsViewModelLazy,
+                        uiState = newsViewModelLazy.value.state.observeAsState().value,
                         onItemClicked = {
                             // Handle click listener
+                        },
+                        onSaveClicked = { item, selected ->
+                            newsViewModel.saveNewsItem(item, selected)
                         }
                     )
                 }
