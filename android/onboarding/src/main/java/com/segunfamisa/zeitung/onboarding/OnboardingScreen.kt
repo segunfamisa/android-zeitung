@@ -1,10 +1,19 @@
 package com.segunfamisa.zeitung.onboarding
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -18,11 +27,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.segunfamisa.zeitung.common.theme.colors
+import com.segunfamisa.zeitung.common.theme.colorScheme
 import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
 import com.segunfamisa.zeitung.common.theme.typography
 import kotlinx.coroutines.FlowPreview
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @FlowPreview
 @Composable
 fun OnboardingContent(
@@ -41,6 +52,7 @@ fun OnboardingContent(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(
     continueButtonEnabled: State<Boolean>,
@@ -70,7 +82,7 @@ fun OnboardingScreen(
                     .align(Alignment.CenterHorizontally)
                     .wrapContentWidth(align = Alignment.CenterHorizontally),
                 text = stringResource(id = R.string.onboarding_prompt),
-                style = typography().h5,
+                style = typography().headlineLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
@@ -91,8 +103,8 @@ fun OnboardingScreen(
                         onContinue(apiKey.text)
                     }
                 ),
-                textStyle = typography().caption.copy(color = contentColorFor(backgroundColor = colors().background)),
-                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = colors().secondary),
+                textStyle = typography().labelMedium.copy(color = contentColorFor(backgroundColor = colorScheme().background)),
+                colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = colorScheme().secondary),
                 label = { Text(text = stringResource(id = R.string.api_key_text_prompt)) }
             )
             Spacer(modifier = Modifier.height(16.dp))

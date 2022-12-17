@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.compose.animation)
     implementation(libs.compose.constraintlayout)
     implementation(libs.compose.foundation.layout)
-    implementation(libs.compose.material)
+    implementation(libs.compose.material3)
     implementation(libs.compose.runtime.livedata)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)

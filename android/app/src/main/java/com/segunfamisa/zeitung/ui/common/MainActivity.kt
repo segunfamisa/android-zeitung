@@ -1,12 +1,13 @@
 package com.segunfamisa.zeitung.ui.common
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
@@ -88,14 +89,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
     @ExperimentalCoilApi
     @ExperimentalComposeUiApi
     @Composable
     private fun Main() {
         val navController = rememberNavController()
-        val scaffoldState = rememberScaffoldState()
         Scaffold(
-            scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar(
                     title = { Text(stringResource(R.string.app_name)) }
@@ -106,8 +107,11 @@ class MainActivity : AppCompatActivity() {
                     navController = navController,
                     items = listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks)
                 )
-            }
+            },
         ) {
+            LaunchedEffect(Routes.News) {
+                newsViewModelLazy.value.fetchHeadlines()
+            }
             NavHost(navController = navController, startDestination = Routes.News) {
                 composable(Routes.Explore) {
                     Text(text = "Explore")
@@ -122,9 +126,6 @@ class MainActivity : AppCompatActivity() {
                             // Handle click listener
                         }
                     )
-                    LaunchedEffect(Routes.News) {
-                        newsViewModelLazy.value.fetchHeadlines()
-                    }
                 }
             }
         }

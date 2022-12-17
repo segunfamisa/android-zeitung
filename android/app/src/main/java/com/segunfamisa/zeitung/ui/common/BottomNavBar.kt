@@ -2,30 +2,24 @@ package com.segunfamisa.zeitung.ui.common
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
-import com.segunfamisa.zeitung.common.theme.colors
+import com.segunfamisa.zeitung.common.theme.preview.ThemedUiPreview
 
 sealed class NavItem(
     @StringRes val title: Int,
@@ -45,12 +39,18 @@ fun BottomNavBar(
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    BottomNav {
+    NavigationBar {
         items.forEach { navItem ->
             val isSelected = currentDestination?.hierarchy?.any { it.route?.equals(navItem.route) == true } == true
-            BottomNavItem(
-                isSelected = isSelected,
-                item = navItem,
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        painter = painterResource(id = navItem.icon),
+                        contentDescription = stringResource(id = navItem.title),
+                    )
+                },
+                label = { Text(stringResource(id = navItem.title)) },
+                selected = isSelected,
                 onClick = {
                     navController.navigate(navItem.route) {
                         // Pop up to the start destination of the graph to
@@ -72,111 +72,13 @@ fun BottomNavBar(
 }
 
 @Composable
-fun BottomNav(
-    modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.surface,
-    content: @Composable () -> Unit
-) {
-    Surface(elevation = 4.dp) {
-        Row(modifier = modifier
-            .background(backgroundColor)
-            .padding(8.dp)
-            .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            content()
-        }
-    }
-}
-
-@Composable
-private fun BottomNavItem(
-    modifier: Modifier = Modifier,
-    isSelected: Boolean = false,
-    item: NavItem,
-    onClick: () -> Unit
-) {
-    val backgroundColor = if (isSelected) MaterialTheme.colors.primary.copy(alpha = 0.1f) else Color.Transparent
-    val contentColor = if (isSelected) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.onSurface
-
-    Box(modifier = modifier
-        .then(
-            Modifier
-                .clip(CircleShape)
-                .background(backgroundColor)
-                .clickable { onClick() }
-        )) {
-        Row(modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-
-            Icon(
-                painter = painterResource(id = item.icon),
-                contentDescription = null,
-                modifier = Modifier,
-                tint = contentColor
-            )
-
-            AnimatedVisibility(visible = isSelected) {
-                Text(
-                    text = stringResource(id = item.title),
-                    color = contentColor
-                )
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun BottomNavItemPreview() {
-    ZeitungTheme(darkTheme = false) {
-        val isSelected = true
-        val navItem = NavItem.News
-        BottomNavItem(
-            isSelected = isSelected,
-            onClick = {
-
-            },
-            item = navItem
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun BottomNavItemPreviewDarkMode() {
-    ZeitungTheme(darkTheme = true) {
-        val isSelected = true
-        val navItem = NavItem.News
-        BottomNavItem(
-            isSelected = isSelected,
-            onClick = {
-
-            },
-            item = navItem
-        )
-    }
-}
-
-@Composable
-@Preview
+@ThemedUiPreview
 private fun BottomNavPreview() {
     ZeitungTheme {
         val items = listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks)
-        BottomNav() {
-            items.forEachIndexed { index, navItem ->
-                val isSelected = index == 0
-                BottomNavItem(
-                    isSelected = isSelected,
-                    onClick = {
-
-                    },
-                    item = navItem
-                )
-            }
-        }
+        BottomNavBar(
+            navController = rememberNavController(ComposeNavigator()),
+            items = items
+        )
     }
 }

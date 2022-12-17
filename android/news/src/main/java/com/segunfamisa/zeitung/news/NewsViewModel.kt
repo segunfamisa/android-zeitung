@@ -5,12 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.segunfamisa.zeitung.core.entities.Article
-import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
 import com.segunfamisa.zeitung.common.UiState
+import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
+import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
 import com.segunfamisa.zeitung.utils.DispatcherProvider
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

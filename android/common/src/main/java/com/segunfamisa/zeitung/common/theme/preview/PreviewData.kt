@@ -1,6 +1,6 @@
 package com.segunfamisa.zeitung.common.theme.preview
 
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 
