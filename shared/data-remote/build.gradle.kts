@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm")
+    kotlin("android")
     kotlin("kapt")
-    id("idea")
+    id("com.android.library")
 }
 apply(from = "${rootProject.projectDir}/keys.gradle")
 
