@@ -4,8 +4,6 @@ import com.segunfamisa.zeitung.data.di.qualifiers.Remote
 import com.segunfamisa.zeitung.data.headlines.HeadlinesSource
 import com.segunfamisa.zeitung.data.news.NewsSource
 import com.segunfamisa.zeitung.data.newssources.NewsSourcesDataSource
-import com.segunfamisa.zeitung.data.remote.common.ErrorParser
-import com.segunfamisa.zeitung.data.remote.common.ErrorParserImpl
 import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParser
 import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParserImpl
 import com.segunfamisa.zeitung.data.remote.headlines.RemoteHeadlinesSource
@@ -36,9 +34,6 @@ abstract class RemoteDataModule {
             return Moshi.Builder().build()
         }
     }
-
-    @Binds
-    internal abstract fun bindErrorParser(errorParserImpl: ErrorParserImpl): ErrorParser
 
     @Binds
     @Remote
