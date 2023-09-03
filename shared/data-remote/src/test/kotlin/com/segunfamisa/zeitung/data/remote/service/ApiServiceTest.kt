@@ -1,14 +1,15 @@
 package com.segunfamisa.zeitung.data.remote.service
 
+import com.segunfamisa.zeitung.data.remote.common.ApiResponse
+import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParserImpl
 import com.segunfamisa.zeitung.data.remote.entities.Article
 import com.segunfamisa.zeitung.data.remote.entities.Source
 import com.segunfamisa.zeitung.data.remote.entities.SourceMinimal
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.AfterClass
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -42,10 +43,18 @@ class ApiServiceTest {
         }
     }
     private val interceptor =
-        AuthorizationInterceptor(apiKeyProvider = ApiKeyProviderImpl())
+        AuthorizationInterceptor(
+            apiKeyProvider = object : ApiKeyProvider {
+                override fun getApiKey(): String {
+                    return "apiKey"
+                }
+            })
+    private val errorParser = ApiErrorParserImpl(moshi = Moshi.Builder().build())
+
     private val apiServiceCreator = ApiServiceCreator(
         urlProvider = urlProvider,
-        authorizationInterceptor = interceptor
+        authorizationInterceptor = interceptor,
+        errorParser = errorParser,
     )
 
     private lateinit var apiService: ApiService
@@ -61,10 +70,10 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get headlines
-        val headlines = apiService.getHeadlines()
+        val headlines = apiService.getHeadlines() as ApiResponse.Success
 
         // then verify that the headlines (as read from the json resource files) correspond to the expected ones
-        val response = headlines.body()!!
+        val response = headlines.entity
         val expectedArticle0 = Article(
             source = SourceMinimal(
                 id = "the-guardian-au",
@@ -94,10 +103,10 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get sources
-        val sources = apiService.getSources()
+        val sources = apiService.getSources() as ApiResponse.Success
 
         // then verify that the source (as read from the json resource) correspond to the expected ones
-        val response = sources.body()!!
+        val response = sources.entity
         val expectedSource0 = Source(
             id = "abc-news",
             name = "ABC News",
@@ -133,7 +142,7 @@ class ApiServiceTest {
         )
 
         // then verify that response is as we have in the json file
-        val news = response.body()!!
+        val news = (response as ApiResponse.Success).entity
         assertEquals(expectedNews0, news.articles[0])
         assertEquals(20, news.articles.size)
         assertEquals(62465, news.totalResults)
@@ -147,8 +156,7 @@ class ApiServiceTest {
         // when we call get news
         val response = apiService.getNews()
 
-        // then verify that body is null and error body is not null
-        assertNull("response body is expected to be null", response.body())
-        assertNotNull("error body should not be null", response.errorBody())
+        // then verify that the response is error type
+        assertEquals(true, response is ApiResponse.Error)
     }
 }

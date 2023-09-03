@@ -1,8 +1,8 @@
 package com.segunfamisa.zeitung.data.remote.service
 
+import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
 import com.segunfamisa.zeitung.data.remote.entities.SourcesResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,7 +16,7 @@ internal interface ApiService {
         @Query("query") query: String? = null,
         @Query("pageSize") pageSize: Int? = null,
         @Query("page") page: Int? = null
-    ): Response<ArticlesResponse>
+    ): ApiResponse<ArticlesResponse>
 
     @GET("everything")
     suspend fun getNews(
@@ -28,12 +28,12 @@ internal interface ApiService {
         @Query("language") language: String? = null,
         @Query("sortBy") sortBy: String = "publishedAt",
         @Query("page") page: Int? = null
-    ): Response<ArticlesResponse>
+    ): ApiResponse<ArticlesResponse>
 
     @GET("sources")
     suspend fun getSources(
         @Query("category") category: String? = null,
         @Query("language") language: String? = null,
         @Query("country") country: String? = null
-    ): Response<SourcesResponse>
+    ): ApiResponse<SourcesResponse>
 }

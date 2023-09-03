@@ -7,6 +7,6 @@ import javax.inject.Inject
 internal class ApiKeyProviderImpl @Inject constructor() : ApiKeyProvider {
 
     override fun getApiKey(): String {
-        return BuildConfig.APPLICATION_ID
+        return BuildConfig.ApiKey
     }
 }

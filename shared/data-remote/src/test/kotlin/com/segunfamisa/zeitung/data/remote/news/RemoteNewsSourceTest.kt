@@ -2,14 +2,18 @@ package com.segunfamisa.zeitung.data.remote.news
 
 import arrow.core.getOrHandle
 import arrow.core.orNull
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.core.entities.Source
-import com.segunfamisa.zeitung.data.remote.common.ErrorParser
-import com.segunfamisa.zeitung.data.remote.service.*
+import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParserImpl
+import com.segunfamisa.zeitung.data.remote.headlines.ArticlesMapper
+import com.segunfamisa.zeitung.data.remote.service.ApiService
+import com.segunfamisa.zeitung.data.remote.service.ApiServiceCreator
+import com.segunfamisa.zeitung.data.remote.service.AuthorizationInterceptor
+import com.segunfamisa.zeitung.data.remote.service.MockApi
+import com.segunfamisa.zeitung.data.remote.service.UrlProvider
+import com.segunfamisa.zeitung.data.remote.utils.FakeApiKeyProvider
 import com.segunfamisa.zeitung.domain.common.Error
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.AfterClass
@@ -43,7 +47,6 @@ class RemoteNewsSourceTest {
 
     private val sdf = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'")
     private lateinit var apiService: ApiService
-    private val errorParser: ErrorParser = mock()
 
     private lateinit var source: RemoteNewsSource
 
@@ -55,22 +58,13 @@ class RemoteNewsSourceTest {
                     return server.url("/").toString()
                 }
             },
-            authorizationInterceptor = AuthorizationInterceptor(apiKeyProvider = object :
-                ApiKeyProvider {
-                override fun getApiKey(): String {
-                    return "secret_key"
-                }
-            })
+            authorizationInterceptor = AuthorizationInterceptor(
+                apiKeyProvider = FakeApiKeyProvider()
+            ),
+            errorParser = ApiErrorParserImpl(moshi = Moshi.Builder().build()),
         ).createService()
 
-        whenever(errorParser.parse(any())).thenReturn(
-            com.segunfamisa.zeitung.domain.common.Error(
-                "An error occurred",
-                throwable = Throwable("Error")
-            )
-        )
-
-        source = RemoteNewsSource(apiService = apiService, errorParser = errorParser)
+        source = RemoteNewsSource(apiService = apiService, articlesMapper = ArticlesMapper())
     }
 
     @Test
