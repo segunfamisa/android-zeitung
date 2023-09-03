@@ -6,6 +6,8 @@ import com.segunfamisa.zeitung.data.news.NewsSource
 import com.segunfamisa.zeitung.data.newssources.NewsSourcesDataSource
 import com.segunfamisa.zeitung.data.remote.common.ErrorParser
 import com.segunfamisa.zeitung.data.remote.common.ErrorParserImpl
+import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParser
+import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParserImpl
 import com.segunfamisa.zeitung.data.remote.headlines.RemoteHeadlinesSource
 import com.segunfamisa.zeitung.data.remote.news.RemoteNewsSource
 import com.segunfamisa.zeitung.data.remote.newssources.RemoteNewsSourcesDataSource
@@ -49,4 +51,7 @@ abstract class RemoteDataModule {
     @Binds
     @Remote
     internal abstract fun bindRemoteNewsSource(remoteDataSource: RemoteNewsSource): NewsSource
+
+    @Binds
+    internal abstract fun bindApiErrorParser(apiErrorParserImpl: ApiErrorParserImpl): ApiErrorParser
 }
