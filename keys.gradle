@@ -1,4 +1,6 @@
-ext.apiKey = {
+rootProject.ext.apiKey = getApiKey()
+
+def getApiKey() {
     boolean isCiEnvironment = System.getenv("CI")
     String apiKey = ""
     if (isCiEnvironment) {

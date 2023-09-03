@@ -1,6 +1,7 @@
-package com.segunfamisa.zeitung.data.remote.service
+package com.segunfamisa.zeitung.data
 
-import com.segunfamisa.zeitung.data.BuildConfig
+import com.segunfamisa.zeitung.BuildConfig
+import com.segunfamisa.zeitung.data.remote.service.UrlProvider
 import javax.inject.Inject
 
 class UrlProviderImpl @Inject constructor() : UrlProvider {
