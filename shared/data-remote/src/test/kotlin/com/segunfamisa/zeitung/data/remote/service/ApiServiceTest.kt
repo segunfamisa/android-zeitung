@@ -70,10 +70,10 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get headlines
-        val headlines = apiService.getHeadlines()
+        val headlines = apiService.getHeadlines() as ApiResponse.Success
 
         // then verify that the headlines (as read from the json resource files) correspond to the expected ones
-        val response = headlines.body()!!
+        val response = headlines.entity
         val expectedArticle0 = Article(
             source = SourceMinimal(
                 id = "the-guardian-au",

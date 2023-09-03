@@ -17,7 +17,7 @@ internal interface ApiService {
         @Query("query") query: String? = null,
         @Query("pageSize") pageSize: Int? = null,
         @Query("page") page: Int? = null
-    ): Response<ArticlesResponse>
+    ): ApiResponse<ArticlesResponse>
 
     @GET("everything")
     suspend fun getNews(

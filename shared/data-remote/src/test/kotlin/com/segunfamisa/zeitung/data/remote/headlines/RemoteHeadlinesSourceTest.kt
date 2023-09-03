@@ -3,16 +3,15 @@ package com.segunfamisa.zeitung.data.remote.headlines
 import arrow.core.orNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import com.segunfamisa.zeitung.data.remote.common.ApiCallError
+import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
 import com.segunfamisa.zeitung.data.remote.service.ApiService
 import com.segunfamisa.zeitung.data.remote.service.TestDataGenerator
 import kotlinx.coroutines.runBlocking
-import okhttp3.MediaType
-import okhttp3.ResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import retrofit2.Response
 
 class RemoteHeadlinesSourceTest {
 
@@ -31,8 +30,8 @@ class RemoteHeadlinesSourceTest {
             val articles = TestDataGenerator.createArticles(count = 5)
             whenever(apiService.getHeadlines(category = category))
                 .thenReturn(
-                    Response.success(
-                        ArticlesResponse(
+                    ApiResponse.Success(
+                        entity = ArticlesResponse(
                             totalResults = 5,
                             articles = articles
                         )
@@ -89,9 +88,8 @@ class RemoteHeadlinesSourceTest {
 
         // given that the api call fails
         whenever(apiService.getHeadlines(category = category)).thenReturn(
-            Response.error(
-                401,
-                ResponseBody.create(MediaType.parse("application/json; charset=utf-8"), "")
+            ApiResponse.Error(
+                throwable = ApiCallError.ServerError(errorCode = 401, message = "API call failure")
             )
         );
 
