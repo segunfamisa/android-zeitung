@@ -1,14 +1,9 @@
 plugins {
-    kotlin("android")
-    kotlin("kapt")
     id("com.android.library")
+    kotlin("kapt")
 }
 apply(from = "${rootProject.projectDir}/keys.gradle")
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+apply(from = "${rootProject.projectDir}/config/android-library-config.gradle")
 
 dependencies {
     implementation(project(":shared:core"))
