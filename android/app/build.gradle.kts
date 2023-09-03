@@ -1,14 +1,24 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     kotlin("kapt")
 }
 apply(from = "${rootProject.projectDir}/config/android-compose-config.gradle")
+apply(from = "${rootProject.projectDir}/keys.gradle")
+
+val apiKey: String by rootProject.extra
+
 
 android {
     defaultConfig {
         applicationId = "com.segunfamisa.zeitung"
         versionCode = 1
         versionName = "1.0"
+
+
+        buildConfigField("String", "BaseUrl", "\"https://newsapi.org/v2/\"")
+        buildConfigField("String", "ApiKey", "\"$apiKey\"")
     }
 }
 
