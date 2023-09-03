@@ -11,6 +11,7 @@ import com.squareup.moshi.ToJson
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
@@ -66,7 +67,13 @@ internal class ApiServiceCreator @Inject constructor(
 
         @ToJson
         @Synchronized
-        fun parseFromString(string: String): Date = sdf.parse(string)
+        fun parseFromString(string: String): Date? {
+            return try {
+                sdf.parse(string)
+            } catch (exception: ParseException) {
+                null
+            }
+        }
 
         @FromJson
         @Synchronized

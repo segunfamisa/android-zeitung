@@ -10,6 +10,6 @@ internal data class Article(
     @field:Json(name = "description") val description: String?,
     @field:Json(name = "url") val url: String,
     @field:Json(name = "urlToImage") val imageUrl: String?,
-    @field:Json(name = "publishedAt") val publishedAt: Date,
+    @field:Json(name = "publishedAt") val publishedAt: Date?,
     @field:Json(name = "content") val content: String?
 )

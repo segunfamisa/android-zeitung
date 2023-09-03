@@ -21,7 +21,7 @@ internal class ArticlesMapper @Inject constructor() :
                 country = ""
             ),
             url = data.url,
-            description = data.description ?: "",
+            description = data.description,
             author = data.author ?: "",
             title = data.title,
             imageUrl = data.imageUrl ?: "",
