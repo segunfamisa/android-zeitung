@@ -5,6 +5,7 @@ import arrow.core.orNull
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.core.entities.Source
 import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParserImpl
+import com.segunfamisa.zeitung.data.remote.headlines.ArticlesMapper
 import com.segunfamisa.zeitung.data.remote.service.ApiService
 import com.segunfamisa.zeitung.data.remote.service.ApiServiceCreator
 import com.segunfamisa.zeitung.data.remote.service.AuthorizationInterceptor
@@ -63,7 +64,7 @@ class RemoteNewsSourceTest {
             errorParser = ApiErrorParserImpl(moshi = Moshi.Builder().build()),
         ).createService()
 
-        source = RemoteNewsSource(apiService = apiService)
+        source = RemoteNewsSource(apiService = apiService, articlesMapper = ArticlesMapper())
     }
 
     @Test
