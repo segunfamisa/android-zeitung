@@ -121,10 +121,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 composable(Routes.News) {
                     NewsContent(
-                        newsViewModel = newsViewModelLazy,
-                        onItemClicked = {
-                            // Handle click listener
-                        }
+                        newsViewModel = newsViewModelLazy
                     )
                 }
             }

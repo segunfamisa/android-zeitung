@@ -1,5 +1,7 @@
 package com.segunfamisa.zeitung.di
 
+import android.app.Application
+import android.content.Context
 import com.segunfamisa.zeitung.data.ApiKeyProviderImpl
 import com.segunfamisa.zeitung.data.UrlProviderImpl
 import com.segunfamisa.zeitung.data.di.DataModule
@@ -10,6 +12,7 @@ import com.segunfamisa.zeitung.utils.DefaultDispatcherProvider
 import com.segunfamisa.zeitung.utils.DispatcherProvider
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module(
     includes = [
@@ -18,6 +21,14 @@ import dagger.Module
     ]
 )
 abstract class AppModule {
+
+    companion object {
+
+        @Provides
+        fun provideAppContext(app: Application): Context {
+            return app.applicationContext
+        }
+    }
 
     @Binds
     abstract fun bindDispatcherProvider(provider: DefaultDispatcherProvider): DispatcherProvider

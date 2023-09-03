@@ -1,82 +1,55 @@
 package com.segunfamisa.zeitung.news
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.segunfamisa.zeitung.common.UiState
-import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
 import com.segunfamisa.zeitung.utils.DispatcherProvider
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NewsViewModel @Inject constructor(
     private val getHeadlinesUseCase: GetHeadlinesUseCase,
+    private val uiItemMapper: UiItemMapper,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    private val _state: MutableLiveData<UiState<List<UiNewsItem>>> = MutableLiveData()
-    val state: LiveData<UiState<List<UiNewsItem>>>
-        get() = _state
+    private val _uiState = MutableStateFlow<NewsUiState>(value = NewsUiState.Loading)
+    val uiState: StateFlow<NewsUiState>
+        get() = _uiState
 
     fun fetchHeadlines() {
         viewModelScope.launch(dispatcherProvider.io) {
             val params = HeadlineQueryParam(category = "technology", country = "us")
-            _state.postValue(UiState.Loading)
+            _uiState.value = NewsUiState.Loading
             getHeadlinesUseCase.execute(params)
                 .collect { headlines ->
                     headlines.fold({
                         Log.e(LOG_TAG, it.toString())
-                        _state.postValue(UiState.Error(error = Exception(it.message)))
-                    }, {
-                        _state.postValue(UiState.Success(data = it.toUiNewsItemList()))
+                        _uiState.value = NewsUiState.Error(message = it.message)
+                    }, { articles ->
+                        val hasHeader = articles.isNotEmpty()
+                        _uiState.value = NewsUiState.Loaded(
+                            header = articles.firstOrNull()?.let {
+                                uiItemMapper.createUiItem(it)
+                            },
+                            news = if (hasHeader) {
+                                articles.subList(1, articles.size)
+                            } else {
+                                articles
+                            }.map {
+                                uiItemMapper.createUiItem(it)
+                            }
+                        )
                     })
                 }
         }
     }
 
-    private fun List<Article>.toUiNewsItemList(): List<UiNewsItem> {
-        return this.mapIndexed { index, article ->
-            if (index == 0) {
-                UiNewsItem.Top(
-                    headline = article.title,
-                    subhead = article.description,
-                    date = article.publishedAt,
-                    author = article.author,
-                    image = null,
-                    imageUrl = article.imageUrl,
-                    url = article.url,
-                    isSaved = article.isSaved,
-                    source = UiSourceItem(
-                        id = article.source.id,
-                        logo = null, // TODO implement converting url to image asset
-                        name = article.source.name
-                    )
-                )
-            } else {
-                UiNewsItem.Regular(
-                    headline = article.title,
-                    subhead = article.description,
-                    date = article.publishedAt,
-                    author = article.author,
-                    image = null,
-                    imageUrl = article.imageUrl,
-                    url = article.url,
-                    isSaved = article.isSaved,
-                    source = UiSourceItem(
-                        id = article.source.id,
-                        logo = null, // TODO implement converting url to image asset
-                        name = article.source.name
-                    )
-                )
-            }
-        }
-    }
-
-    fun saveNewsItem(newsItem: UiNewsItem, shouldSave: Boolean) {
+    fun saveNewsItem(url: String, shouldSave: Boolean) {
         // TODO("Not yet implemented")
     }
 
