@@ -103,10 +103,10 @@ class ApiServiceTest {
         server.setDispatcher(mockApi.successDispatcher)
 
         // when we call get sources
-        val sources = apiService.getSources()
+        val sources = apiService.getSources() as ApiResponse.Success
 
         // then verify that the source (as read from the json resource) correspond to the expected ones
-        val response = sources.body()!!
+        val response = sources.entity
         val expectedSource0 = Source(
             id = "abc-news",
             name = "ABC News",
