@@ -1,16 +1,24 @@
 package com.segunfamisa.zeitung.data.remote.service
 
-import com.squareup.moshi.*
+import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiErrorParser
+import com.segunfamisa.zeitung.data.remote.common.calladapter.ApiResponseCallAdapterFactory
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.ToJson
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 internal class ApiServiceCreator @Inject constructor(
     private val urlProvider: UrlProvider,
-    private val authorizationInterceptor: AuthorizationInterceptor
+    private val authorizationInterceptor: AuthorizationInterceptor,
+    private val errorParser: ApiErrorParser,
 ) {
 
     // region Public Api
@@ -30,6 +38,7 @@ internal class ApiServiceCreator @Inject constructor(
             .client(okHttpClient)
             .baseUrl(urlProvider.getBaseUrl())
             .addConverterFactory(moshiConverter)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory(errorParser = errorParser))
             .build()
 
         return retrofit.create(ApiService::class.java)
