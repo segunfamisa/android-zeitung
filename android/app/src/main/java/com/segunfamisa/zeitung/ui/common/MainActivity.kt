@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.res.stringResource
@@ -90,7 +91,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
+    @SuppressLint(
+        "UnusedMaterialScaffoldPaddingParameter",
+        "UnusedMaterial3ScaffoldPaddingParameter"
+    )
     @ExperimentalCoilApi
     @ExperimentalComposeUiApi
     @Composable
@@ -121,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 composable(Routes.News) {
                     NewsContent(
-                        newsViewModel = newsViewModelLazy
+                        uiState = newsViewModelLazy.value.uiState.collectAsState().value
                     )
                 }
             }
