@@ -67,6 +67,10 @@ dependencies {
     kapt(libs.dagger.android.processor)
 
     testImplementation(libs.test.junit)
+    testImplementation(libs.test.robolectric)
+    testImplementation(libs.test.compose)
+    debugImplementation(libs.test.compose.manifests)
     androidTestImplementation(libs.androidx.testrunner)
     androidTestImplementation(libs.androidx.espresso)
+    androidTestImplementation(libs.test.compose)
 }
