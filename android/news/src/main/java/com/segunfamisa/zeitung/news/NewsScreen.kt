@@ -41,6 +41,7 @@ import java.util.Date
 import java.util.Locale
 
 internal const val TEST_TAG_LOADING = "Loading Indicator"
+internal const val TEST_TAG_ARTICLE_LIST = "News list"
 
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
@@ -64,6 +65,7 @@ private fun NewsArticleList(
 ) {
     LazyColumn(
         modifier = Modifier.padding(bottom = 56.dp)
+            .testTag(TEST_TAG_ARTICLE_LIST)
     ) {
 
         header?.let {
