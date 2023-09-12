@@ -40,7 +40,6 @@ import com.segunfamisa.zeitung.common.theme.typography
 import java.util.Date
 import java.util.Locale
 
-const val LOG_TAG = "NewsContent"
 internal const val TEST_TAG_LOADING = "Loading Indicator"
 
 @ExperimentalCoilApi

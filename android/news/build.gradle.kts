@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.compose.runtime.livedata)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.navigation)
 
     implementation(libs.arrow)
     implementation(libs.lifecycle.vm)
