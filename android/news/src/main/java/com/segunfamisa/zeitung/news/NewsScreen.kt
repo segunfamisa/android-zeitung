@@ -19,13 +19,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,23 +40,15 @@ import com.segunfamisa.zeitung.common.theme.typography
 import java.util.Date
 import java.util.Locale
 
-const val LOG_TAG = "NewsContent"
+internal const val TEST_TAG_LOADING = "Loading Indicator"
+internal const val TEST_TAG_ARTICLE_LIST = "News list"
 
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @Composable
-fun NewsContent(
-    newsViewModel: Lazy<NewsViewModel>
-) {
-    val viewModel = newsViewModel.value
-    val uiState: NewsUiState by viewModel.uiState.collectAsState()
-
+fun NewsContent(uiState: NewsUiState) {
     when (uiState) {
-        is NewsUiState.Loaded -> NewsArticleList(
-            header = (uiState as NewsUiState.Loaded).header,
-            newsItems = (uiState as NewsUiState.Loaded).news,
-        )
-
+        is NewsUiState.Loaded -> NewsArticleList(header = uiState.header, newsItems = uiState.news)
         is NewsUiState.Loading -> LoadingScreen()
         is NewsUiState.Error -> ErrorSnackbar()
     }
@@ -74,6 +65,7 @@ private fun NewsArticleList(
 ) {
     LazyColumn(
         modifier = Modifier.padding(bottom = 56.dp)
+            .testTag(TEST_TAG_ARTICLE_LIST)
     ) {
 
         header?.let {
@@ -304,7 +296,8 @@ private fun LoadingScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center),
+            .wrapContentSize(Alignment.Center)
+            .testTag(TEST_TAG_LOADING),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(color = colorScheme().secondary)

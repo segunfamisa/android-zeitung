@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.compose.runtime.livedata)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.navigation)
 
     implementation(libs.arrow)
     implementation(libs.lifecycle.vm)
@@ -30,6 +31,9 @@ dependencies {
 
     implementation(libs.bundles.kotlin.coroutines)
 
+    testImplementation(libs.test.compose)
+    debugImplementation(libs.test.compose.manifests)
     testImplementation(libs.test.junit)
+    testImplementation(libs.test.robolectric)
     androidTestImplementation(libs.androidx.testjunitext)
 }

@@ -9,7 +9,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.res.stringResource
@@ -20,8 +19,8 @@ import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.R
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
-import com.segunfamisa.zeitung.news.NewsContent
 import com.segunfamisa.zeitung.news.NewsViewModel
+import com.segunfamisa.zeitung.news.newsNavGraph
 import com.segunfamisa.zeitung.onboarding.OnboardingContent
 import com.segunfamisa.zeitung.onboarding.OnboardingViewModel
 import com.segunfamisa.zeitung.util.viewmodel.ViewModelFactory
@@ -35,12 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var onboardingViewModelFactory: ViewModelFactory<OnboardingViewModel>
-
-    private val newsViewModelLazy: Lazy<NewsViewModel> = ViewModelLazy(
-        viewModelClass = NewsViewModel::class,
-        storeProducer = { viewModelStore },
-        factoryProducer = { newsViewModelFactory }
-    )
 
     private val onboardingViewModelLazy: Lazy<OnboardingViewModel> = ViewModelLazy(
         viewModelClass = OnboardingViewModel::class,
@@ -90,7 +83,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
+    @SuppressLint(
+        "UnusedMaterialScaffoldPaddingParameter",
+        "UnusedMaterial3ScaffoldPaddingParameter"
+    )
     @ExperimentalCoilApi
     @ExperimentalComposeUiApi
     @Composable
@@ -109,20 +105,13 @@ class MainActivity : AppCompatActivity() {
                 )
             },
         ) {
-            LaunchedEffect(Routes.News) {
-                newsViewModelLazy.value.fetchHeadlines()
-            }
             NavHost(navController = navController, startDestination = Routes.News) {
+                newsNavGraph(route = Routes.News, vmFactory = newsViewModelFactory)
                 composable(Routes.Explore) {
                     Text(text = "Explore")
                 }
                 composable(Routes.Bookmarks) {
                     Text(text = "Bookmarks")
-                }
-                composable(Routes.News) {
-                    NewsContent(
-                        newsViewModel = newsViewModelLazy
-                    )
                 }
             }
         }
