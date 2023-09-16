@@ -51,4 +51,11 @@ internal class SourcesViewModel @Inject constructor(
             initialValue = UiState(loading = true),
             started = SharingStarted.WhileSubscribed()
         )
+
+    /**
+     * Toggles the following status of a news source.
+     */
+    fun followSource(sourceId: String, followed: Boolean) {
+        userPreferencesUseCase.toggleSourceFollowing(sourceId = sourceId, followed = followed)
+    }
 }
