@@ -3,6 +3,7 @@ package com.segunfamisa.zeitung.sources.internal
 internal data class UiState(
     val loading: Boolean,
     val sources: List<UiItem> = emptyList(),
+    val error: String? = null,
 )
 
 internal sealed interface UiItem {
