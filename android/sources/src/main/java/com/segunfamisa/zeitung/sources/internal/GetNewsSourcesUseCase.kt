@@ -10,11 +10,11 @@ import javax.inject.Inject
 
 internal class GetNewsSourcesUseCase @Inject constructor(
     private val sourcesRepository: NewsSourcesRepository
-) : FlowUseCase<NewsSourcesQueryParam, List<Source>>() {
+) : FlowUseCase<SourcesQueryParam, List<Source>>() {
 
-    override fun execute(param: NewsSourcesQueryParam): Flow<Either<Error, List<Source>>> {
+    override fun execute(param: SourcesQueryParam): Flow<Either<Error, List<Source>>> {
         return sourcesRepository.getNewsSources(
-            category = param.category,
+            category = "",
             language = param.language,
             country = ""
         )
