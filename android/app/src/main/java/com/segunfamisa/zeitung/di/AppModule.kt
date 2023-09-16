@@ -8,6 +8,7 @@ import com.segunfamisa.zeitung.data.di.DataModule
 import com.segunfamisa.zeitung.data.remote.di.RemoteDataModule
 import com.segunfamisa.zeitung.data.remote.service.ApiKeyProvider
 import com.segunfamisa.zeitung.data.remote.service.UrlProvider
+import com.segunfamisa.zeitung.news.NewsModule
 import com.segunfamisa.zeitung.sources.di.SourcesModule
 import com.segunfamisa.zeitung.utils.DefaultDispatcherProvider
 import com.segunfamisa.zeitung.utils.DispatcherProvider
@@ -19,6 +20,7 @@ import dagger.Provides
     includes = [
         DataModule::class,
         RemoteDataModule::class,
+        NewsModule::class,
         SourcesModule::class,
     ]
 )
