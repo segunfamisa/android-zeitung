@@ -5,4 +5,6 @@
     <string name="menu_browse">Browse</string>
     <string name="menu_bookmarks">Saved</string>
 
+    <string name="app_bar_sources">News Sources</string>
+
 </resources>
