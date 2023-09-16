@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -27,7 +26,7 @@ sealed class NavItem(
     val route: String
 ) {
     object News : NavItem(R.string.menu_news, R.drawable.ic_nav_menu_home, Routes.News)
-    object Explore : NavItem(R.string.menu_browse, R.drawable.ic_nav_menu_explore, Routes.Explore)
+    object Sources : NavItem(R.string.menu_sources, R.drawable.ic_nav_menu_explore, Routes.Sources)
     object Bookmarks :
         NavItem(R.string.menu_bookmarks, R.drawable.ic_nav_menu_bookmark, Routes.Bookmarks)
 }
@@ -75,7 +74,7 @@ fun BottomNavBar(
 @ThemedUiPreview
 private fun BottomNavPreview() {
     ZeitungTheme {
-        val items = listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks)
+        val items = listOf(NavItem.News, NavItem.Sources, NavItem.Bookmarks)
         BottomNavBar(
             navController = rememberNavController(ComposeNavigator()),
             items = items

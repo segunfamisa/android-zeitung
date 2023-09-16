@@ -2,7 +2,7 @@
     <string name="app_name">Android Zeitung</string>
 
     <string name="menu_news">Home</string>
-    <string name="menu_browse">Browse</string>
+    <string name="menu_sources">Sources</string>
     <string name="menu_bookmarks">Saved</string>
 
     <string name="app_bar_sources">News Sources</string>

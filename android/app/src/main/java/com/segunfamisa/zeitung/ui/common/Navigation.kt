@@ -5,7 +5,7 @@ object Routes {
     val Onboarding = format("onboarding")
     val Main = format("main")
     val News = format("news")
-    val Explore = format("explore")
+    val Sources = format("sources")
     val Bookmarks = format("bookmarks")
 
     private fun format(screen: String): String {

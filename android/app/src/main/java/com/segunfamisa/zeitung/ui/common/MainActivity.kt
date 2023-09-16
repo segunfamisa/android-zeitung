@@ -9,6 +9,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.res.stringResource
@@ -18,27 +20,24 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.R
+import com.segunfamisa.zeitung.common.di.ViewModelFactory
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
-import com.segunfamisa.zeitung.news.NewsViewModel
 import com.segunfamisa.zeitung.news.newsNavGraph
 import com.segunfamisa.zeitung.onboarding.OnboardingContent
 import com.segunfamisa.zeitung.onboarding.OnboardingViewModel
-import com.segunfamisa.zeitung.util.viewmodel.ViewModelFactory
+import com.segunfamisa.zeitung.sources.sourcesNavGraph
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var newsViewModelFactory: ViewModelFactory<NewsViewModel>
-
-    @Inject
-    lateinit var onboardingViewModelFactory: ViewModelFactory<OnboardingViewModel>
+    lateinit var vmFactory: ViewModelFactory
 
     private val onboardingViewModelLazy: Lazy<OnboardingViewModel> = ViewModelLazy(
         viewModelClass = OnboardingViewModel::class,
         storeProducer = { viewModelStore },
-        factoryProducer = { onboardingViewModelFactory }
+        factoryProducer = { vmFactory }
     )
 
     @ExperimentalCoilApi
@@ -92,24 +91,32 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun Main() {
         val navController = rememberNavController()
+        val backStack by navController.currentBackStackEntryFlow.collectAsState(navController.currentBackStackEntry)
+
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(stringResource(R.string.app_name)) }
+                    title = {
+                        Text(
+                            text = if (backStack?.destination?.route == Routes.Sources) {
+                                stringResource(R.string.app_bar_sources)
+                            } else {
+                                stringResource(R.string.app_name)
+                            }
+                        )
+                    }
                 )
             },
             bottomBar = {
                 BottomNavBar(
                     navController = navController,
-                    items = listOf(NavItem.News, NavItem.Explore, NavItem.Bookmarks)
+                    items = listOf(NavItem.News, NavItem.Bookmarks, NavItem.Sources)
                 )
             },
         ) {
             NavHost(navController = navController, startDestination = Routes.News) {
-                newsNavGraph(route = Routes.News, vmFactory = newsViewModelFactory)
-                composable(Routes.Explore) {
-                    Text(text = "Explore")
-                }
+                newsNavGraph(route = Routes.News, vmFactory = vmFactory)
+                sourcesNavGraph(route = Routes.Sources, vmFactory = vmFactory)
                 composable(Routes.Bookmarks) {
                     Text(text = "Bookmarks")
                 }
