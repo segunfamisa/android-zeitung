@@ -2,11 +2,11 @@ package com.segunfamisa.zeitung.sources
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.segunfamisa.zeitung.sources.internal.GetNewsSourcesUseCase
-import com.segunfamisa.zeitung.sources.internal.SourcesQueryParam
+import com.segunfamisa.zeitung.domain.newssources.GetNewsSourcesUseCase
+import com.segunfamisa.zeitung.domain.newssources.SourcesQueryParam
+import com.segunfamisa.zeitung.domain.preferences.UserPreferencesUseCase
 import com.segunfamisa.zeitung.sources.internal.UiSourceMapper
 import com.segunfamisa.zeitung.sources.internal.UiState
-import com.segunfamisa.zeitung.sources.internal.UserPreferencesUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
