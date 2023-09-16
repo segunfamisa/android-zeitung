@@ -28,6 +28,7 @@ dependencies {
     implementation(project(":android:common"))
     implementation(project(":android:news"))
     implementation(project(":android:onboarding"))
+    implementation(project(":android:sources"))
     implementation(project(":shared:core"))
     implementation(project(":shared:data"))
     implementation(project(":shared:data-remote"))
