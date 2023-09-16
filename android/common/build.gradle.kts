@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.constraintlayout)
     implementation(libs.compose.ui.tooling)
+    implementation(libs.dagger.core)
 
     implementation(libs.coil)
 }
