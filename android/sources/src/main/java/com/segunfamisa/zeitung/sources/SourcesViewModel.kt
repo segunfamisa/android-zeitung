@@ -26,7 +26,7 @@ internal class SourcesViewModel @Inject constructor(
         .flatMapConcat { language ->
             combine(
                 getNewsSourcesUseCase.execute(param = SourcesQueryParam(language = language)),
-                userPreferencesUseCase.followedSources,
+                userPreferencesUseCase.followedSourceIds,
             ) { eitherNewsSources, followedSources ->
                 eitherNewsSources.fold(
                     ifLeft = { error ->
@@ -38,7 +38,7 @@ internal class SourcesViewModel @Inject constructor(
                             sources = uiSourceMapper.from(
                                 input = sources,
                                 followedChecker = { sourceId ->
-                                    followedSources.any { it.id == sourceId }
+                                    followedSources.any { it == sourceId }
                                 }
                             )
                         )
