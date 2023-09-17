@@ -15,7 +15,7 @@ class GetHeadlinesUseCase @Inject constructor(
         return repo.getHeadlines(
             category = param.category,
             country = param.country,
-            sources = ""
+            sources = param.sources.joinToString(separator = ",")
         )
     }
 }
