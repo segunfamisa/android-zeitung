@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":android:sources"))
     implementation(project(":shared:core"))
     implementation(project(":shared:data"))
+    implementation(project(":shared:data-local"))
     implementation(project(":shared:data-remote"))
     implementation(project(":shared:domain"))
     implementation(project(":shared:utils"))

@@ -9,5 +9,16 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared:core"))
+    implementation(project(":shared:domain"))
+    implementation(project(":shared:data"))
 
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.coroutines.core)
+
+    implementation(libs.dagger.core)
+    implementation(libs.arrow)
+
+    testImplementation(libs.test.junit)
+    testImplementation(libs.test.mockito)
 }
