@@ -138,7 +138,7 @@ private fun TopNewsArticleItem(
 
         item.source?.let {
             Text(text = item.source,
-                style = typography.labelSmall,
+                style = typography.labelSmall.copy(color = colorScheme().secondary),
                 modifier = Modifier.constrainAs(source) {
                     top.linkTo(image.bottom, 8.dp)
                     start.linkTo(parent.start)
@@ -160,7 +160,7 @@ private fun TopNewsArticleItem(
 
         item.date?.let { timeAgo ->
             Text(text = timeAgo.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-                style = typography.labelMedium,
+                style = typography.labelMedium.copy(color = colorScheme().secondary),
                 modifier = Modifier.constrainAs(date) {
                     top.linkTo(headline.bottom, 8.dp)
                     start.linkTo(parent.start)
@@ -205,7 +205,7 @@ private fun NewsArticleItem(
         item.source?.let {
             Text(
                 text = item.source,
-                style = typography.labelSmall,
+                style = typography.labelSmall.copy(color = colorScheme().secondary),
                 modifier = Modifier.constrainAs(source) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -229,7 +229,7 @@ private fun NewsArticleItem(
         item.date?.let {
             Text(
                 text = item.date.capitalize(Locale.getDefault()),
-                style = typography.labelMedium,
+                style = typography.labelMedium.copy(color = colorScheme().secondary),
                 modifier = Modifier.constrainAs(date) {
                     top.linkTo(headline.bottom, margin = 8.dp)
                     bottom.linkTo(parent.bottom)
