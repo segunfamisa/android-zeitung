@@ -8,7 +8,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -20,7 +23,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.R
+import com.segunfamisa.zeitung.common.LocalAppState
 import com.segunfamisa.zeitung.common.di.ViewModelFactory
+import com.segunfamisa.zeitung.common.rememberAppState
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import com.segunfamisa.zeitung.news.newsNavGraph
 import com.segunfamisa.zeitung.onboarding.OnboardingContent
@@ -29,6 +34,7 @@ import com.segunfamisa.zeitung.sources.sourcesNavGraph
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : AppCompatActivity() {
 
     @Inject
@@ -48,7 +54,11 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             ZeitungTheme {
-                App()
+                val windowSizeClass = calculateWindowSizeClass(this)
+                val appState = rememberAppState(windowSizeClass = windowSizeClass)
+                CompositionLocalProvider(LocalAppState provides appState) {
+                    App()
+                }
             }
         }
     }
