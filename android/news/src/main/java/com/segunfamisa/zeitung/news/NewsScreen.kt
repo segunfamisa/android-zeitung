@@ -257,6 +257,7 @@ private fun NewsArticleItem(
             modifier = Modifier
                 .size(24.dp)
                 .constrainAs(save) {
+                    top.linkTo(image.bottom)
                     bottom.linkTo(parent.bottom)
                     end.linkTo(parent.end)
                 }, onSaveClicked = { saved ->
@@ -376,7 +377,11 @@ private fun PreviewDarkThemeNewsArticleItem() {
 private fun PreviewNewsArticleList() {
     ThemedPreview {
         val article = fakeArticle()
-        val articles = listOf(article, article.copy(saved = false), article.copy(imageUrl = null))
+        val articles = listOf(
+            article.copy(source = null),
+            article.copy(saved = false),
+            article.copy(imageUrl = null)
+        )
         NewsArticleList(newsItems = articles)
     }
 }
