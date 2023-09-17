@@ -15,15 +15,15 @@ internal class UserPreferencesRepositoryImpl @Inject constructor(
     override val language: Flow<String> = dataSource.language
     override val savedArticles: Flow<List<Article>> = dataSource.savedArticles
 
-    override suspend fun saveSource(sourceId: String): Either<Error, Unit> {
-        return dataSource.saveSource(sourceId)
+    override suspend fun saveSource(sourceId: String, saved: Boolean): Either<Error, Unit> {
+        return dataSource.saveSource(sourceId, saved)
     }
 
     override suspend fun setLanguage(language: String): Either<Error, Unit> {
         return dataSource.setLanguage(language)
     }
 
-    override suspend fun saveArticle(article: Article): Either<Error, Unit> {
-        return dataSource.saveArticle(article)
+    override suspend fun saveArticle(article: Article, saved: Boolean): Either<Error, Unit> {
+        return dataSource.saveArticle(article, saved)
     }
 }

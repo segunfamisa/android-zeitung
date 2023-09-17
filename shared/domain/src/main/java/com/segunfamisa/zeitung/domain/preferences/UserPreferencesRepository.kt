@@ -10,8 +10,8 @@ interface UserPreferencesRepository {
     val savedSources: Flow<List<String>>
     val language: Flow<String>
     val savedArticles: Flow<List<Article>>
-    suspend fun saveSource(sourceId: String): Either<Error, Unit>
+    suspend fun saveSource(sourceId: String, saved: Boolean): Either<Error, Unit>
     suspend fun setLanguage(language: String): Either<Error, Unit>
-    suspend fun saveArticle(article: Article): Either<Error, Unit>
-    
+    suspend fun saveArticle(article: Article, saved: Boolean): Either<Error, Unit>
+
 }
