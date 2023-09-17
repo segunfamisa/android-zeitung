@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,8 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImagePainter
-import coil.compose.ImagePainter
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.segunfamisa.zeitung.common.theme.compositedOnSurface
 
 /**
@@ -30,7 +28,7 @@ fun NetworkImage(
     placeholderColor: Color? = MaterialTheme.colorScheme.compositedOnSurface(0.2f)
 ) {
     Box(modifier = modifier) {
-        val painter = rememberImagePainter(data = url)
+        val painter = rememberAsyncImagePainter(model = url)
 
         Image(
             painter = painter,
@@ -39,10 +37,14 @@ fun NetworkImage(
             contentScale = contentScale,
         )
 
-        if (painter.state is AsyncImagePainter.State.Loading && placeholderColor != null) {
-            Spacer(modifier = Modifier
-                .matchParentSize()
-                .background(placeholderColor))
+        if ((painter.state is AsyncImagePainter.State.Loading ||
+                painter.state is AsyncImagePainter.State.Error) && placeholderColor != null
+        ) {
+            Spacer(
+                modifier = Modifier
+                    .matchParentSize()
+                    .background(placeholderColor)
+            )
         }
     }
 
