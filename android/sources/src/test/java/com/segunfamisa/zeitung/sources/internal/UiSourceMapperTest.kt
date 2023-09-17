@@ -23,10 +23,10 @@ internal class UiSourceMapperTest {
         // Then verify that the source items are grouped accordingly
         val expectedUiItems = listOf(
             UiItem.Section("entertainment"),
-            createUiSource(id = "bbc", followed = false),
-            createUiSource(id = "cnn", followed = false),
+            createUiSource(id = "bbc", displayLabel = "BB", followed = false),
+            createUiSource(id = "cnn", displayLabel = "CN", followed = false),
             UiItem.Section("general"),
-            createUiSource(id = "zdf", followed = false),
+            createUiSource(id = "zdf", displayLabel = "ZD", followed = false),
         )
         assertEquals(expectedUiItems, uiItems)
     }
@@ -44,7 +44,7 @@ internal class UiSourceMapperTest {
         // Then verify that the source items are grouped accordingly
         val expectedUiItems = listOf(
             UiItem.Section("entertainment"),
-            createUiSource(id = "bbc", followed = true),
+            createUiSource(id = "bbc", displayLabel = "BB", followed = true),
         )
         assertEquals(expectedUiItems, uiItems)
     }
@@ -57,17 +57,18 @@ internal class UiSourceMapperTest {
             category = category,
             url = "url",
             description = "description",
-            name = "name $id"
+            name = id
         )
     }
 
-    private fun createUiSource(id: String, followed: Boolean): UiItem.Source {
+    private fun createUiSource(id: String, displayLabel: String, followed: Boolean): UiItem.Source {
         return UiItem.Source(
             id = id,
-            name = "name $id",
+            name = id,
             description = "description",
             url = "url",
-            followed = followed
+            followed = followed,
+            displayLabel = displayLabel
         )
     }
 }

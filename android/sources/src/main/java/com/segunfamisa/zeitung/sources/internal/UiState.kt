@@ -16,6 +16,7 @@ internal sealed interface UiItem {
         val description: String,
         val url: String,
         val followed: Boolean,
+        val displayLabel: String = "",
     ) : UiItem
 
     data class Section(override val name: String) : UiItem
