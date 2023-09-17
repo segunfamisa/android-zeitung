@@ -16,8 +16,9 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.coroutines.core)
 
-    implementation(libs.dagger.core)
     implementation(libs.arrow)
+    implementation(libs.dagger.core)
+    implementation(libs.datastore)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.test.mockito)

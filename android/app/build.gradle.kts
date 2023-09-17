@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.compose.ui.tooling)
 
     implementation(libs.coil)
+    implementation(libs.datastore)
 
     implementation(libs.appcompat)
     implementation(libs.lifecycle.vm)
