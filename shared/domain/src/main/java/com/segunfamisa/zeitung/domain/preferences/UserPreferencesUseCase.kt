@@ -1,28 +1,23 @@
 package com.segunfamisa.zeitung.domain.preferences
 
+import com.segunfamisa.zeitung.utils.DispatcherProvider
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserPreferencesUseCase @Inject constructor() {
-    private val _followedSourcesIds: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
-    val followedSourceIds: Flow<List<String>> = _followedSourcesIds
+class UserPreferencesUseCase @Inject constructor(
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val dispatcherProvider: DispatcherProvider,
+) {
+    val followedSourceIds: Flow<List<String>> = userPreferencesRepository.savedSources
 
-    val language: Flow<String> = flowOf("en")
+    val language: Flow<String> = userPreferencesRepository.language
 
-    fun toggleSourceFollowing(sourceId: String, followed: Boolean) {
-        _followedSourcesIds.update {
-            if (followed) {
-                it + listOf(sourceId)
-            } else {
-                it.toMutableList().apply {
-                    remove(sourceId)
-                }
-            }
+    suspend fun toggleSourceFollowing(sourceId: String, followed: Boolean) {
+        withContext(dispatcherProvider.io) {
+            userPreferencesRepository.saveSource(sourceId, followed)
         }
     }
 }

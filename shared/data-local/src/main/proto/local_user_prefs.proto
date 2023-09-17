@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.segunfamisa.zeitung.data.local.preferences";
+option java_multiple_files = true;
+
+message Prefs {
+    string language = 1;
+    repeated string saved_sources = 2;
+    repeated SavedArticle saved_articles = 3;
+}
+
+message SavedArticle {
+    SavedArticleSource source = 1;
+    string author = 2;
+    string title = 3;
+    optional string description = 4;
+    string url = 5;
+    optional string image_url = 6;
+    optional google.protobuf.Timestamp published_at = 7;
+    string content = 8;
+    bool is_saved = 9;
+}
+
+message SavedArticleSource {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string url = 4;
+    string category = 5;
+    string language = 6;
+    string country = 7;
+}
