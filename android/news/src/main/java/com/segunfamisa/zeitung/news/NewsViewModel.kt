@@ -1,59 +1,58 @@
 package com.segunfamisa.zeitung.news
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
-import com.segunfamisa.zeitung.utils.DispatcherProvider
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.segunfamisa.zeitung.domain.preferences.UserPreferencesUseCase
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 class NewsViewModel @Inject constructor(
     private val getHeadlinesUseCase: GetHeadlinesUseCase,
     private val uiItemMapper: UiItemMapper,
-    private val dispatcherProvider: DispatcherProvider
+    private val userPreferencesUseCase: UserPreferencesUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<NewsUiState>(value = NewsUiState.Loading)
-    val uiState: StateFlow<NewsUiState>
-        get() = _uiState
-
-    fun fetchHeadlines() {
-        viewModelScope.launch(dispatcherProvider.io) {
-            val params = HeadlineQueryParam(category = "technology", country = "us")
-            _uiState.value = NewsUiState.Loading
-            getHeadlinesUseCase.execute(params)
-                .collect { headlines ->
-                    headlines.fold({
-                        Log.e(LOG_TAG, it.toString())
-                        _uiState.value = NewsUiState.Error(message = it.message)
-                    }, { articles ->
-                        val hasHeader = articles.isNotEmpty()
-                        _uiState.value = NewsUiState.Loaded(
-                            header = articles.firstOrNull()?.let {
-                                uiItemMapper.createUiItem(it)
-                            },
-                            news = if (hasHeader) {
-                                articles.subList(1, articles.size)
-                            } else {
-                                articles
-                            }.map {
-                                uiItemMapper.createUiItem(it)
-                            }
-                        )
-                    })
-                }
+    val uiState: StateFlow<NewsUiState> = userPreferencesUseCase.followedSourceIds
+        .flatMapConcat { sources ->
+            getHeadlinesUseCase.execute(param = HeadlineQueryParam(sources = sources))
         }
-    }
+        .map { eitherHeadlines ->
+            eitherHeadlines.fold(
+                ifLeft = { error ->
+                    NewsUiState.Error(message = error.message)
+                },
+                ifRight = { articles ->
+                    val hasHeader = articles.isNotEmpty()
+                    NewsUiState.Loaded(
+                        header = articles.firstOrNull()?.let {
+                            uiItemMapper.createUiItem(it)
+                        },
+                        news = if (hasHeader) {
+                            articles.subList(1, articles.size)
+                        } else {
+                            articles
+                        }.map {
+                            uiItemMapper.createUiItem(it)
+                        }
+                    )
+                }
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = NewsUiState.Loading
+        )
 
-    fun saveNewsItem(url: String, shouldSave: Boolean) {
+    fun saveNewsItem(url: String, saved: Boolean) {
         // TODO("Not yet implemented")
-    }
-
-    private companion object {
-        const val LOG_TAG = "NewsViewModel"
     }
 }

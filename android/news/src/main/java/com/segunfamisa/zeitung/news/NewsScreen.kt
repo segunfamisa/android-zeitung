@@ -46,9 +46,17 @@ internal const val TEST_TAG_ARTICLE_LIST = "News list"
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @Composable
-fun NewsContent(uiState: NewsUiState) {
+fun NewsContent(
+    uiState: NewsUiState,
+    onNewsItemSaved: ((String, Boolean) -> Unit) = { _, _ -> }
+) {
     when (uiState) {
-        is NewsUiState.Loaded -> NewsArticleList(header = uiState.header, newsItems = uiState.news)
+        is NewsUiState.Loaded -> NewsArticleList(
+            header = uiState.header,
+            newsItems = uiState.news,
+            onNewsItemSaved = onNewsItemSaved
+        )
+
         is NewsUiState.Loading -> LoadingScreen()
         is NewsUiState.Error -> ErrorSnackbar()
     }
@@ -64,7 +72,8 @@ private fun NewsArticleList(
     onNewsItemSaved: ((String, Boolean) -> Unit)? = null,
 ) {
     LazyColumn(
-        modifier = Modifier.padding(bottom = 56.dp)
+        modifier = Modifier
+            .padding(bottom = 64.dp, top = 56.dp)
             .testTag(TEST_TAG_ARTICLE_LIST)
     ) {
 
