@@ -17,11 +17,25 @@ internal class UiSourceMapper @Inject constructor() {
                             name = source.name,
                             description = source.description,
                             url = source.url,
-                            followed = followedChecker.invoke(source.id)
+                            followed = followedChecker.invoke(source.id),
+                            displayLabel = source.name.toLetterIconLabel()
                         )
                     }
                 )
             }
+        }
+    }
+
+    private fun String.toLetterIconLabel(): String {
+        val parts = split(" ")
+        return if (parts.size > 1) {
+            "${parts[0][0]}${parts[1][0]}".uppercase()
+        } else if (length > 1) {
+            substring(0, 2).uppercase()
+        } else if (length == 1) {
+            this.uppercase()
+        } else {
+            ""
         }
     }
 
