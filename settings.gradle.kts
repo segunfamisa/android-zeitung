@@ -13,6 +13,7 @@ include(":android:common")
 include(":android:headlines")
 include(":android:news")
 include(":android:onboarding")
+include(":android:sources")
 
 include(":shared:core")
 include(":shared:data")
