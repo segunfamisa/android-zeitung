@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.compose.runtime.livedata)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.windowsizeclass)
 
     implementation(libs.coil)
     implementation(libs.datastore)

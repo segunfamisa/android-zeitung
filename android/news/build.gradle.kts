@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.navigation)
+    implementation(libs.compose.windowsizeclass)
 
     implementation(libs.arrow)
     implementation(libs.lifecycle.vm)
