@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(FlowPreview::class)
@@ -56,6 +57,8 @@ internal class SourcesViewModel @Inject constructor(
      * Toggles the following status of a news source.
      */
     fun followSource(sourceId: String, followed: Boolean) {
-        userPreferencesUseCase.toggleSourceFollowing(sourceId = sourceId, followed = followed)
+        viewModelScope.launch {
+            userPreferencesUseCase.toggleSourceFollowing(sourceId = sourceId, followed = followed)
+        }
     }
 }
