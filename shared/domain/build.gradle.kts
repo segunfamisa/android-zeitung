@@ -10,6 +10,7 @@ java {
 
 dependencies {
     implementation(project(":shared:core"))
+    implementation(project(":shared:utils"))
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.coroutines.core)

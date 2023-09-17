@@ -36,6 +36,7 @@ dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "d
 dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
 dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+datastore = "androidx.datastore:datastore:1.0.0"
 glide-lib = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-kapt = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 javax-inject = "javax.inject:javax.inject:1"
@@ -45,6 +46,8 @@ kotlin-gradleplugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 lifecycle-vm = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 material = "com.google.android.material:material:1.7.0"
+protobuf = "com.google.protobuf:protobuf-javalite:3.21.11"
+protobuf-gradleplugin = "com.google.protobuf:protobuf-gradle-plugin:0.8.19"
 retrofit-core = "com.squareup.retrofit2:retrofit:2.6.2"
 retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "moshi" }
 test-mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
@@ -61,3 +64,4 @@ kotlin-coroutines = ["kotlin-coroutines-android", "kotlin-coroutines-core"]
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+protobuf = { id = "com.google.protobuf", version = "0.8.17" }

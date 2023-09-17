@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath(libs.android.gradleplugin)
         classpath(libs.kotlin.gradleplugin)
+        classpath(libs.protobuf.gradleplugin)
     }
 }
 

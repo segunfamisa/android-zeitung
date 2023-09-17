@@ -17,6 +17,7 @@ include(":android:sources")
 
 include(":shared:core")
 include(":shared:data")
+include(":shared:data-local")
 include(":shared:data-remote")
 include(":shared:domain")
 include(":shared:utils")

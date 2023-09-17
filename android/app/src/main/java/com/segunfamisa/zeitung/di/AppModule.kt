@@ -5,6 +5,7 @@ import android.content.Context
 import com.segunfamisa.zeitung.data.ApiKeyProviderImpl
 import com.segunfamisa.zeitung.data.UrlProviderImpl
 import com.segunfamisa.zeitung.data.di.DataModule
+import com.segunfamisa.zeitung.data.local.di.LocalDataModule
 import com.segunfamisa.zeitung.data.remote.di.RemoteDataModule
 import com.segunfamisa.zeitung.data.remote.service.ApiKeyProvider
 import com.segunfamisa.zeitung.data.remote.service.UrlProvider
@@ -20,6 +21,7 @@ import dagger.Provides
     includes = [
         DataModule::class,
         RemoteDataModule::class,
+        LocalDataModule::class,
         NewsModule::class,
         SourcesModule::class,
     ]

@@ -10,14 +10,17 @@ import javax.inject.Inject
 class UiItemMapper @Inject constructor(
     private val context: Context,
 ) {
-    fun createUiItem(article: Article): NewsUiItem {
+    fun createUiItem(
+        article: Article,
+        savedChecker: (Article) -> Boolean = { _ -> false }
+    ): NewsUiItem {
         return NewsUiItem(
             headline = article.title,
             subhead = article.description,
             author = article.author,
             date = article.publishedAt?.asTimeAgo(resources = context.resources),
             url = article.url,
-            saved = false,
+            saved = savedChecker(article),
             imageUrl = article.imageUrl,
             source = article.source.name,
         )

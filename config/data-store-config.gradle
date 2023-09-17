@@ -1,0 +1,31 @@
+apply plugin: "com.google.protobuf"
+
+//android {
+//    // Add generated code folder to app module source set
+//    sourceSets.getByName("main")
+//            .java.srcDirs("${protobuf.protobuf.generatedFilesBaseDir}/main/javalite")
+//}
+
+dependencies {
+    implementation(libs.datastore)
+    implementation(libs.protobuf)
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.21.7"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}

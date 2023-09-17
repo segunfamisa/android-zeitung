@@ -20,13 +20,22 @@ private val raleWayFontFamily = FontFamily(
     Font(R.font.raleway_medium_italic, FontWeight.Medium, FontStyle.Italic)
 )
 
+private val nunitoFamily = FontFamily(
+    Font(R.font.nunito_light, FontWeight.Light),
+    Font(R.font.nunito_regular, FontWeight.Normal),
+    Font(R.font.nunito_medium, FontWeight.Medium),
+
+    Font(R.font.nunito_light_italic, FontWeight.Light, FontStyle.Italic),
+    Font(R.font.nunito_regular_italic, FontWeight.Normal, FontStyle.Italic),
+    Font(R.font.nunito_medium_italic, FontWeight.Medium, FontStyle.Italic)
+)
+
 private val textStyle: TextStyle = TextStyle(
-    fontFamily = raleWayFontFamily
+    fontFamily = nunitoFamily
 )
 
 internal fun zeitungTypography() = Typography(
     displayLarge = textStyle.copy(
-        fontFamily = raleWayFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 57.sp,
         letterSpacing = (-1.5).sp
