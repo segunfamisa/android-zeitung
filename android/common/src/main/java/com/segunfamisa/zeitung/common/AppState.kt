@@ -41,6 +41,12 @@ data class AppState(
                 WindowStyle.TwoPane
             }
         }
+
+    val shouldUseNavRail: Boolean
+        get() = windowStyle == WindowStyle.TwoPane
+
+    val shouldUseBottomBar: Boolean
+        get() = !shouldUseNavRail
 }
 
 @JvmInline

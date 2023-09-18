@@ -4,10 +4,12 @@ plugins {
 }
 apply(from = "${rootProject.projectDir}/config/android-library-compose-config.gradle")
 
+android {
+    namespace = "com.segunfamisa.zeitung.news.ui"
+}
 
 dependencies {
     implementation(project(":android:common"))
-    implementation(project(":android:news-ui"))
     implementation(project(":shared:domain"))
     implementation(project(":shared:core"))
     implementation(project(":shared:utils"))

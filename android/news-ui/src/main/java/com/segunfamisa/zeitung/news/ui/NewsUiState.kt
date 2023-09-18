@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.news
+package com.segunfamisa.zeitung.news.ui
 
 sealed interface NewsUiState {
 

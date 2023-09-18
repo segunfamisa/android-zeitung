@@ -1,7 +1,7 @@
 package com.segunfamisa.compose.news
 
-import com.segunfamisa.zeitung.news.NewsUiItem
-import com.segunfamisa.zeitung.news.NewsUiState
+import com.segunfamisa.zeitung.news.ui.NewsUiItem
+import com.segunfamisa.zeitung.news.ui.NewsUiState
 
 object UiStateFactory {
 

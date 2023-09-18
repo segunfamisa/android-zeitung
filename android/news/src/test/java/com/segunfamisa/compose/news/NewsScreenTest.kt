@@ -6,9 +6,9 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.news.NewsContent
-import com.segunfamisa.zeitung.news.NewsUiState
 import com.segunfamisa.zeitung.news.TEST_TAG_ARTICLE_LIST
 import com.segunfamisa.zeitung.news.TEST_TAG_LOADING
+import com.segunfamisa.zeitung.news.ui.NewsUiState
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

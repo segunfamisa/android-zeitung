@@ -26,7 +26,6 @@ internal class UserPreferencesSourceImpl @Inject constructor(
 
     override val savedArticles: Flow<List<Article>> = dataStore.data
         .map { it.savedArticlesList.toCoreArticleList() }
-        .distinctUntilChanged()
 
     override suspend fun saveSource(sourceId: String, saved: Boolean): Either<Error, Unit> {
         return try {
@@ -107,7 +106,7 @@ internal class UserPreferencesSourceImpl @Inject constructor(
                         prefs.savedArticlesList.toMutableList()
                     }.apply {
                         // add this new entry
-                        add(article.toSavedArticle())
+                        add(0, article.toSavedArticle())
                     }
                 } else {
                     if (alreadyExists(article.url)) {

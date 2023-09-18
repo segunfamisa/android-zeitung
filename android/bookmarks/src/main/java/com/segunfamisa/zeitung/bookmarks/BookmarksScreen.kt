@@ -1,10 +1,9 @@
 @file:OptIn(
-    ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
-    ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
-    ExperimentalComposeUiApi::class, ExperimentalCoilApi::class
+    ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class,
+    ExperimentalCoilApi::class
 )
 
-package com.segunfamisa.zeitung.news
+package com.segunfamisa.zeitung.bookmarks
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
@@ -20,42 +19,54 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.common.LocalAppState
 import com.segunfamisa.zeitung.common.WindowStyle
 import com.segunfamisa.zeitung.common.design.NewsCard
-import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import com.segunfamisa.zeitung.common.theme.colorScheme
-import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
+import com.segunfamisa.zeitung.common.theme.typography
 import com.segunfamisa.zeitung.news.ui.NewsUiItem
 import com.segunfamisa.zeitung.news.ui.NewsUiState
 
 internal const val TEST_TAG_LOADING = "Loading Indicator"
-internal const val TEST_TAG_ARTICLE_LIST = "News list"
+internal const val TEST_TAG_ARTICLE_LIST = "Saved articles list"
 
-@ExperimentalCoilApi
-@ExperimentalComposeUiApi
 @Composable
-fun NewsContent(
+internal fun BookmarksContent(
     uiState: NewsUiState,
-    onNewsItemSaved: ((String, Boolean) -> Unit) = { _, _ -> }
+    onBookmarkRemoved: ((String) -> Unit) = { _ -> }
 ) {
     when (uiState) {
-        is NewsUiState.Loaded -> NewsArticleList(
-            header = uiState.header,
-            newsItems = uiState.news,
-            onNewsItemSaved = onNewsItemSaved
-        )
+        is NewsUiState.Loaded -> if (uiState.news.isNotEmpty() || uiState.header != null) {
+            NewsArticleList(
+                header = uiState.header,
+                newsItems = uiState.news,
+                onNewsItemSaved = onBookmarkRemoved
+            )
+        } else {
+            EmptyNewsScreen()
+        }
 
         is NewsUiState.Loading -> LoadingScreen()
         is NewsUiState.Error -> ErrorSnackbar()
+    }
+}
+
+@Composable
+private fun EmptyNewsScreen() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = "No saved articles",
+            modifier = Modifier.align(alignment = Alignment.Center),
+            style = typography().headlineMedium
+        )
     }
 }
 
@@ -67,7 +78,7 @@ private fun NewsArticleList(
     newsItems: List<NewsUiItem> = emptyList(),
     windowStyle: WindowStyle = LocalAppState.current.windowStyle,
     onNewsItemClicked: ((String) -> Unit)? = null,
-    onNewsItemSaved: ((String, Boolean) -> Unit)? = null,
+    onNewsItemSaved: ((String) -> Unit)? = null,
 ) {
     val articleCard = @Composable { newsUiItem: NewsUiItem ->
         NewsCard(
@@ -82,8 +93,8 @@ private fun NewsArticleList(
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .clickable(onClick = { onNewsItemClicked?.invoke(newsUiItem.url) }),
-            onSaveClicked = { url, saved ->
-                onNewsItemSaved?.invoke(url, saved)
+            onSaveClicked = { url, _ ->
+                onNewsItemSaved?.invoke(url)
             },
         )
     }
@@ -134,9 +145,7 @@ private fun NewsList(
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
-        modifier = Modifier
-            .fillMaxSize()
-            .testTag(TEST_TAG_ARTICLE_LIST)
+        modifier = Modifier.testTag(TEST_TAG_ARTICLE_LIST)
     ) {
         header?.let {
             item {
@@ -151,6 +160,12 @@ private fun NewsList(
 }
 
 @Composable
+private fun ErrorSnackbar() {
+    //TODO("Not yet implemented")
+}
+
+
+@Composable
 private fun LoadingScreen() {
     Box(
         modifier = Modifier
@@ -162,72 +177,3 @@ private fun LoadingScreen() {
         CircularProgressIndicator(color = colorScheme().secondary)
     }
 }
-
-@Composable
-private fun ErrorSnackbar() {
-    // TODO("Not yet implemented")
-}
-
-@Composable
-@Preview("Loading screen")
-private fun PreviewLoadingState() {
-    ThemedPreview {
-        LoadingScreen()
-    }
-}
-
-@OptIn(ExperimentalCoilApi::class)
-@ExperimentalComposeUiApi
-@Composable
-@Preview("News article list")
-private fun PreviewNewsArticleList() {
-    ZeitungTheme {
-        val article = fakeArticle()
-        val articles = listOf(
-            article.copy(source = null),
-            article.copy(saved = false),
-            article.copy(imageUrl = null)
-        )
-        NewsArticleList(newsItems = articles)
-    }
-}
-
-@Composable
-@Preview(
-    "News article two pane",
-    device = "spec:width=1280dp,height=800dp,dpi=240,orientation=portrait"
-)
-private fun PreviewNewsArticleGrid() {
-    ZeitungTheme {
-        val article = fakeArticle()
-        val articles = listOf(
-            article.copy(source = null),
-            article.copy(saved = false),
-            article.copy(imageUrl = null)
-        )
-        NewsArticleList(newsItems = articles, windowStyle = WindowStyle.TwoPane)
-    }
-}
-
-@OptIn(ExperimentalCoilApi::class)
-@ExperimentalComposeUiApi
-@Composable
-@Preview("News article list (dark theme)")
-private fun PreviewDarkThemeNewsArticleList() {
-    ZeitungTheme(darkTheme = true) {
-        val articles = listOf(fakeArticle(), fakeArticle().copy(saved = false), fakeArticle())
-        NewsArticleList(newsItems = articles) { _, _ -> }
-    }
-}
-
-@Composable
-private fun fakeArticle() = NewsUiItem(
-    source = "BBC",
-    author = "Nintendo Life",
-    headline = "The World Ends With You: The Animation Airs In 2021, Here's Your First Look - Nintendo Life",
-    subhead = "Square Enix ' s hit game returns as an anime",
-    url = "https://www.nintendolife.com/news/2020/07/the_world_ends_with_you_the_animation_airs_in_2021_heres_your_first_look",
-    saved = true,
-    imageUrl = "https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5ee95df165be0e00060a8bdd%2F0x0.jpg%3FcropX1%3D12%26cropX2%3D695%26cropY1%3D9%26cropY2%3D393",
-    date = "2 hours ago"
-)
