@@ -11,7 +11,6 @@ rootProject.name = "android-zeitung"
 include(":android:app")
 include(":android:bookmarks")
 include(":android:common")
-include(":android:headlines")
 include(":android:news")
 include(":android:news-ui")
 include(":android:onboarding")
