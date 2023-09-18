@@ -109,10 +109,11 @@ class MainActivity : AppCompatActivity() {
                 TopAppBar(
                     title = {
                         Text(
-                            text = if (backStack?.destination?.route == Routes.Sources) {
-                                stringResource(R.string.app_bar_sources)
-                            } else {
-                                stringResource(R.string.app_name)
+                            text = when (backStack?.destination?.route) {
+                                Routes.Sources -> stringResource(R.string.app_bar_sources)
+                                Routes.Bookmarks -> stringResource(id = R.string.app_bar_bookmarks)
+                                Routes.News -> stringResource(id = R.string.app_bar_news)
+                                else -> stringResource(R.string.app_name)
                             }
                         )
                     }
