@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -30,6 +31,7 @@ import com.segunfamisa.zeitung.common.LocalAppState
 import com.segunfamisa.zeitung.common.WindowStyle
 import com.segunfamisa.zeitung.common.design.NewsCard
 import com.segunfamisa.zeitung.common.theme.colorScheme
+import com.segunfamisa.zeitung.common.theme.typography
 import com.segunfamisa.zeitung.news.ui.NewsUiItem
 import com.segunfamisa.zeitung.news.ui.NewsUiState
 
@@ -42,14 +44,29 @@ internal fun BookmarksContent(
     onBookmarkRemoved: ((String) -> Unit) = { _ -> }
 ) {
     when (uiState) {
-        is NewsUiState.Loaded -> NewsArticleList(
-            header = uiState.header,
-            newsItems = uiState.news,
-            onNewsItemSaved = onBookmarkRemoved
-        )
+        is NewsUiState.Loaded -> if (uiState.news.isNotEmpty() || uiState.header != null) {
+            NewsArticleList(
+                header = uiState.header,
+                newsItems = uiState.news,
+                onNewsItemSaved = onBookmarkRemoved
+            )
+        } else {
+            EmptyNewsScreen()
+        }
 
         is NewsUiState.Loading -> LoadingScreen()
         is NewsUiState.Error -> ErrorSnackbar()
+    }
+}
+
+@Composable
+private fun EmptyNewsScreen() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = "No saved articles",
+            modifier = Modifier.align(alignment = Alignment.Center),
+            style = typography().headlineMedium
+        )
     }
 }
 
@@ -74,6 +91,7 @@ private fun NewsArticleList(
             date = newsUiItem.date,
             saved = newsUiItem.saved,
             modifier = Modifier
+                .padding(bottom = 16.dp)
                 .clickable(onClick = { onNewsItemClicked?.invoke(newsUiItem.url) }),
             onSaveClicked = { url, _ ->
                 onNewsItemSaved?.invoke(url)
@@ -102,9 +120,8 @@ private fun NewsGrid(
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(columns),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(8.dp),
         content = {
             header?.let {
                 item {
@@ -116,7 +133,7 @@ private fun NewsGrid(
             }
         },
         modifier = Modifier
-            .padding(bottom = 64.dp, top = 56.dp)
+            .padding(bottom = 64.dp, top = 56.dp, start = 8.dp, end = 8.dp)
             .testTag(TEST_TAG_ARTICLE_LIST)
     )
 }
@@ -128,7 +145,6 @@ private fun NewsList(
     listItem: @Composable (NewsUiItem) -> Unit,
 ) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp),
         modifier = Modifier
             .padding(bottom = 64.dp, top = 56.dp)

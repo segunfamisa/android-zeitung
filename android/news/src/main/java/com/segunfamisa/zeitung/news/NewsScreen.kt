@@ -80,6 +80,7 @@ private fun NewsArticleList(
             date = newsUiItem.date,
             saved = newsUiItem.saved,
             modifier = Modifier
+                .padding(bottom = 16.dp)
                 .clickable(onClick = { onNewsItemClicked?.invoke(newsUiItem.url) }),
             onSaveClicked = { url, saved ->
                 onNewsItemSaved?.invoke(url, saved)
@@ -108,9 +109,8 @@ private fun NewsGrid(
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(columns),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(8.dp),
         content = {
             header?.let {
                 item {
@@ -122,7 +122,7 @@ private fun NewsGrid(
             }
         },
         modifier = Modifier
-            .padding(bottom = 64.dp, top = 56.dp)
+            .padding(bottom = 64.dp, top = 56.dp, start = 8.dp, end = 8.dp)
             .testTag(TEST_TAG_ARTICLE_LIST)
     )
 }
@@ -134,7 +134,6 @@ private fun NewsList(
     listItem: @Composable (NewsUiItem) -> Unit,
 ) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp),
         modifier = Modifier
             .padding(bottom = 64.dp, top = 56.dp)
@@ -195,7 +194,8 @@ private fun PreviewNewsArticleList() {
 }
 
 @Composable
-@Preview("News article two pane",
+@Preview(
+    "News article two pane",
     device = "spec:width=1280dp,height=800dp,dpi=240,orientation=portrait"
 )
 private fun PreviewNewsArticleGrid() {
