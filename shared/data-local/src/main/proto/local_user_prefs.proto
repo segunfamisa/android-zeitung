@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 option java_package = "com.segunfamisa.zeitung.data.local.preferences";
 option java_multiple_files = true;
 
@@ -18,7 +16,7 @@ message SavedArticle {
     optional string description = 4;
     string url = 5;
     optional string image_url = 6;
-    optional google.protobuf.Timestamp published_at = 7;
+    optional string published_at = 7;
     string content = 8;
     bool is_saved = 9;
 }

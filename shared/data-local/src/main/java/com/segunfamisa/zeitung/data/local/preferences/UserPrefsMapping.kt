@@ -1,29 +1,25 @@
 package com.segunfamisa.zeitung.data.local.preferences
 
-import com.google.protobuf.Timestamp
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.core.entities.Source
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.Locale
 
+const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX" // "2023-09-17T04:01:16+00:00"
+private val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.US)
 
 internal fun Article.toSavedArticle(): SavedArticle {
     val builder = SavedArticle.newBuilder()
         .setSource(source.toSavedSource())
         .setAuthor(author)
         .setTitle(title)
-        .setDescription(description)
         .setUrl(url)
         .setImageUrl(imageUrl)
         .setContent(content)
         .setIsSaved(isSaved)
 
-    if (publishedAt != null) {
-        builder.setPublishedAt(
-            Timestamp.newBuilder()
-                .setSeconds(publishedAt!!.time / 1000L)
-                .build()
-        )
-    }
+    description?.let { builder.setDescription(description) }
+    publishedAt?.let { builder.setPublishedAt(dateFormat.format(it)) }
     return builder.build()
 }
 
@@ -36,7 +32,13 @@ internal fun List<SavedArticle>.toCoreArticleList(): List<Article> {
             description = it.description,
             url = it.url,
             imageUrl = it.imageUrl,
-            publishedAt = it.publishedAt?.seconds?.let { Date(it * 1000) },
+            publishedAt = it.publishedAt?.let { dateString ->
+                if (dateString.isNotEmpty()) {
+                    dateFormat.parse(dateString)
+                } else {
+                    null
+                }
+            },
             content = it.content,
             isSaved = it.isSaved
         )
