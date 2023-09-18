@@ -2,6 +2,7 @@ package com.segunfamisa.zeitung.di
 
 import android.app.Application
 import android.content.Context
+import com.segunfamisa.zeitung.bookmarks.di.BookmarksModule
 import com.segunfamisa.zeitung.data.ApiKeyProviderImpl
 import com.segunfamisa.zeitung.data.UrlProviderImpl
 import com.segunfamisa.zeitung.data.di.DataModule
@@ -22,6 +23,8 @@ import dagger.Provides
         DataModule::class,
         RemoteDataModule::class,
         LocalDataModule::class,
+        // features
+        BookmarksModule::class,
         NewsModule::class,
         SourcesModule::class,
     ]
