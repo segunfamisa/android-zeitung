@@ -56,11 +56,7 @@ internal fun SourcesContent(
 
 @Composable
 private fun SourcesList(sources: List<UiItem>, onSourceFollowed: (String, Boolean) -> Unit) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 64.dp, top = 56.dp)
-    ) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(sources) {
             when (it) {
                 is UiItem.Section -> SourceSection(it)

@@ -122,7 +122,6 @@ private fun NewsGrid(
             }
         },
         modifier = Modifier
-            .padding(bottom = 64.dp, top = 56.dp, start = 8.dp, end = 8.dp)
             .testTag(TEST_TAG_ARTICLE_LIST)
     )
 }
@@ -136,7 +135,7 @@ private fun NewsList(
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
         modifier = Modifier
-            .padding(bottom = 64.dp, top = 56.dp)
+            .fillMaxSize()
             .testTag(TEST_TAG_ARTICLE_LIST)
     ) {
         header?.let {
