@@ -13,6 +13,7 @@ include(":android:bookmarks")
 include(":android:common")
 include(":android:headlines")
 include(":android:news")
+include(":android:news-ui")
 include(":android:onboarding")
 include(":android:sources")
 

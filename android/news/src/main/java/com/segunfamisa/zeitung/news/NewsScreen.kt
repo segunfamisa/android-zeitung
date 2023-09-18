@@ -34,6 +34,8 @@ import com.segunfamisa.zeitung.common.design.NewsCard
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import com.segunfamisa.zeitung.common.theme.colorScheme
 import com.segunfamisa.zeitung.common.theme.preview.ThemedPreview
+import com.segunfamisa.zeitung.news.ui.NewsUiItem
+import com.segunfamisa.zeitung.news.ui.NewsUiState
 
 internal const val TEST_TAG_LOADING = "Loading Indicator"
 internal const val TEST_TAG_ARTICLE_LIST = "News list"

@@ -6,6 +6,8 @@ import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.domain.headlines.GetHeadlinesUseCase
 import com.segunfamisa.zeitung.domain.headlines.HeadlineQueryParam
 import com.segunfamisa.zeitung.domain.preferences.UserPreferencesUseCase
+import com.segunfamisa.zeitung.news.ui.NewsUiState
+import com.segunfamisa.zeitung.news.ui.UiItemMapper
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
