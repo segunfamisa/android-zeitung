@@ -26,7 +26,6 @@ internal class UserPreferencesSourceImpl @Inject constructor(
 
     override val savedArticles: Flow<List<Article>> = dataStore.data
         .map { it.savedArticlesList.toCoreArticleList() }
-        .distinctUntilChanged()
 
     override suspend fun saveSource(sourceId: String, saved: Boolean): Either<Error, Unit> {
         return try {

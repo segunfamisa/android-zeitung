@@ -23,6 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.segunfamisa.zeitung.R
+import com.segunfamisa.zeitung.bookmarks.bookmarksGraph
 import com.segunfamisa.zeitung.common.LocalAppState
 import com.segunfamisa.zeitung.common.di.ViewModelFactory
 import com.segunfamisa.zeitung.common.rememberAppState
@@ -127,9 +128,7 @@ class MainActivity : AppCompatActivity() {
             NavHost(navController = navController, startDestination = Routes.News) {
                 newsNavGraph(route = Routes.News, vmFactory = vmFactory)
                 sourcesNavGraph(route = Routes.Sources, vmFactory = vmFactory)
-                composable(Routes.Bookmarks) {
-                    Text(text = "Bookmarks")
-                }
+                bookmarksGraph(Routes.Bookmarks, vmFactory = vmFactory)
             }
         }
     }

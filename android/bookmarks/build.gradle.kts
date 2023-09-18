@@ -10,6 +10,7 @@ android {
 
 dependencies {
     implementation(project(":android:common"))
+    implementation(project(":android:news-ui"))
     implementation(project(":shared:core"))
     implementation(project(":shared:domain"))
     implementation(project(":shared:utils"))
@@ -18,7 +19,7 @@ dependencies {
     implementation(libs.bundles.kotlin.coroutines)
 
     implementation(libs.arrow)
-    
+
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.foundation.layout)
     implementation(libs.compose.material3)
@@ -26,6 +27,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
 
+    implementation(libs.coil)
     implementation(libs.dagger.core)
     implementation(libs.lifecycle.vm)
 
