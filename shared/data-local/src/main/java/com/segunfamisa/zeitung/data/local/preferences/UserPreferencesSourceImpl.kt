@@ -106,7 +106,7 @@ internal class UserPreferencesSourceImpl @Inject constructor(
                         prefs.savedArticlesList.toMutableList()
                     }.apply {
                         // add this new entry
-                        add(article.toSavedArticle())
+                        add(0, article.toSavedArticle())
                     }
                 } else {
                     if (alreadyExists(article.url)) {
