@@ -26,6 +26,7 @@ dependencies {
     val kapt by configurations
 
     implementation(project(":android:common"))
+    implementation(project(":android:bookmarks"))
     implementation(project(":android:news"))
     implementation(project(":android:onboarding"))
     implementation(project(":android:sources"))
