@@ -22,6 +22,7 @@ import com.segunfamisa.zeitung.common.rememberAppState
 import com.segunfamisa.zeitung.common.theme.ZeitungTheme
 import com.segunfamisa.zeitung.onboarding.OnboardingContent
 import com.segunfamisa.zeitung.onboarding.OnboardingViewModel
+import com.segunfamisa.zeitung.ui.common.nav.Routes
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 

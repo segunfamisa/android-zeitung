@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.common
+package com.segunfamisa.zeitung.ui.common.nav
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Icon
