@@ -50,7 +50,7 @@ internal class MainScreenRobot private constructor(
     companion object {
 
         @JvmStatic
-        fun AndroidComposeTestRule<*, *>.main(actions: MainScreenRobot.() -> MainScreenRobot): MainScreenRobot {
+        fun AndroidComposeTestRule<*, *>.onMain(actions: MainScreenRobot.() -> MainScreenRobot): MainScreenRobot {
             return MainScreenRobot(composeTestRule = this)
                 .apply {
                     actions()

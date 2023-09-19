@@ -15,7 +15,7 @@ class BookmarksScreenRobot(
     companion object {
 
         @JvmStatic
-        fun AndroidComposeTestRule<*, *>.bookmarks(actions: BookmarksScreenRobot.() -> BookmarksScreenRobot): BookmarksScreenRobot {
+        fun AndroidComposeTestRule<*, *>.onBookmarks(actions: BookmarksScreenRobot.() -> BookmarksScreenRobot): BookmarksScreenRobot {
             return BookmarksScreenRobot(composeTestRule = this)
                 .apply {
                     actions()
