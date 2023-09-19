@@ -14,6 +14,10 @@ open class ComposeRobot(
     private val composeRule: ComposeTestRule
 ) {
 
+    protected fun ComposeRobot.findCollection() {
+        // TODO add this.
+    }
+
     protected fun ComposeRobot.findTab(text: String): SemanticsNodeInteraction {
         val tabs = composeRule.onNode(expectValue(SemanticsProperties.SelectableGroup, Unit))
             .onChildren()
