@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.common
+package com.segunfamisa.zeitung.ui.common.nav
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

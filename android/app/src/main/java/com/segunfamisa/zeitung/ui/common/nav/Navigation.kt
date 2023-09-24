@@ -1,4 +1,4 @@
-package com.segunfamisa.zeitung.ui.common
+package com.segunfamisa.zeitung.ui.common.nav
 
 object Routes {
     private const val host = "zeitung"
