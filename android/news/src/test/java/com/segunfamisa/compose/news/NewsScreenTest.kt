@@ -3,8 +3,10 @@ package com.segunfamisa.compose.news
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import coil.annotation.ExperimentalCoilApi
+import com.github.takahirom.roborazzi.captureRoboImage
 import com.segunfamisa.zeitung.news.NewsContent
 import com.segunfamisa.zeitung.news.TEST_TAG_ARTICLE_LIST
 import com.segunfamisa.zeitung.news.TEST_TAG_LOADING
@@ -36,6 +38,8 @@ class NewsScreenTest {
         composeTestRule.setContent {
             NewsContent(uiState = UiStateFactory.createLoadedState(newsCount = 3))
         }
+
+        composeTestRule.onRoot().captureRoboImage()
 
         composeTestRule.onNodeWithTag(TEST_TAG_ARTICLE_LIST)
             .assertExists("News list not found")
