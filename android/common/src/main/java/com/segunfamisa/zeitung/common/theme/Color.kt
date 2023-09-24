@@ -1,11 +1,16 @@
 package com.segunfamisa.zeitung.common.theme
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.platform.LocalContext
 
 private val White = Color(0xffffffff)
 
@@ -70,6 +75,25 @@ private val darkColorScheme = lightColorScheme(
 
 @Composable
 fun colorScheme(darkTheme: Boolean = isSystemInDarkTheme()): ColorScheme {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        resolveColorSchemeWithDynamicColor(darkTheme = darkTheme)
+    } else {
+        resolveColorScheme(darkTheme = darkTheme)
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Composable
+private fun resolveColorSchemeWithDynamicColor(darkTheme: Boolean): ColorScheme {
+    return if (darkTheme) {
+        dynamicDarkColorScheme(LocalContext.current)
+    } else {
+        dynamicLightColorScheme(LocalContext.current)
+    }
+}
+
+@Composable
+private fun resolveColorScheme(darkTheme: Boolean): ColorScheme {
     return if (darkTheme) {
         darkColorScheme
     } else {
