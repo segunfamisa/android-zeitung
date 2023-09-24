@@ -11,6 +11,7 @@ buildscript {
         classpath(libs.android.gradleplugin)
         classpath(libs.kotlin.gradleplugin)
         classpath(libs.protobuf.gradleplugin)
+        classpath(libs.roborazzi.gradleplugin)
     }
 }
 

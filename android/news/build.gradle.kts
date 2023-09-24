@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("io.github.takahirom.roborazzi")
 }
 apply(from = "${rootProject.projectDir}/config/android-library-compose-config.gradle")
 
@@ -38,5 +39,7 @@ dependencies {
     debugImplementation(libs.test.compose.manifests)
     testImplementation(libs.test.junit)
     testImplementation(libs.test.robolectric)
+    testImplementation(libs.test.roborazzi.core)
+    testImplementation(libs.test.roborazzi.compose)
     androidTestImplementation(libs.androidx.testjunitext)
 }

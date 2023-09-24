@@ -3,6 +3,7 @@
 plugins {
     id("com.android.application")
     kotlin("kapt")
+    id("io.github.takahirom.roborazzi")
 }
 apply(from = "${rootProject.projectDir}/config/android-compose-config.gradle")
 apply(from = "${rootProject.projectDir}/keys.gradle")
@@ -80,4 +81,7 @@ dependencies {
     androidTestImplementation(libs.androidx.testrunner)
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(libs.test.compose)
+    androidTestImplementation(libs.test.roborazzi.core)
+    androidTestImplementation(libs.test.roborazzi.compose)
+    androidTestImplementation(libs.test.roborazzi.junitrule)
 }
