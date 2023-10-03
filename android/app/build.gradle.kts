@@ -73,6 +73,9 @@ dependencies {
     kapt(libs.dagger.compiler)
     kapt(libs.dagger.android.processor)
 
+    implementation(libs.pagingmultiplatform.common)
+    implementation(libs.timber)
+
     testImplementation(libs.test.junit)
     testImplementation(libs.test.robolectric)
     testImplementation(libs.test.compose)

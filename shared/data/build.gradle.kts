@@ -20,6 +20,8 @@ dependencies {
 
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
+    implementation(libs.pagingmultiplatform.common)
+    implementation(libs.timber)
 
     testImplementation(libs.test.junit)
     testImplementation(libs.test.mockito)
