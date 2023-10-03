@@ -8,10 +8,12 @@ import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
 import com.segunfamisa.zeitung.data.remote.service.ApiService
 import com.segunfamisa.zeitung.data.remote.service.TestDataGenerator
+import com.segunfamisa.zeitung.data.remote.utils.assertThrows
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+
 
 class RemoteHeadlinesSourceTest {
 
@@ -44,42 +46,76 @@ class RemoteHeadlinesSourceTest {
             val headlines = result.orNull()!!
 
             // the verify that the headlines are as expected
-            assertEquals(5, headlines.size)
+            assertEquals(5, headlines.articles.size)
         }
 
     @Test
-    fun `headlines are not fetched if all parameters are empty`() = runBlocking {
+    fun `illegal argument exception is thrown if all parameters are empty`() = runBlocking {
         // given that all params are empty and we get headlines,
-        val result = source.getHeadlines(category = "", country = "", sources = "")
+        val actualError = assertThrows<IllegalArgumentException> {
+            source.getHeadlines(category = "", country = "", sources = "")
+        }
 
         // then we receive an error
-        assertTrue(result.isLeft())
-    }
-
-    @Test
-    fun `headlines are not fetched if we search by both sources and category`() = runBlocking {
-        // given that both sources and category are non empty
-        // when we get headlines
-        val result = source.getHeadlines(
-            category = "business",
-            country = "",
-            sources = "local.de,news.google.de"
+        assertEquals(
+            "Invalid request, no parameter is specified",
+            actualError.message
         )
-
-        // then we receive error
-        assertTrue(result.isLeft())
     }
 
     @Test
-    fun `headlines are not fetched if we search by both sources and country`() = runBlocking {
-        // given that both sources and country are non empty
-        // when we get headlines
-        val result =
-            source.getHeadlines(category = "", country = "de", sources = "local.de,news.google.de")
+    fun `illegal argument exception is thrown if we search by both sources and category`() =
+        runBlocking {
+            // given that both sources and category are non empty
+            // when we get headlines
+            val actualError = assertThrows<IllegalArgumentException> {
+                source.getHeadlines(
+                    category = "business",
+                    country = "",
+                    sources = "local.de,news.google.de"
+                )
+            }
 
-        // then we receive error
-        assertTrue(result.isLeft())
+            // then we assert the error message is as expected
+            assertEquals(
+                "Invalid request, can't search category and sources together",
+                actualError.message
+            )
+        }
+
+    @Test
+    fun `illegal argument exception is thrown when page is less than 0`() = runBlocking {
+        val actualError = assertThrows<IllegalArgumentException> {
+            source.getHeadlines(
+                category = "",
+                country = "",
+                sources = "local.de,news.google.de",
+                page = -1
+            )
+        }
+        val expectedMessage = "Page cannot be null or less than 0. Current value: -1"
+        assertEquals(expectedMessage, actualError.message)
     }
+
+    @Test
+    fun `illegal argument exception is thrown if we search by both sources and country`() =
+        runBlocking {
+            // given that both sources and country are non empty
+            // when we get headlines
+            val actualError = assertThrows<IllegalArgumentException> {
+                source.getHeadlines(
+                    category = "",
+                    country = "de",
+                    sources = "local.de,news.google.de"
+                )
+            }
+
+            // then the error is as expected
+            assertEquals(
+                "Invalid request, can't search country and sources together",
+                actualError.message
+            )
+        }
 
     @Test
     fun `an error is returned the api returns an error`() = runBlocking {

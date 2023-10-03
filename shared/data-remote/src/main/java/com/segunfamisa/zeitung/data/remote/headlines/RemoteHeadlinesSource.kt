@@ -1,8 +1,7 @@
 package com.segunfamisa.zeitung.data.remote.headlines
 
 import arrow.core.Either
-import com.segunfamisa.zeitung.core.entities.Article
-import com.segunfamisa.zeitung.data.common.IllegalOperationException
+import com.segunfamisa.zeitung.core.entities.ArticlesResult
 import com.segunfamisa.zeitung.data.headlines.HeadlinesSource
 import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.service.ApiService
@@ -17,26 +16,34 @@ internal class RemoteHeadlinesSource @Inject constructor(
     override suspend fun getHeadlines(
         category: String,
         country: String,
-        sources: String
-    ): Either<Error, List<Article>> {
+        sources: String,
+        pageSize: Int?,
+        page: Int?,
+    ): Either<Error, ArticlesResult> {
         return executeIfValid(
             category = category,
             country = country,
-            sources = sources
-        ) { cat, cry, src ->
+            sources = sources,
+            page = page,
+        ) { ->
             try {
                 val response = apiService.getHeadlines(
-                    category = cat.nullify(),
-                    country = cry.nullify(),
-                    sources = src.nullify()
+                    category = category.nullify(),
+                    country = country.nullify(),
+                    sources = sources.nullify(),
+                    pageSize = pageSize,
+                    page = page
                 )
 
                 when (response) {
                     is ApiResponse.Success -> Either.Right(
-                        response.entity
-                            .articles.map {
-                                mapper.from(data = it)
-                            })
+                        ArticlesResult(
+                            totalResults = response.entity.totalResults,
+                            articles = response.entity
+                                .articles.map {
+                                    mapper.from(data = it)
+                                })
+                    )
 
                     is ApiResponse.Error -> Either.Left(
                         Error(
@@ -55,42 +62,27 @@ internal class RemoteHeadlinesSource @Inject constructor(
         category: String,
         country: String,
         sources: String,
-        action: suspend (String, String, String) -> Either<Error, List<Article>>
-    ): Either<Error, List<Article>> {
+        page: Int?,
+        action: suspend () -> Either<Error, ArticlesResult>
+    ): Either<Error, ArticlesResult> {
         if (category.isEmpty() && country.isEmpty() && sources.isEmpty()) {
-            val message = "Invalid request, no parameter is specified"
-            return Either.Left(
-                Error(
-                    message = message,
-                    throwable = IllegalOperationException(message)
-                )
-            )
+            throw IllegalArgumentException("Invalid request, no parameter is specified")
         }
 
         if (sources.isNotEmpty()) {
-            val message: String
             if (category.isNotEmpty()) {
-                message = "Invalid request, can't search category and sources together"
-                return Either.Left(
-                    Error(
-                        message = message,
-                        throwable = IllegalOperationException(message)
-                    )
-                )
+                throw IllegalArgumentException("Invalid request, can't search category and sources together")
             }
 
             if (country.isNotEmpty()) {
-                message = "Invalid request, can't search country and sources together"
-                return Either.Left(
-                    Error(
-                        message = message,
-                        throwable = IllegalOperationException(message)
-                    )
-                )
+                throw IllegalArgumentException("Invalid request, can't search country and sources together")
             }
         }
 
-        return action(category, country, sources)
+        if (page != null && page < 0)
+            throw IllegalArgumentException("Page cannot be null or less than 0. Current value: $page")
+
+        return action()
     }
 
     private fun String.nullify(): String? {

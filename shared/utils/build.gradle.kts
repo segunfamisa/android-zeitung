@@ -9,6 +9,7 @@ java {
 }
 
 dependencies {
+    implementation(libs.arrow)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.coroutines.core)
 

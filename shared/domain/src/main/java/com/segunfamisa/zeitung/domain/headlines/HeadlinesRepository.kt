@@ -10,6 +10,7 @@ interface HeadlinesRepository {
     fun getHeadlines(
         category: String,
         country: String,
-        sources: String
+        sources: String,
+        page: Int,
     ): Flow<Either<Error, List<Article>>>
 }

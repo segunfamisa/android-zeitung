@@ -5,6 +5,7 @@ import com.segunfamisa.zeitung.di.Injector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import timber.log.Timber
 import javax.inject.Inject
 
 class App : Application(), HasAndroidInjector {
@@ -16,6 +17,9 @@ class App : Application(), HasAndroidInjector {
         super.onCreate()
 
         Injector.init(this)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingActivityInjector
