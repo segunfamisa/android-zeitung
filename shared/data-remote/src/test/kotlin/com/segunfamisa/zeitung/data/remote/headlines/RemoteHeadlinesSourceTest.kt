@@ -50,27 +50,38 @@ class RemoteHeadlinesSourceTest {
         }
 
     @Test
-    fun `headlines are not fetched if all parameters are empty`() = runBlocking {
+    fun `illegal argument exception is thrown if all parameters are empty`() = runBlocking {
         // given that all params are empty and we get headlines,
-        val result = source.getHeadlines(category = "", country = "", sources = "")
+        val actualError = assertThrows<IllegalArgumentException> {
+            source.getHeadlines(category = "", country = "", sources = "")
+        }
 
         // then we receive an error
-        assertTrue(result.isLeft())
+        assertEquals(
+            "Invalid request, no parameter is specified",
+            actualError.message
+        )
     }
 
     @Test
-    fun `headlines are not fetched if we search by both sources and category`() = runBlocking {
-        // given that both sources and category are non empty
-        // when we get headlines
-        val result = source.getHeadlines(
-            category = "business",
-            country = "",
-            sources = "local.de,news.google.de"
-        )
+    fun `illegal argument exception is thrown if we search by both sources and category`() =
+        runBlocking {
+            // given that both sources and category are non empty
+            // when we get headlines
+            val actualError = assertThrows<IllegalArgumentException> {
+                source.getHeadlines(
+                    category = "business",
+                    country = "",
+                    sources = "local.de,news.google.de"
+                )
+            }
 
-        // then we receive error
-        assertTrue(result.isLeft())
-    }
+            // then we assert the error message is as expected
+            assertEquals(
+                "Invalid request, can't search category and sources together",
+                actualError.message
+            )
+        }
 
     @Test
     fun `illegal argument exception is thrown when page is less than 0`() = runBlocking {
@@ -87,15 +98,24 @@ class RemoteHeadlinesSourceTest {
     }
 
     @Test
-    fun `headlines are not fetched if we search by both sources and country`() = runBlocking {
-        // given that both sources and country are non empty
-        // when we get headlines
-        val result =
-            source.getHeadlines(category = "", country = "de", sources = "local.de,news.google.de")
+    fun `illegal argument exception is thrown if we search by both sources and country`() =
+        runBlocking {
+            // given that both sources and country are non empty
+            // when we get headlines
+            val actualError = assertThrows<IllegalArgumentException> {
+                source.getHeadlines(
+                    category = "",
+                    country = "de",
+                    sources = "local.de,news.google.de"
+                )
+            }
 
-        // then we receive error
-        assertTrue(result.isLeft())
-    }
+            // then the error is as expected
+            assertEquals(
+                "Invalid request, can't search country and sources together",
+                actualError.message
+            )
+        }
 
     @Test
     fun `an error is returned the api returns an error`() = runBlocking {

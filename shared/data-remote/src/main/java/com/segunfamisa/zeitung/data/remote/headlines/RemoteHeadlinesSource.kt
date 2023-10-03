@@ -2,7 +2,6 @@ package com.segunfamisa.zeitung.data.remote.headlines
 
 import arrow.core.Either
 import com.segunfamisa.zeitung.core.entities.Article
-import com.segunfamisa.zeitung.data.common.IllegalOperationException
 import com.segunfamisa.zeitung.data.headlines.HeadlinesSource
 import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.service.ApiService
@@ -26,12 +25,12 @@ internal class RemoteHeadlinesSource @Inject constructor(
             country = country,
             sources = sources,
             page = page,
-        ) { cat, cry, src ->
+        ) { ->
             try {
                 val response = apiService.getHeadlines(
-                    category = cat.nullify(),
-                    country = cry.nullify(),
-                    sources = src.nullify(),
+                    category = category.nullify(),
+                    country = country.nullify(),
+                    sources = sources.nullify(),
                     pageSize = pageSize,
                     page = page
                 )
@@ -61,45 +60,26 @@ internal class RemoteHeadlinesSource @Inject constructor(
         country: String,
         sources: String,
         page: Int?,
-        action: suspend (String, String, String) -> Either<Error, List<Article>>
+        action: suspend () -> Either<Error, List<Article>>
     ): Either<Error, List<Article>> {
         if (category.isEmpty() && country.isEmpty() && sources.isEmpty()) {
-            val message = "Invalid request, no parameter is specified"
-            return Either.Left(
-                Error(
-                    message = message,
-                    throwable = IllegalOperationException(message)
-                )
-            )
+            throw IllegalArgumentException("Invalid request, no parameter is specified")
         }
 
         if (sources.isNotEmpty()) {
-            val message: String
             if (category.isNotEmpty()) {
-                message = "Invalid request, can't search category and sources together"
-                return Either.Left(
-                    Error(
-                        message = message,
-                        throwable = IllegalOperationException(message)
-                    )
-                )
+                throw IllegalArgumentException("Invalid request, can't search category and sources together")
             }
 
             if (country.isNotEmpty()) {
-                message = "Invalid request, can't search country and sources together"
-                return Either.Left(
-                    Error(
-                        message = message,
-                        throwable = IllegalOperationException(message)
-                    )
-                )
+                throw IllegalArgumentException("Invalid request, can't search country and sources together")
             }
         }
 
         if (page != null && page < 0)
             throw IllegalArgumentException("Page cannot be null or less than 0. Current value: $page")
 
-        return action(category, country, sources)
+        return action()
     }
 
     private fun String.nullify(): String? {
