@@ -26,7 +26,9 @@ internal class HeadlinesRepositoryImpl @Inject constructor(
                     country = country,
                     sources = sources,
                     page = page,
-                )
+                ).map {
+                    it.articles
+                }
             )
         }
     }

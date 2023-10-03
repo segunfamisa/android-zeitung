@@ -46,7 +46,7 @@ class RemoteHeadlinesSourceTest {
             val headlines = result.orNull()!!
 
             // the verify that the headlines are as expected
-            assertEquals(5, headlines.size)
+            assertEquals(5, headlines.articles.size)
         }
 
     @Test

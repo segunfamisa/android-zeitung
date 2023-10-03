@@ -1,7 +1,7 @@
 package com.segunfamisa.zeitung.data.remote.headlines
 
 import arrow.core.Either
-import com.segunfamisa.zeitung.core.entities.Article
+import com.segunfamisa.zeitung.core.entities.ArticlesResult
 import com.segunfamisa.zeitung.data.headlines.HeadlinesSource
 import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.service.ApiService
@@ -19,7 +19,7 @@ internal class RemoteHeadlinesSource @Inject constructor(
         sources: String,
         pageSize: Int?,
         page: Int?,
-    ): Either<Error, List<Article>> {
+    ): Either<Error, ArticlesResult> {
         return executeIfValid(
             category = category,
             country = country,
@@ -37,10 +37,13 @@ internal class RemoteHeadlinesSource @Inject constructor(
 
                 when (response) {
                     is ApiResponse.Success -> Either.Right(
-                        response.entity
-                            .articles.map {
-                                mapper.from(data = it)
-                            })
+                        ArticlesResult(
+                            totalResults = response.entity.totalResults,
+                            articles = response.entity
+                                .articles.map {
+                                    mapper.from(data = it)
+                                })
+                    )
 
                     is ApiResponse.Error -> Either.Left(
                         Error(
@@ -60,8 +63,8 @@ internal class RemoteHeadlinesSource @Inject constructor(
         country: String,
         sources: String,
         page: Int?,
-        action: suspend () -> Either<Error, List<Article>>
-    ): Either<Error, List<Article>> {
+        action: suspend () -> Either<Error, ArticlesResult>
+    ): Either<Error, ArticlesResult> {
         if (category.isEmpty() && country.isEmpty() && sources.isEmpty()) {
             throw IllegalArgumentException("Invalid request, no parameter is specified")
         }
