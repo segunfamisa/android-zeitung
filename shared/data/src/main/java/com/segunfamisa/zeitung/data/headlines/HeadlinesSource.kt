@@ -6,5 +6,11 @@ import com.segunfamisa.zeitung.domain.common.Error
 
 interface HeadlinesSource {
 
-    suspend fun getHeadlines(category: String, country: String, sources: String): Either<Error, List<Article>>
+    suspend fun getHeadlines(
+        category: String,
+        country: String,
+        sources: String,
+        pageSize: Int? = null,
+        page: Int? = null,
+    ): Either<Error, List<Article>>
 }

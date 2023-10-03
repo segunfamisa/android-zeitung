@@ -17,18 +17,23 @@ internal class RemoteHeadlinesSource @Inject constructor(
     override suspend fun getHeadlines(
         category: String,
         country: String,
-        sources: String
+        sources: String,
+        pageSize: Int?,
+        page: Int?,
     ): Either<Error, List<Article>> {
         return executeIfValid(
             category = category,
             country = country,
-            sources = sources
+            sources = sources,
+            page = page,
         ) { cat, cry, src ->
             try {
                 val response = apiService.getHeadlines(
                     category = cat.nullify(),
                     country = cry.nullify(),
-                    sources = src.nullify()
+                    sources = src.nullify(),
+                    pageSize = pageSize,
+                    page = page
                 )
 
                 when (response) {
@@ -55,6 +60,7 @@ internal class RemoteHeadlinesSource @Inject constructor(
         category: String,
         country: String,
         sources: String,
+        page: Int?,
         action: suspend (String, String, String) -> Either<Error, List<Article>>
     ): Either<Error, List<Article>> {
         if (category.isEmpty() && country.isEmpty() && sources.isEmpty()) {
@@ -89,6 +95,9 @@ internal class RemoteHeadlinesSource @Inject constructor(
                 )
             }
         }
+
+        if (page != null && page < 0)
+            throw IllegalArgumentException("Page cannot be null or less than 0. Current value: $page")
 
         return action(category, country, sources)
     }

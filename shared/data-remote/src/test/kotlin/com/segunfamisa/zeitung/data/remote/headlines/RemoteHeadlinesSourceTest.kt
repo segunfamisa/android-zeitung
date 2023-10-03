@@ -8,10 +8,12 @@ import com.segunfamisa.zeitung.data.remote.common.ApiResponse
 import com.segunfamisa.zeitung.data.remote.entities.ArticlesResponse
 import com.segunfamisa.zeitung.data.remote.service.ApiService
 import com.segunfamisa.zeitung.data.remote.service.TestDataGenerator
+import com.segunfamisa.zeitung.data.remote.utils.assertThrows
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+
 
 class RemoteHeadlinesSourceTest {
 
@@ -68,6 +70,20 @@ class RemoteHeadlinesSourceTest {
 
         // then we receive error
         assertTrue(result.isLeft())
+    }
+
+    @Test
+    fun `illegal argument exception is thrown when page is less than 0`() = runBlocking {
+        val actualError = assertThrows<IllegalArgumentException> {
+            source.getHeadlines(
+                category = "",
+                country = "",
+                sources = "local.de,news.google.de",
+                page = -1
+            )
+        }
+        val expectedMessage = "Page cannot be null or less than 0. Current value: -1"
+        assertEquals(expectedMessage, actualError.message)
     }
 
     @Test

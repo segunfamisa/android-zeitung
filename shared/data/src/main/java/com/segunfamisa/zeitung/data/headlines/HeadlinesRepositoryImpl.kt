@@ -16,14 +16,16 @@ internal class HeadlinesRepositoryImpl @Inject constructor(
     override fun getHeadlines(
         category: String,
         country: String,
-        sources: String
+        sources: String,
+        page: Int
     ): Flow<Either<Error, List<Article>>> {
         return flow {
             this.emit(
                 remoteSource.getHeadlines(
                     category = category,
                     country = country,
-                    sources = sources
+                    sources = sources,
+                    page = page,
                 )
             )
         }

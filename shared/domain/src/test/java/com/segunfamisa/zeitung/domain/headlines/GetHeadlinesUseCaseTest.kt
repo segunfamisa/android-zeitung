@@ -6,13 +6,12 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.segunfamisa.zeitung.core.entities.Article
 import com.segunfamisa.zeitung.core.entities.Source
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.util.*
+import java.util.Date
 
 class GetHeadlinesUseCaseTest {
 
@@ -32,7 +31,14 @@ class GetHeadlinesUseCaseTest {
 
         // given that the repository returns news for that response
         val articles = createArticles(count = 2)
-        whenever(repo.getHeadlines(category = category, sources = "", country = country)).thenReturn(
+        whenever(
+            repo.getHeadlines(
+                category = category,
+                sources = "",
+                country = country,
+                page = 0
+            )
+        ).thenReturn(
             flowOf(Either.right(articles))
         )
 
